@@ -19,26 +19,30 @@ initNetworking({
     main: {
       apiUrl: "https://metaweather.com/api",
       requestInterceptor: (config) => {
-        alert("pre");
+        console.log("main api request interceptor", config);
         return config;
       },
       responseHandlers: [
         (response) => {
-          alert("handle 1");
+          console.log("main api first response handler", response);
         },
         (response) => {
-          alert("handle 2");
+          console.log("main api second response handler", response);
         },
       ],
     },
     openmeteo: {
       apiUrl: "https://api.open-meteo.com/v1",
+      requestInterceptor: (config) => {
+        console.log("openmeteo api request interceptor", config);
+        return config;
+      },
       responseHandlers: [
         (response) => {
-          alert("handle 1");
+          console.log("openmeteo api first response handler", response);
         },
         (response) => {
-          alert("handle 2");
+          console.log("openmeteo api second response handler", response);
         },
       ],
     },

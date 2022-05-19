@@ -180,6 +180,7 @@ you need to have the following libraries already installed:
 
 
 * [React Query](https://github.com/tannerlinsley/react-query)
+* [Axios](https://github.com/axios/axios)
 
 
 <!-- GETTING STARTED -->

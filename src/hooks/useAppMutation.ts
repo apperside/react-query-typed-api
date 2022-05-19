@@ -11,7 +11,7 @@ import { ApiScope, RestApiRoute, RestPayloadType, httpPost, RestResponseType, Ap
  * @returns 
  */
 export function useAppMutation<S extends ApiScope = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>(
-	route: T | { scope: S, route: RestApiRoute<S> }, queryOptions: Partial<AppQueryOptions<RestPayloadType<S, T>>> = {},
+	route: T | { scope: S, route: RestApiRoute<S> }, queryOptions: Partial<Omit<AppQueryOptions<RestPayloadType<S, T>>, "apiScope">> = {},
 	mutationOptions: UseMutationOptions = {}
 ): UseMutationResult<RestResponseType<S, T, "mutation">, any, (RestPayloadType<S, T> & { _pathParams?: { [key: string]: any } }), any> {
 	const queryClient = useQueryClient();

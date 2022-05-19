@@ -6,7 +6,7 @@ import { appQueryBuilder } from "./appQueryBuilder";
 
 export function useAppQuery<S extends keyof AppRoutes = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>
 	(routeOrRouteObj: T | { scope: S, route: T },
-		appQueryOptions: Partial<AppQueryOptions> = {},
+		appQueryOptions: Partial<Omit<AppQueryOptions, "payload" | "apiScope">> = {},
 		useQueryOptions: UseQueryOptions = {})
 	: UseQueryResult<RestResponseType<S, T>> {
 

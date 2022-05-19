@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      retry: false,
       refetchOnWindowFocus: false,
     },
   },
@@ -17,9 +18,29 @@ initNetworking({
   servers: {
     main: {
       apiUrl: "https://metaweather.com/api",
+      requestInterceptor: (config) => {
+        alert("pre");
+        return config;
+      },
+      responseHandlers: [
+        (response) => {
+          alert("handle 1");
+        },
+        (response) => {
+          alert("handle 2");
+        },
+      ],
     },
     openmeteo: {
       apiUrl: "https://api.open-meteo.com/v1",
+      responseHandlers: [
+        (response) => {
+          alert("handle 1");
+        },
+        (response) => {
+          alert("handle 2");
+        },
+      ],
     },
   },
 });

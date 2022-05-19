@@ -1,6 +1,6 @@
 {
 	"name": "react-query-typed-api",
-	"version": "0.0.93",
+	"version": "0.0.94",
 	"description": "A wrapper around react-query",
 	"main": "lib/index.js",
 	"module": "lib/index.esm.js",

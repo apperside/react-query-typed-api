@@ -7091,10 +7091,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-query-typed-api@0.0.93:
-  version "0.0.93"
-  resolved "https://registry.yarnpkg.com/react-query-typed-api/-/react-query-typed-api-0.0.93.tgz#750aef6f067a73bd8bc1e95755ae0d60d3ce650f"
-  integrity sha512-UAMGO9PFOgN6nbi/UTqiUXtIqP8nbWVycDssuy/ATBcccwainIpuDo4gqNRo/fegpSsJkDE0OeXFIXXeFyFzLw==
+react-query-typed-api@0.0.94:
+  version "0.0.94"
+  resolved "https://registry.yarnpkg.com/react-query-typed-api/-/react-query-typed-api-0.0.94.tgz#c91d9fc7aae2d806d1886dbf92dba76a411d429f"
+  integrity sha512-MZyZVZt1y6Jh5nGRkkfxsYOtpO+ehPAtHYI9aW5HiRBoDX6oLIHE7B1raAfrTPPYOw+Ol1QvGIV1bgSFjq5U3g==
   dependencies:
     "@nestjsx/crud-request" "^5.0.0-alpha.3"
     axios "^0.26.0"

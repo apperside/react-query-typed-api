@@ -1,7 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { DeepPartial } from "src/helpers/typeUtils";
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export * from "./httpManager";
 export * from "./restManager";

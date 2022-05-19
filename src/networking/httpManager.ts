@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelTokenSource } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from "axios";
 import urljoin from "url-join";
 import { ApiScope } from ".";
 import { ILocalStorage } from './../helpers/localStorageHelper';
@@ -31,12 +31,7 @@ export type CustomErrorHandler = (error: any, config: HttpRequestOptions) => any
 
 
 //@ts-ignore
-// const axiosInstances: { [key in keyof ApiScope]: AxiosInstance } = {};
-const axiosInstance = axios.create({
-	// baseURL: BASE_SERVER_URL,
-	timeout: 30000,
-	headers: { "Content-Type": "application/json" }
-});
+const axiosInstances: { [key in keyof ApiScope]: AxiosInstance } = {};
 
 let apiConfig: NetworkingConfig
 
@@ -46,6 +41,7 @@ type NetworkingConfig = {
 		[key in ApiScope]: {
 			tokenLocalStorageKey?: string // default "token"
 			apiUrl: string
+			timeout?: number
 			headers?: { [key: string]: (string | ((options: HttpRequestOptions) => string)) }
 			requestHandlers?: CustomRequestHandler[];
 			responseHandlers?: CustomResponseHandler[];
@@ -58,43 +54,35 @@ type NetworkingConfig = {
 
 let _localStorage: ILocalStorage
 
-export const initNetworking = (config: NetworkingConfig) => {
-	apiConfig = config;
-	_localStorage = (config.localStorage ?? typeof localStorage !== "undefined" ? localStorage : undefined) as any
-	Object.keys(config.servers).forEach((key) => {
-		// const serverConfig = config.servers[key];
-		// const axiosInstance = axios.create({
-		//   // baseURL: BASE_SERVER_URL,
-		//   timeout: 30000,
-		//   headers: { "Content-Type": "application/json" },
-		//   // ...(serverConfig.axiosConfig ?? {})
-		// });
-
-		// axiosInstance.interceptors.request.use(
-		//   axiosLogginInterceptor,
-		//   error => {
-		//     // Do something with request error
-		//     return Promise.reject(error);
-		//   }
-		// );
-
-		// axiosInstances[key] = axiosInstance;
-	})
-};
-
 const axiosLogginInterceptor = (config?: AxiosRequestConfig) => {
 	if (apiConfig.loggingEnabled) {
 		console.log(`performing http ${config?.method} to ${config?.url} with options and token ${config?.headers?.["Authorization"]} `, JSON.stringify(config?.data), config);
 	}
 }
-// simple request handler to log the requests with full config object
-// axiosInstance.interceptors.request.use(
-//   axiosLogginInterceptor,
-//   error => {
-//     // Do something with request error
-//     return Promise.reject(error);
-//   }
-// );
+
+export const initNetworking = (config: NetworkingConfig) => {
+	apiConfig = config;
+	_localStorage = (config.localStorage ?? typeof localStorage !== "undefined" ? localStorage : undefined) as any
+	Object.keys(config.servers).forEach((key) => {
+		const serverConfig = config.servers[key];
+		const axiosInstance = axios.create({
+			// baseURL: BASE_SERVER_URL,
+			timeout: serverConfig.timeout ?? 30000,
+			headers: { "Content-Type": "application/json" }
+		});
+
+
+		axiosInstance.interceptors.request.use(
+			axiosLogginInterceptor,
+			error => {
+				// Do something with request error
+				return Promise.reject(error);
+			}
+		);
+
+		axiosInstances[key] = axiosInstance;
+	})
+};
 
 
 export async function httpRequest(options: HttpRequestOptions) {
@@ -140,7 +128,7 @@ export async function httpRequest(options: HttpRequestOptions) {
 
 	try {
 		console.log("req");
-		const result = await axiosInstance.request({
+		const result = await axiosInstances[apiScope].request({
 			url: finalUrl,
 			headers: headers,
 			data: payload,

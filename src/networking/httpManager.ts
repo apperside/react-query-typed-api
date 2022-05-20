@@ -2,9 +2,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelTokenSource } from "axios";
 import urljoin from "url-join";
-import { ApiScope } from ".";
-import { ILocalStorage } from './../helpers/localStorageHelper';
+import { ApiScope } from "..";
+import localStorage from "cross-local-storage";
+declare module "cross-local-storage" {
+	/**
+  
+	  * Augment this interface to add al custom endpoints
+  
+	  */
 
+	export interface LocalStorageKeys {
+		token: string
+	}
+}
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 
@@ -49,17 +59,13 @@ type AppServerConfig = {
 	axiosConfig?: AxiosRequestConfig
 }
 type NetworkingConfig = {
-	/**
-	 * this has been added to allow using local storage also with react native by passing to this config the AsyncStorage instance
-	 */
-	localStorage?: ILocalStorage
 	servers: {
 		[key in ApiScope]: AppServerConfig
 	}
 	loggingEnabled?: boolean
 }
 
-let _localStorage: ILocalStorage
+// let _localStorage: ILocalStorage
 
 const axiosLogginInterceptor = (config?: AxiosRequestConfig) => {
 	if (apiConfig.loggingEnabled) {
@@ -73,7 +79,6 @@ const axiosInstances: { [key in keyof ApiScope]: AxiosInstance } = {};
 
 export function initNetworking(config: NetworkingConfig) {
 	apiConfig = config;
-	_localStorage = (config.localStorage ?? typeof localStorage !== "undefined" ? localStorage : undefined) as any
 	Object.keys(config.servers).forEach((key) => {
 		const serverConfig = config.servers[key] as AppServerConfig;
 		const axiosInstance = axios.create({
@@ -132,7 +137,7 @@ export async function httpRequest(options: HttpRequestOptions) {
 	const isFullUrl = requestUrl.toLowerCase().startsWith("http") || requestUrl.toLowerCase().startsWith("https");
 	const authHeader = headers["Authorization"];
 	if (typeof window !== "undefined" && isProtected && !authHeader) {
-		const token = await _localStorage.getItem((apiConfig.servers[apiScope].tokenLocalStorageKey ?? "token") as any)
+		const token = await localStorage.getItem((apiConfig.servers[apiScope].tokenLocalStorageKey ?? "token") as any)
 		if (token) {
 			headers["Authorization"] = `Bearer ${token}`;
 		}

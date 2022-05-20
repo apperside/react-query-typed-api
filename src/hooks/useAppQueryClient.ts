@@ -1,7 +1,7 @@
 import { MutationObserverOptions, QueryObserverOptions, useQueryClient } from "react-query";
 import { Updater } from "react-query/types/core/utils";
 import { AppQueryOptions } from ".";
-import { AppRoutes, RestPayloadType, RestResponseType } from "../networking";
+import { AppRoutes, RestPayloadType, RestResponseType } from "..";
 import { appQueryBuilder } from "./appQueryBuilder";
 
 

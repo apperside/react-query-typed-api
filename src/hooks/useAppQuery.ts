@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
 import { AppQueryOptions } from ".";
-import { AppRoutes, httpGet, RestResponseType } from "../networking";
+import { AppRoutes, httpGet, RestResponseType } from "..";
 import { appQueryBuilder } from "./appQueryBuilder";
 
 export function useAppQuery<S extends keyof AppRoutes = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>

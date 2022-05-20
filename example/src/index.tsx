@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { initNetworking } from "react-query-typed-api";
 import { QueryClient, QueryClientProvider } from "react-query";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

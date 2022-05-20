@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AppQueryOptions } from ".";
-import { AppRoutes } from "../networking";
+import { AppRoutes } from "..";
 
 export function appQueryBuilder<S extends keyof AppRoutes = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>
 	(routeOrRouteObj: T | { scope: S, route: T },

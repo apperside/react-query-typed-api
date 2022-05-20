@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MutationKey, useMutation, UseMutationOptions, UseMutationResult, useQueryClient } from "react-query";
 import { AppQueryOptions } from ".";
-import { ApiScope, RestApiRoute, RestPayloadType, httpPost, RestResponseType, AppRoutes } from "../networking";
+import { ApiScope, RestApiRoute, RestPayloadType, httpPost, RestResponseType, AppRoutes } from "..";
 
 /**
  * 

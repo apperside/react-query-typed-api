@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from "react";
+import { useQueryClient } from "react-query";
 import {
   httpGet,
   useAppMutation,
@@ -9,6 +10,8 @@ import "./App.css";
 import logo from "./logo.svg";
 
 function App() {
+  const queryClient = useQueryClient();
+  alert(!!queryClient);
   /**
    * returns UseQueryResult<GetManyResponse<AFakeObject> | undefined, unknown>
    */

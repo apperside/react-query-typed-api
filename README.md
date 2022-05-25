@@ -33,27 +33,32 @@
 
 <a href="https://github.com/apperside/react-query-typed-api">
 
-<img src="images/logo.png" alt="Logo" width="80" height="80"/>
+<img width="569" alt="Screenshot 2022-05-20 at 13 00 10" src="https://user-images.githubusercontent.com/5955338/169514642-0c5a64a2-b6bb-475c-830d-ba10dc7f7167.png">
 
 </a>
 
   
 
-<h3 align="center">React Query Wrapper</h3>
+<h3 align="center">React Query Typed Api</h3>
 
   
 
 <p align="center">
-Bootstrapped with https://www.npmjs.com/package/react-component-lib-boilerplate
-
 An opinioneted wrapper around react-query to allow strong typing for your api requests
 
 <br  />
 
+
+
+https://user-images.githubusercontent.com/5955338/169515163-dcda8641-c6be-4db8-aa34-6a396dc066f2.mp4
+
+
+
+
 <!--<a href="https://github.com/apperside/react-query-typed-api"><strong>Explore the docs »</strong></a>-->
 
 <br  />
-
+Bootstrapped with https://www.npmjs.com/package/react-component-lib-boilerplate
 <br  />
 
 <!--<a href="https://github.com/apperside/react-query-typed-api">View Demo</a>-->
@@ -173,6 +178,7 @@ A companion web application to define the routes and generate the full api confi
 
   
   
+  <!-- GETTING STARTED -->
 
 ## Prerequisites
 you need to have the following libraries already installed:
@@ -399,7 +405,6 @@ The `initNetworking` function takes the following arguments:
 | parameter | description | mandatory  |default value |
 |--|--|--|--|
 | servers |the configuration fo the servers, see below  |true|undefined
-| localStorage | by default *react-query-typed-api* will use the browser's local storage to automatically add the token header from the storage. If you want to use this library with react native you will need to pass the instance of AsyncStorage to this parameter	 |no|window.localStorage|
 | loggingEnabled |if true, the library will log all the request, responses and errors |no | false
 
 **SERVER CONFIGURATION**
@@ -437,7 +442,7 @@ This parameter can be:
 | **method** | this parameter indicated the HTTP verb (GET,POST,PUT,PATCH,DELETE)|GET|
 |**headers**|a key-value pair for the request headers|undefined|
 |**query**|a string representing the entire query string or an object|undefined|
-|**isProtected**|if true, an Authorization header will be added with Bearer authentication using the token from the local storage (by default the local storage key will be *`token`* , but it can be customized in the [initialization options](#initialization)|true|
+|**isProtected**|if true, an Authorization header will be added with Bearer authentication using the token from the local storage (by default the local storage key will be *`token`* , but it can be customized in the [initialization options](#initialization). To read the local storage we use [cross-local-storage](https://github.com/apperside/cross-local-storage), a very cool library to interact with localstorage on both the web and react native|true|
 |**extraRoutePath**|a string that will be added after the base api url (passed in the [initialization options](#initialization) and before the endpoint url. For example if the apiUrl is http://localhost:8080/api and your endpoint is `/my-endpoint`, if you pass for example `"custom-path"` to this propery, the final endpoint will be http://localhost:8080/api/custom-path/my-endpoint |undefined|
 |**cancelToken**|an [Axios's cancel token](https://axios-http.com/docs/cancellation)|undefined|
 |**pathParams**|if the endpoint has a path variable (eg: `/my-endpoint/:id`), this parameter must contain an object having as values the path variables and as value the value you want your variable to assume|--|
@@ -497,9 +502,9 @@ Since this is 100% true for `useAppQuery`,  on `useAppMutation` we added there i
   
   
 
-<!-- TODO -->
+<!-- ROADMAP -->
 
-## TODO
+## Roadmap
 
   
 
@@ -508,8 +513,6 @@ Since this is 100% true for `useAppQuery`,  on `useAppMutation` we added there i
  [] Add missing documentation (crud endpoints, 
  
  [] Wrap useInfiniteQuery
-
- [] Add support for typing errors
  
  [] Add tests
 

@@ -1,21 +1,27 @@
 import { useCallback, useEffect } from "react";
 import { useQueryClient } from "react-query";
+
 import {
   httpGet,
   useAppMutation,
   useAppQuery,
   useAppQueryClient,
+  AppModels,
+  AppQuery,
 } from "react-query-typed-api";
 import "./App.css";
 import logo from "./logo.svg";
 
 function App() {
+  const item: keyof typeof AppModels = "mymodel";
+
+  console.log(item);
   const queryClient = useQueryClient();
-  alert(!!queryClient);
   /**
    * returns UseQueryResult<GetManyResponse<AFakeObject> | undefined, unknown>
    */
   const queryExample1 = useAppQuery("fake-object");
+  const prova = useAppQuery("prova");
 
   /**
    * takes in input AFakeObject and returns AFakeObject
@@ -23,16 +29,16 @@ function App() {
   const muationExample1 = useAppMutation("fake-object");
 
   /**
-   * returns UseQueryResult<GetManyResponse<FakeEventObject> | undefined, unknown>
+   * returns UseQueryRe	sult<GetManyResponse<FakeEventObject> | undefined, unknown>
    */
   const customCrudQuery = useAppQuery("custom-nest-crud/events");
-  // returns UseQueryResult<GetManyResponse<FakeEventObject> | undefined, unknown>
 
   /**
    * returns UseQueryResult<CustomGetManyResponse<"bookings">, unknown>
    * because for this endpoint, we have a custom response type for getMany function
    */
   const anotherCustomCrudQuery = useAppQuery("custom-crud/bookings");
+  const aaa = anotherCustomCrudQuery.data?.items;
 
   /**
    * example query with path variables
@@ -126,6 +132,7 @@ function App() {
             <div>{JSON.stringify(metaweatherQuery.data)}</div>
           )}
         </div>
+
         <p>Openmeteo response</p>
         <div>
           {openMeteoQuery.isLoading && <div>Loading...</div>}
@@ -136,6 +143,21 @@ function App() {
             <div>{JSON.stringify(openMeteoQuery.data)}</div>
           )}
         </div>
+
+        <p>Openmeteo response with AppQuery component</p>
+        <AppQuery
+          routeOrRouteObj={{ scope: "openmeteo", route: "forecast" }}
+          appQueryOptions={ {
+			query: {
+			  latitude: "52.52",
+			  longitude: "13.41",
+			  hourly: "temperature_2m",
+			},
+		  }}>
+          {(query) => {
+            return <div>{JSON.stringify(query.data)}</div>
+          }}
+        </AppQuery>
       </header>
     </div>
   );

@@ -1,0 +1,37 @@
+# Initialization
+
+After you have defined all of your routes, you need to initialize the library by providing the server informations for all the defined api scopes. A good point to do this could be the same point where you initialize react-query's `queryClient` and pass it to the app's context (as explained in [their docs](https://react-query.tanstack.com/quick-start))
+
+```typescript
+import { initApi } from "react-query-typed-api";
+
+initApi({
+  servers: {
+    main: {
+      apiUrl: "https://my-api-url.com/api",
+    },
+    anotherApi: {
+      apiUrl: "https://another-api-url/v1",
+    },
+  },
+});
+```
+
+The `initNetworking` function takes the following arguments:
+
+| parameter      | description                                                         | mandatory | default value |
+| -------------- | ------------------------------------------------------------------- | --------- | ------------- |
+| servers        | the configuration fo the servers, see below                         | true      | undefined     |
+| loggingEnabled | if true, the library will log all the request, responses and errors | no        | false         |
+
+**SERVER CONFIGURATION**
+The `servers` field is an object which accepts the following values:
+
+| property           | description                                                                                                                                                                                                                                                                       | mandatory | default value |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
+| apiUrl             | the base url for the api (eg: http://localhost:8080/api )                                                                                                                                                                                                                         | yes       | undefined     |
+| headers            | the headers you will add here will be added to each request for the given api scope. It can be a static key-value map (eg: `{"My-Api-Key":"12345"}`) or a function which takes in input the request configuration, so you can return custom values based on the route, method ecc | no        |
+| requestInterceptor | the function you pass here must be a valid [axios interceptor](https://axios-http.com/docs/interceptors) and it will be added before each request for this server                                                                                                                 | no        | undefined     |
+| responseHandlers   | since axios, by design, only allows one interceptor for the request, in this library you are allowed to pass any number of interceptors for the response. Every function you will add here will be called with the request's response                                             | no        | empty array   |
+| errorHandlers      | like above, in this library you are allowed to pass any number of interceptors for the errors. Every function you will add here will be called with the full error info                                                                                                           | no        | empty array   |
+

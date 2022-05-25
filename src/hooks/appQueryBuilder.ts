@@ -2,8 +2,8 @@
 import { AppQueryOptions } from ".";
 import { AppRoutes } from "..";
 
-export function appQueryBuilder<S extends keyof AppRoutes = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>
-	(routeOrRouteObj: T | { scope: S, route: T },
+export function appQueryBuilder<Scope extends keyof AppRoutes = "main", T extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>
+	(routeOrRouteObj: T | { scope: Scope, route: T },
 		appQueryOptions: Partial<AppQueryOptions> = {})
 	: any {
 

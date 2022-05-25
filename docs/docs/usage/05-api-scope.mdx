@@ -1,0 +1,33 @@
+# API Scopes
+import ReactPlayer from 'react-player'
+
+You can use augmentation to add as many set of apis as you need, you just need to augment the interface `AppRoutes`. An api scope is intended to be a group of endpoint pointing to the same server and having the same prefix. Let say you augment it in the following way
+```typescript
+      type MyApiResponseType = { responseField1: string }
+      type MyApiPayloadType = { payloadField1: string }
+      type MyApiResponseType2 = { responseField2: string }
+    
+      export interface MainApi {
+        "my-route/:id": { responseType: MyApiResponseType, payloadType: MyApiPayloadType },
+      }
+    
+      /**
+       * Augment this interface to as many groups of api you need.
+       * A group of api is a set of endpoints that share the same prefix,server,port and protocol
+       */
+      export interface AppRoutes {
+        
+        anotherApi: {
+          "another-api-route": { responseType: { anotherApiResponseField: string } }
+        }
+      }
+```
+You will be able to use the other scopes like this 
+```typescript
+      const query = useAppQuery({ scope: "anotherApi", route: "another-api-route" });
+    
+      const mutation = useAppMutation({ scope: "anotherApi", route: "another-api-route" })
+```
+You will have full intellisense also in this case
+
+<ReactPlayer playing controls loop url='https://user-images.githubusercontent.com/5955338/169356072-9b81090a-6500-457a-bb7f-123974f43e80.mp4' />

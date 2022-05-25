@@ -6,7 +6,7 @@ import { appQueryBuilder } from './appQueryBuilder';
  * @deprecated
  * use appQueryBuilder.buildNestJsxQuery instead
  */
-const buildQuery = appQueryBuilder.buildNestJsxQuery;
+const buildQuery = appQueryBuilder.nestJsx;
 
 /**
  * @deprecated

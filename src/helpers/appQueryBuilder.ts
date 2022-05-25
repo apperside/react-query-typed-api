@@ -32,7 +32,7 @@ const buildNestJsxQuery = (queryOptions: (Omit<CreateQueryParams, "join"> & { jo
 }
 
 export const appQueryBuilder = {
-	buildNestJsxQuery
+	nestJsx: buildNestJsxQuery
 }
 
 

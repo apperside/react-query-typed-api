@@ -33,7 +33,7 @@
 
 <a href="https://github.com/apperside/react-query-typed-api">
 
-<img src="images/logo.png" alt="Logo" width="80" height="80">
+<img src="images/logo.png" alt="Logo" width="80" height="80"/>
 
 </a>
 
@@ -173,7 +173,6 @@ A companion web application to define the routes and generate the full api confi
 
   
   
-  <!-- GETTING STARTED -->
 
 ## Prerequisites
 you need to have the following libraries already installed:

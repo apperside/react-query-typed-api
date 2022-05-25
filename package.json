@@ -1,7 +1,7 @@
 {
 	"name": "react-query-typed-api",
-	"version": "0.0.99",
-	"description": "A wrapper around react-query",
+	"version": "0.0.106",
+	"description": "An opinionated wrapper around react-query for strongly typed api requests",
 	"main": "lib/index.js",
 	"module": "lib/index.esm.js",
 	"scripts": {
@@ -33,6 +33,7 @@
 		"@babel/core": "^7.14.2",
 		"@changesets/cli": "^2.16.0",
 		"@rollup/plugin-commonjs": "^19.0.0",
+		"@rollup/plugin-multi-entry": "^4.1.0",
 		"@rollup/plugin-node-resolve": "^13.0.0",
 		"@rollup/plugin-typescript": "^8.3.0",
 		"@storybook/addon-a11y": "^6.2.9",
@@ -56,6 +57,7 @@
 		"axios": "^0.26.0",
 		"babel-loader": "^8.2.2",
 		"chromatic": "^5.8.0",
+		"docusaurus-plugin-typedoc": "^0.17.5",
 		"eslint": "^7.26.0",
 		"eslint-config-airbnb": "^18.2.1",
 		"eslint-config-prettier": "^8.3.0",
@@ -76,10 +78,13 @@
 		"rollup-plugin-cleaner": "^1.0.0",
 		"rollup-plugin-copy": "^3.4.0",
 		"rollup-plugin-executable": "^1.6.3",
+		"rollup-plugin-generate-package-json": "^3.2.0",
 		"rollup-plugin-multi-input": "^1.3.1",
 		"rollup-plugin-peer-deps-external": "^2.2.4",
 		"rollup-plugin-typescript2": "^0.31.1",
 		"ts-jest": "^26.5.6",
+		"typedoc": "^0.22.15",
+		"typedoc-plugin-markdown": "^3.12.1",
 		"typescript": "^4.2.4"
 	},
 	"peerDependencies": {

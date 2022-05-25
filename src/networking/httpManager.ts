@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelTokenSource } from "axios";
 import urljoin from "url-join";
-import { ApiScope } from "..";
+import { ApiScope, AppRoutes } from "..";
 import localStorage from "cross-local-storage";
 declare module "cross-local-storage" {
 	/**
@@ -18,21 +16,60 @@ declare module "cross-local-storage" {
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 
-export type BaseHttpRequestOptions<Payload = any> = {
+
+/**
+ * The options for an HTTP request
+ * @param Payload the type for the payload, default is any
+ */
+export interface HttpRequestOptions<Payload = any> {
+	/**
+	 * The request url
+	 */
+	url: string
+	/**
+	 * The query string.
+	 * It can be:
+	 * - a plain string: in this case it must be a valid query string
+	 * - a key value pair: in this case the query string will be built using the keys and their stringified values
+	 */
 	query?: string | { [key: string]: string };
-	headers?: { [key: string]: string };
+	/**
+	 * The headers for the request.
+	 * It must be a key-value pair with with the values being a string or a number (which will be stringified )
+	 */
+	headers?: { [key: string]: string | number }
+	/**
+	 * The HTTP method
+	 */
 	method?: HttpMethod;
+	/**
+	 * If it is true, the library will put a bearer token in the `Authorization` header which will be read from the localstorage's
+	 * token value. The name of the key to search for in the local storage can be customized with the {@link ApiConfig} object  in the 
+	 * {@link initApi} function
+	 */
 	isProtected?: boolean;
+	/**
+	 * A string that will be added after the base api url 
+	 * (passed in the [initialization options](#initialization) and before the endpoint url. 
+	 * For example if the apiUrl is http://localhost:8080/api and your endpoint is `/my-endpoint`, 
+	 * if you pass for example `"custom-path"` to this propery, 
+	 * the final endpoint will be http://localhost:8080/api/custom-path/my-endpoint 
+	 */
 	extraRoutePath?: string | string[] | (string | number)[]
+	/**
+	 * An [Axios's cancel token](https://axios-http.com/docs/cancellation) to cancel pending requests if needed
+	 */
 	cancelToken?: CancelTokenSource
+	/**
+	 * The payload for the request 
+	 */
 	payload?: Payload
-	// url: string;
+	/**
+	 * The {@link ApiScope} for the request.
+	 * Based on this value a specific network configuration will be picked up based con the configuration object passed to {@link initApi}
+	 */
 	apiScope?: ApiScope;
 }
-
-export type HttpRequestOptions<P = any> = {
-	url: string
-} & BaseHttpRequestOptions<P>
 
 
 export type CustomRequestHandler = (config: AxiosRequestConfig) => any | Promise<AxiosRequestConfig>
@@ -40,9 +77,12 @@ export type CustomResponseHandler = (value: AxiosResponse) => any
 export type CustomErrorHandler = (error: any, config: HttpRequestOptions) => any
 
 
-let apiConfig: NetworkingConfig
+let apiConfig: ApiConfig
 
-type AppServerConfig = {
+/**
+ * Api configuration
+ */
+export type ApiServerConfig = {
 	/**
 	 * The name of the localstorage key that will be used to store and read the token.
 	 * Evety request market as authenticated will put in the header the token as Bearer.
@@ -58,12 +98,24 @@ type AppServerConfig = {
 	errorHandlers?: CustomErrorHandler[];
 	axiosConfig?: AxiosRequestConfig
 }
-type NetworkingConfig = {
+
+/**
+ * Configuration object for the apiaaa
+ */
+export type ApiConfig = {
+	/**
+	 * A key-value pair where the key are all the keys in {@link AppRoutes}, and the value
+	 * an {@link ApiServerConfig} object
+	 */
 	servers: {
-		[key in ApiScope]: AppServerConfig
+		[key in keyof AppRoutes]: ApiServerConfig
 	}
 	loggingEnabled?: boolean
 }
+/**
+ * @deprecated use {@link ApiConfig} instead
+ */
+export type NetworkingConfig = ApiConfig
 
 // let _localStorage: ILocalStorage
 
@@ -77,10 +129,15 @@ const axiosLogginInterceptor = (config?: AxiosRequestConfig) => {
 //@ts-ignore
 const axiosInstances: { [key in keyof ApiScope]: AxiosInstance } = {};
 
-export function initNetworking(config: NetworkingConfig) {
+/**
+ * This function must be called as soon as possible in you application lifecycle,
+ * in any case it must be called before any api request.
+ * See how to use it in the [usage section](/docs/usage/basic-usage)
+ */
+export function initApi(config: ApiConfig) {
 	apiConfig = config;
 	Object.keys(config.servers).forEach((key) => {
-		const serverConfig = config.servers[key] as AppServerConfig;
+		const serverConfig = config.servers[key] as ApiServerConfig;
 		const axiosInstance = axios.create({
 			timeout: serverConfig.timeout ?? 30000,
 			headers: { "Content-Type": "application/json" },
@@ -112,6 +169,11 @@ export function initNetworking(config: NetworkingConfig) {
 	})
 }
 
+/**
+ * @deprecated
+ * use  {@link initApi} instead
+ */
+export const initNetworking = initApi;
 
 export async function httpRequest(options: HttpRequestOptions) {
 	const {
@@ -168,7 +230,7 @@ export async function httpRequest(options: HttpRequestOptions) {
 		if (apiConfig.loggingEnabled) {
 			console.log(`request result for http ${method} to ${finalUrl}`, JSON.stringify(result.data));
 		}
-		(apiConfig.servers[apiScope] as AppServerConfig).responseHandlers?.forEach((fn) => {
+		(apiConfig.servers[apiScope] as ApiServerConfig).responseHandlers?.forEach((fn) => {
 			try {
 				fn(result);
 			} catch (err) {

@@ -1,4 +1,4 @@
-import { ModelRoutes, NestModelRoute } from "react-query-typed-api";
+import { RoutesForModel, NestJsxModelRoute } from "react-query-typed-api";
 import { OpenMeteoResponse } from './open-meteo';
 import { WeatherReactResponse } from "./weather-react";
 
@@ -6,6 +6,7 @@ import { WeatherReactResponse } from "./weather-react";
 type AFakeObject = { fakeObjectField: string }
 type FakeEventObject = { eventField: string }
 type FakeBookingObject = { bookingField: string }
+
 
 
 export interface CustomGetManyResponse<T> {
@@ -44,7 +45,7 @@ declare module "react-query-typed-api" {
 		 * saveManyResponse?: GetManyResponse<T>;
 		 * 
 		 */
-		ModelRoutes<"fake-object">,
+		RoutesForModel<"fake-object">,
 
 
 		/**
@@ -57,7 +58,7 @@ declare module "react-query-typed-api" {
 		 * and has the default responses except for the getMany:
 		 * 
 		 */
-		ModelRoutes<"bookings", "custom-crud", { getMany: CustomGetManyResponse<"bookings"> }>,
+		RoutesForModel<"bookings", "custom-crud", { getManyResponse: CustomGetManyResponse<FakeBookingObject> }>,
 		/**
 		 * this will generate the following endpoints
 		 * 
@@ -83,7 +84,7 @@ declare module "react-query-typed-api" {
 		 *	saveManyResponse: T[];
 		 *	deleteManyPayload: any;
 		*/
-		NestModelRoute<"events", "custom-nest-crud"> {
+		NestJsxModelRoute<"events", "custom-nest-crud"> {
 
 	}
 
@@ -91,11 +92,15 @@ declare module "react-query-typed-api" {
 	 * Augment this interface to add al custom endpoints
 	 */
 	export interface MainApi {
+		"prova": { prova: WeatherReactResponse }
 		"forecast/coords/:coordinates": { responseType: WeatherReactResponse }
 		"another-custom-route": { responseType: { customResponseField: string }, payloadType: { field1: string, field2: number } }
 		"another-custom-route/:id": { responseType: { customResponseField: string }, payloadType: { field1: string, field2: number } }
 	}
 
+	export enum AppModels {
+		"mymodel"
+	}
 	/**
 	 * Augment this interface to as many groups of api you need.
 	 * A group of api is a set of endpoints that share the same apiUrl (which you set with initNetworking function)

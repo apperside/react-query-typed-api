@@ -1,0 +1,43 @@
+# Path variables
+import ReactPlayer from 'react-player'
+
+You can also use routes with variable parameters. Given we augment the api like this
+```typescript
+      type MyApiResponseType = { field1: string }
+      type MyApiPayloadType = { field2: string }
+      
+      export interface MainApi {
+            "my-route/:id": { responseType: MyApiResponseType, payloadType: MyApiPayloadType },
+      }
+```
+we can use this endpoint like this:
+
+**QUERY**
+```typescript
+    const query = useAppQuery("my-route/:id", { pathParams: { id: "123" } });
+```
+**MUTATION**
+```typescript
+    const mutation = useAppMutation("my-route/:id")
+    // the _ before pathParams is not a typo, read below for more info
+    mutation.mutate({ field2: "value", _pathParams: { id: "123" } })
+```
+```
+⚠️ Type inferring does not work for path params, and probably it never will 😃
+```
+
+### <a name="diff-note"></a>
+
+> **A note about `mutate` and `mutateAsync` methods:** In react-query, when you call `mutate` or `mutateAsync`, you can just pass the payload
+> for the request and an options object where you can pass just some
+> callbacks. To allow the best possible integration for path params, we
+> added `_pathParams` as a valid field to pass to `mutate` and
+> `mutateAsync`, because sometimes it may be tricky to have the values
+> to use as path variables at the moment you call useMutation (imagine
+> for example a form submission, you most probably will have the value
+> you need only when the form is submitted).
+> 
+> Since this field will never be passed to the request payload, we
+> prefixed it with underscore to allow you to pass a `pathParams` field
+> (without underscore) to you payload in case you may need. If you will
+> need to pass a _pathParams field to your payload, **it will not work**

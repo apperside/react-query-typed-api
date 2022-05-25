@@ -1,0 +1,37 @@
+---
+sidebar_position: 1
+---
+import ReactPlayer from 'react-player'
+
+# useAppQuery
+The `useAppQuery` hook accepts 3 arguments:
+
+**routeOrRouteObj** (`mandatory`)
+This parameter can be:
+
+ - a string representing any route inside the main scope
+ - an object with the following properties
+```typescript
+{
+     scope:"<one of your api scopes>",
+     route:"a route in the scope"
+}
+```
+
+**appQueryOptions**
+
+`appQueryOptions` accepts the following values:
+ 
+|parameter  |description  |default|
+|--|--|--|
+| **method** | this parameter indicated the HTTP verb (GET,POST,PUT,PATCH,DELETE)|GET|
+|**headers**|a key-value pair for the request headers|undefined|
+|**query**|a string representing the entire query string or an object|undefined|
+|**isProtected**|if true, an Authorization header will be added with Bearer authentication using the token from the local storage (by default the local storage key will be *`token`* , but it can be customized in the [initialization options](#initialization). To read the local storage we use [cross-local-storage](https://github.com/apperside/cross-local-storage), a very cool library to interact with localstorage on both the web and react native|true|
+|**extraRoutePath**|a string that will be added after the base api url (passed in the [initialization options](#initialization) and before the endpoint url. For example if the apiUrl is http://localhost:8080/api and your endpoint is `/my-endpoint`, if you pass for example `"custom-path"` to this propery, the final endpoint will be http://localhost:8080/api/custom-path/my-endpoint |undefined|
+|**cancelToken**|an [Axios's cancel token](https://axios-http.com/docs/cancellation)|undefined|
+|**pathParams**|if the endpoint has a path variable (eg: `/my-endpoint/:id`), this parameter must contain an object having as values the path variables and as value the value you want your variable to assume|--|
+
+
+**useQueryOptions**
+The options you would pass to [react-query's `useQuery()`](https://react-query.tanstack.com/reference/useQuery)

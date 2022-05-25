@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useInfiniteQuery, UseInfiniteQueryOptions, UseInfiniteQueryResult } from "react-query";
 import { AppQueryOptions } from ".";
-import { AppRoutes, httpGet, RestResponseType } from "..";
+import { AppRoutes, ApiResponseType } from "..";
+import { httpGet } from "../imperative"
 
-export function useInfiniteAppQuery<S extends keyof AppRoutes = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>
-	(routeOrRouteObj: T | { scope: S, route: T },
+export function useInfiniteAppQuery<Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>
+	(routeOrRouteObj: Route | { scope: Scope, route: Route },
 		appQueryOptions: Partial<AppQueryOptions> = {},
 		useQueryOptions: UseInfiniteQueryOptions = {})
-	: UseInfiniteQueryResult<RestResponseType<S, T>> {
+	: UseInfiniteQueryResult<ApiResponseType<Scope, Route>> {
 
 	const keyForUseQuery: any = [routeOrRouteObj, typeof appQueryOptions.query === "string" ? appQueryOptions.query : { ...appQueryOptions.query }];
 
@@ -27,7 +28,7 @@ export function useInfiniteAppQuery<S extends keyof AppRoutes = "main", T extend
 		keyForUseQuery.push(pathParams)
 	}
 
-	type RES = RestResponseType<S, T>
+	type RES = ApiResponseType<Scope, Route>
 	return useInfiniteQuery<RES>(keyForUseQuery, (params: any) => {
 		return httpGet(routeOrRouteObj, { ...appQueryOptions }) as Promise<RES>
 	}, useQueryOptions as any);

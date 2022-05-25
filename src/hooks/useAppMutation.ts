@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MutationKey, useMutation, UseMutationOptions, UseMutationResult, useQueryClient } from "react-query";
 import { AppQueryOptions } from ".";
-import { ApiScope, RestApiRoute, RestPayloadType, httpPost, RestResponseType, AppRoutes } from "..";
-
+import { AppRoutes, ApiPayloadType, ApiResponseType } from "..";
+import { httpPost } from "../imperative";
 /**
  * 
  * @param route a route from AppRoutes or an object with a scope and a route
@@ -10,10 +10,10 @@ import { ApiScope, RestApiRoute, RestPayloadType, httpPost, RestResponseType, Ap
  * @param mutationOptions react-query's mutation options
  * @returns 
  */
-export function useAppMutation<S extends ApiScope = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>(
-	route: T | { scope: S, route: RestApiRoute<S> }, queryOptions: Partial<Omit<AppQueryOptions<RestPayloadType<S, T>>, "apiScope">> = {},
-	mutationOptions: UseMutationOptions = {}
-): UseMutationResult<RestResponseType<S, T, "mutation">, any, (RestPayloadType<S, T> & { _pathParams?: { [key: string]: any } }), any> {
+export function useAppMutation<S extends keyof AppRoutes = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>
+	(route: T | { scope: S, route: T }, queryOptions: Partial<Omit<AppQueryOptions<ApiPayloadType<S, T>>, "apiScope">> = {},
+		mutationOptions: UseMutationOptions = {}
+	): UseMutationResult<ApiResponseType<S, T, "mutation">, any, (ApiPayloadType<S, T> & { _pathParams?: { [key: string]: any } }), any> {
 	const queryClient = useQueryClient();
 	const keyForUseQuery: any = [route, typeof queryOptions.query === "string" ? queryOptions.query : { ...queryOptions.query }];
 	const { extraRoutePath } = queryOptions
@@ -36,7 +36,7 @@ export function useAppMutation<S extends ApiScope = "main", T extends keyof AppR
 	 * in the request payload.
 	 * If you need to send a post request with a _pathParams property, it will not work
 	 */
-	return useMutation<RestResponseType<S, T, "mutation">, any, (RestPayloadType<S, T> & { _pathParams?: { [key: string]: any } }), any>(keyForUseQuery as MutationKey, ({ _pathParams, ...params }: any) => {
+	return useMutation<ApiResponseType<S, T, "mutation">, any, (ApiPayloadType<S, T> & { _pathParams?: { [key: string]: any } }), any>(keyForUseQuery as MutationKey, ({ _pathParams, ...params }: any) => {
 		console.log("options", queryOptions)
 		console.log("params", params, _pathParams)
 		const finalRoute = (route as string).split("/")
@@ -53,7 +53,7 @@ export function useAppMutation<S extends ApiScope = "main", T extends keyof AppR
 				return part;
 			})
 			.join("/");
-		return httpPost(finalRoute as any, { payload: params, ...queryOptions }) as Promise<RestResponseType<S, T, "mutation">>
+		return httpPost(finalRoute as any, { payload: params, ...queryOptions }) as Promise<ApiResponseType<S, T, "mutation">>
 
 	}, {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment

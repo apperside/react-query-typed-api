@@ -1,0 +1,79 @@
+import ReactPlayer from 'react-player'
+
+# Basic Usage
+This library is a wrapper around react-query, so before you begin using this library, you need to install and configure react-query as explained in [their docs](https://react-query.tanstack.com/overview).
+
+react-query-typed-api is also heavily based on the concept of augmentation, you can find more about typescript augmentation in [the dedicated documentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation). 
+
+The first interface to know about is AppRoutes, which is declared as follows
+```typescript
+    export interface AppRoutes {
+      main: MainApi
+    }
+    
+    export interface MainApi {
+      /**
+       * TO BE AUGMENTED
+       */
+    }
+```
+The statement `main: MainApi` means that the app has one default api, whose scope is `main`. You can create as many scopes you want, we will speak about api scopes [later on](#api-scopes) .
+
+In order to agument the main scope and add your routes, you have to augment `MainApi` interface
+```typescript
+    /**
+     * You have to add this declaration wherever you want to augment librariy's types
+     */
+    declare module "react-query-typed-api" {
+      /**
+       * Augment this interface to add al custom endpoints
+       */
+      export interface MainApi {
+        // MyApiResponseType and MyApiPayloadType are whatever type you want depending on your endpoint response and payload
+        "my-route": { responseType: MyApiResponseType, payloadType: MyApiPayloadType }
+        // if the payload is the same as the response, you can omit the payloadType 
+        "another-custom-route": { responseType: MyApiResponseType2 }
+      }
+    }
+```
+let say  we augment our main api like this 
+
+```typescript
+    type MyApiResponseType = { responseField1: string }
+    type MyApiPayloadType = { payloadField1: string }
+    type MyApiResponseType2 = { responseField2: string }
+    
+    declare module "react-query-typed-api" {
+      export interface MainApi {
+        "my-route": { responseType: MyApiResponseType, payloadType: MyApiPayloadType }
+        "another-custom-route": { responseType: MyApiResponseType2 }
+      }
+    }
+```
+We are defining 2 routes:
+**my-route**: it will return data of type `MyApiResponseType`, and it will accept data of type `MyApiPayloadType`  when using mutation.
+**another-custom-route**: it will return data of type `MyApiResponseType`, and it will accept data of type `MyApiPayloadType`  when using mutation.
+
+With such configuration you will have the following typescript behavior
+
+<ReactPlayer loop playing controls loop url='https://user-images.githubusercontent.com/5955338/169349796-9faac282-770b-427d-8508-997ea08217aa.mp4' />
+
+
+
+> **IMPORTANT**: every entry under `MainApi` must have these fields:
+> 
+> `responseType`
+> **mandatory**, it represents the type of the response and the type of the payload if `payloadType` is not defined
+> 
+> `payloadType`
+> **optional**, it represents the type of the payload for mutations, `responseType` will be used if not provided
+> 
+> `mutationResponseType`
+> **optional**, it represents the response type for mutations, `responseType` will be used if not provided
+> 
+
+
+`useAppQuery` is nothing else that a wrapper around react-query's `useQuery`, it just wraps it with strong typing thanks to typescript augmentation. Together with `useAppQuery` there is also `useAppMutation`
+
+
+As your can see, types are automatically inferred based on the types declared through augmentation

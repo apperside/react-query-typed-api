@@ -1,0 +1,36 @@
+---
+sidebar_position: 3
+---
+import ReactPlayer from 'react-player'
+
+# useAppQueryClient
+Together with `useAppQuery` and `useAppMutation`, we also crafted `useAppQueryClient`, a wrapper around [`queryClient`](https://react-query.tanstack.com/reference/QueryClient), you can use it the following way
+
+```typescript
+import { useAppQueryClient } from  "react-query-typed-api";
+```
+The following methods have been ported 
+
+ - invalidateAppQueries 
+ - refetchAppQueries 
+ - isFetching
+ -  isMutating
+ - getQueryData 
+ - setQueryData 
+ - removeQueries 
+ - resetQueries 
+ - cancelQueries
+ - invalidateQueries 
+ - refetchQueries 
+ - fetchQuery 
+ - prefetchQuery
+ - executeMutation 
+ - setDefaultOptions 
+ - setQueryDefaults 
+ - getQueryDefaults
+ - setMutationDefaults 
+ - getMutationDefaults
+
+Here is an example how how it works with invalidateQueries method, but it works the same with the other methods
+
+<ReactPlayer playing controls loop url='https://user-images.githubusercontent.com/5955338/169376695-4b2d987c-2f38-4120-ad71-84dac200d294.mp4' />

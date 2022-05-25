@@ -1,11 +1,11 @@
-import { BaseHttpRequestOptions } from "../networking"
+import { HttpRequestOptions } from "src/networking"
 
 export { useAppMutation } from "./useAppMutation"
 export { useAppQuery } from "./useAppQuery"
-export { useAppQueryClient } from "./useAppQueryClient"
+export * from "./useAppQueryClient"
 export { useInfiniteAppQuery } from "./useInfiniteAppQuery"
 
 
 export type AppQueryOptions<Payload = any> = {
 	pathParams?: { [key: string]: any }
-} & BaseHttpRequestOptions<Payload>
+} & Omit<HttpRequestOptions<Payload>, "url">

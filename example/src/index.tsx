@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { initNetworking } from "react-query-typed-api";
+import { initApi } from "react-query-typed-api";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient({
@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
   },
 });
 
-initNetworking({
+initApi({
   servers: {
     main: {
       apiUrl: "https://metaweather.com/api",

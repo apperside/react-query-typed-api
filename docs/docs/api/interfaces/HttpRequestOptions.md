@@ -1,11 +1,10 @@
 ---
-id: "index.HttpRequestOptions"
+id: "HttpRequestOptions"
 title: "Interface: HttpRequestOptions<Payload>"
-sidebar_label: "index.HttpRequestOptions"
+sidebar_label: "HttpRequestOptions"
+sidebar_position: 0
 custom_edit_url: null
 ---
-
-[index](../modules/).HttpRequestOptions
 
 The options for an HTTP request
 
@@ -21,12 +20,12 @@ The options for an HTTP request
 
 • `Optional` **apiScope**: ``"main"``
 
-The [ApiScope](../modules/#apiscope-4) for the request.
-Based on this value a specific network configuration will be picked up based con the configuration object passed to [initApi](../modules/#initapi-4)
+The [ApiScope](../modules.md#apiscope-12) for the request.
+Based on this value a specific network configuration will be picked up based con the configuration object passed to [initApi](../modules.md#initapi-12)
 
 #### Defined in
 
-[networking/httpManager.ts:71](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L71)
+[networking/httpManager.ts:71](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/networking/httpManager.ts#L71)
 
 ___
 
@@ -38,7 +37,7 @@ An [Axios's cancel token](https://axios-http.com/docs/cancellation) to cancel pe
 
 #### Defined in
 
-[networking/httpManager.ts:62](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L62)
+[networking/httpManager.ts:62](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/networking/httpManager.ts#L62)
 
 ___
 
@@ -54,7 +53,7 @@ the final endpoint will be http://localhost:8080/api/custom-path/my-endpoint
 
 #### Defined in
 
-[networking/httpManager.ts:58](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L58)
+[networking/httpManager.ts:58](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/networking/httpManager.ts#L58)
 
 ___
 
@@ -71,7 +70,7 @@ It must be a key-value pair with with the values being a string or a number (whi
 
 #### Defined in
 
-[networking/httpManager.ts:40](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L40)
+[networking/httpManager.ts:40](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/networking/httpManager.ts#L40)
 
 ___
 
@@ -80,24 +79,24 @@ ___
 • `Optional` **isProtected**: `boolean`
 
 If it is true, the library will put a bearer token in the `Authorization` header which will be read from the localstorage's
-token value. The name of the key to search for in the local storage can be customized with the [ApiConfig](../modules/#apiconfig-4) object  in the
-[initApi](../modules/#initapi-4) function
+token value. The name of the key to search for in the local storage can be customized with the [ApiConfig](../modules.md#apiconfig-12) object  in the
+[initApi](../modules.md#initapi-12) function
 
 #### Defined in
 
-[networking/httpManager.ts:50](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L50)
+[networking/httpManager.ts:50](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/networking/httpManager.ts#L50)
 
 ___
 
 ### method
 
-• `Optional` **method**: [`HttpMethod`](../modules/#httpmethod-4)
+• `Optional` **method**: [`HttpMethod`](../modules.md#httpmethod-12)
 
 The HTTP method
 
 #### Defined in
 
-[networking/httpManager.ts:44](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L44)
+[networking/httpManager.ts:44](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/networking/httpManager.ts#L44)
 
 ___
 
@@ -109,7 +108,7 @@ The payload for the request
 
 #### Defined in
 
-[networking/httpManager.ts:66](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L66)
+[networking/httpManager.ts:66](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/networking/httpManager.ts#L66)
 
 ___
 
@@ -124,7 +123,7 @@ It can be:
 
 #### Defined in
 
-[networking/httpManager.ts:35](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L35)
+[networking/httpManager.ts:35](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/networking/httpManager.ts#L35)
 
 ___
 
@@ -136,4 +135,4 @@ The request url
 
 #### Defined in
 
-[networking/httpManager.ts:28](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L28)
+[networking/httpManager.ts:28](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/networking/httpManager.ts#L28)

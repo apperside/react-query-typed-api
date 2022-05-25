@@ -1,0 +1,22 @@
+# Components
+
+At the moment this library provides only one component, which can be used to use a component based approach
+to easily handle query state
+
+```typescript
+import { AppQuery } from "react-query-typed-api";
+
+<AppQuery
+  routeOrRouteObj={"resource1"}
+  appQueryOptions={{
+    query: {
+      queryParam1: "test",
+      queryParam2: 1,
+    },
+  }}>
+  {(query) => {
+    return <div>{JSON.stringify(query.data)}</div>;
+  }}
+</AppQuery>;
+```
+

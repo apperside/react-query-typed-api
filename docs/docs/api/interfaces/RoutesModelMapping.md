@@ -1,11 +1,10 @@
 ---
-id: "crud.RoutesModelMapping"
+id: "RoutesModelMapping"
 title: "Interface: RoutesModelMapping"
-sidebar_label: "crud.RoutesModelMapping"
+sidebar_label: "RoutesModelMapping"
+sidebar_position: 0
 custom_edit_url: null
 ---
-
-[crud](../modules/crud.md).RoutesModelMapping
 
 This interface allows you to define all your CRUD resources and the name to use to those resources in the api urls.
 This interface need to be augmented with key-value pairs where the key is the name of the resource and the value is the

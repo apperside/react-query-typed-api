@@ -1,17 +1,16 @@
 ---
-id: "index.MainApi"
+id: "MainApi"
 title: "Interface: MainApi"
-sidebar_label: "index.MainApi"
+sidebar_label: "MainApi"
+sidebar_position: 0
 custom_edit_url: null
 ---
-
-[index](../modules/).MainApi
 
 This interface represents the main API routes.
 Augment this interface to add your endpoints, see the [usage section](/docs/usage/basic-usage) for more info
 
 ## Hierarchy
 
-- [`CrudRoutes`](../modules/crud.md#crudroutes-4)
+- [`CrudRoutes`](../modules.md#crudroutes-12)
 
   ↳ **`MainApi`**

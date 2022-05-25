@@ -34,11 +34,11 @@ const config = {
       {
         entryPoints: [
           "../src/index.ts",
-          "../src/crud/index.ts",
-          "../src/imperative/index.ts",
+          //   "../src/crud/index.ts",
+          //   "../src/imperative/index.ts",
         ],
         tsconfig: "../tsconfig.json",
-        // entryPointStrategy: "expand",
+        entryPointStrategy: "expand",
         watch: process.env.TYPEDOC_WATCH,
         sidebar: {
           categoryLabel: "API",

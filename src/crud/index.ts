@@ -44,9 +44,18 @@ type CrudActionsDataMapping = {
 /**
  * Default response type for getMany request
  */
-export interface DefaultGetManyResponse<T> {
+export type DefaultGetManyResponse<T> = {
+	/**
+	 * The rows for the request
+	 */
 	rows: T[];
+	/**
+	 * total rows count (useful for pagination)
+	 */
 	count: number
+	/**
+	 * the current page (in case of paginated result)
+	 */
 	page: number
 }
 
@@ -58,14 +67,20 @@ export type DefaultGetOneResponse<T> = T
 /**
  * Default payload type for saveOne request
  */
-export interface DefaultSaveOnePayload<T> {
+export type DefaultSaveOnePayload<T> = {
+	/**
+	 * The item to save
+	 */
 	item: T
 }
 
 /**
  * Default payload type for saveMany request
  */
-export interface DefaultSaveManyPayload<T> {
+export type DefaultSaveManyPayload<T> = {
+	/**
+	 * The items to save
+	 */
 	items: T[];
 }
 
@@ -84,9 +99,20 @@ export type DefaultDeleteManyPayload<T> = T
  */
 export type DefaultDeleteManyResponse<T> = T
 
-
+/**
+ * This interface is used to add a set of crud endpoints for a given model.
+ * For more information about CRUD endpoints, see the [dedicated section](/docs/usage/crud) in the docs
+ * @typeParam CrudModel one of the keys in {@link RoutesModelMapping}
+ * @typeParam BasePath this parameter is used to manipulate the endpoint url.<br/>
+ * The value you will put here will be added after the 
+ * api base url you provided in the [initApi](/docs/api/modules#initapi) function call and before the resource name.
+ * For example, if you base api url is http://localhost:8080/api and your resource name is `resource1`, and you pass
+ * `custom-path` to this type param, the final endpoint will be http://localhost:8080/api/custom-path/resource1 
+ * @typeParam ActionTypesMapping this parameter is used to manipulate the type of the payloads and responses for the crud endpoints.
+ * See the [dedicated section](/docs/usage/crud#data-types-customization) for more information.
+ */
 export type RoutesForModel<CrudModel extends keyof RoutesModelMapping, BasePath extends string | unknown = unknown,
-	R extends CrudActionsDataMapping = {
+	ActionTypesMapping extends CrudActionsDataMapping = {
 		getManyResponse?: DefaultGetManyResponse<RoutesModelMapping[CrudModel]>
 		getOneResponse?: DefaultGetOneResponse<RoutesModelMapping[CrudModel]>
 		saveOnePayload?: DefaultSaveOnePayload<RoutesModelMapping[CrudModel]>
@@ -95,18 +121,18 @@ export type RoutesForModel<CrudModel extends keyof RoutesModelMapping, BasePath 
 		saveManyResponse?: DefaultGetManyResponse<RoutesModelMapping[CrudModel]>
 	}> = {
 		[key in AllRoutes<CrudModel, BasePath>]: key extends `${string}/bulk` ? {
-			responseType: R["saveManyResponse"] extends undefined ? DefaultGetManyResponse<RoutesModelMapping[CrudModel]> : R["saveManyResponse"]
-			payloadType: R["saveManyPayload"] extends undefined ? DefaultSaveManyPayload<RoutesModelMapping[CrudModel]> : R["saveManyPayload"]
+			responseType: ActionTypesMapping["saveManyResponse"] extends undefined ? DefaultGetManyResponse<RoutesModelMapping[CrudModel]> : ActionTypesMapping["saveManyResponse"]
+			payloadType: ActionTypesMapping["saveManyPayload"] extends undefined ? DefaultSaveManyPayload<RoutesModelMapping[CrudModel]> : ActionTypesMapping["saveManyPayload"]
 		} : key extends `${string}/:id` ? {
-			responseType: R["getOneResponse"] extends undefined ? DefaultGetOneResponse<RoutesModelMapping[CrudModel]> : R["getOneResponse"]
-			payloadType: R["saveOnePayload"] extends undefined ? DefaultSaveOnePayload<RoutesModelMapping[CrudModel]> : R["saveOnePayload"]
+			responseType: ActionTypesMapping["getOneResponse"] extends undefined ? DefaultGetOneResponse<RoutesModelMapping[CrudModel]> : ActionTypesMapping["getOneResponse"]
+			payloadType: ActionTypesMapping["saveOnePayload"] extends undefined ? DefaultSaveOnePayload<RoutesModelMapping[CrudModel]> : ActionTypesMapping["saveOnePayload"]
 		} : key extends `${string}/bulk-delete/:ids` ? {
-			responseType: R["deleteManyResponse"] extends undefined ? DefaultDeleteManyResponse<RoutesModelMapping[CrudModel]> : R["deleteManyResponse"]
-			payloadType: R["deleteManyPayload"] extends undefined ? DefaultDeleteManyPayload<RoutesModelMapping[CrudModel]> : R["deleteManyPayload"]
+			responseType: ActionTypesMapping["deleteManyResponse"] extends undefined ? DefaultDeleteManyResponse<RoutesModelMapping[CrudModel]> : ActionTypesMapping["deleteManyResponse"]
+			payloadType: ActionTypesMapping["deleteManyPayload"] extends undefined ? DefaultDeleteManyPayload<RoutesModelMapping[CrudModel]> : ActionTypesMapping["deleteManyPayload"]
 		} : key extends `${string}` ? {
-			responseType: R["getManyResponse"] extends undefined ? DefaultGetManyResponse<RoutesModelMapping[CrudModel]> : R["getManyResponse"]
-			payloadType: R["saveOnePayload"] extends undefined ? DefaultSaveOnePayload<RoutesModelMapping[CrudModel]> : R["saveOnePayload"];
-			mutationResponseType: R["saveOneResponse"] extends undefined ? DefaultSaveOneResponse<RoutesModelMapping[CrudModel]> : R["saveOneResponse"];
+			responseType: ActionTypesMapping["getManyResponse"] extends undefined ? DefaultGetManyResponse<RoutesModelMapping[CrudModel]> : ActionTypesMapping["getManyResponse"]
+			payloadType: ActionTypesMapping["saveOnePayload"] extends undefined ? DefaultSaveOnePayload<RoutesModelMapping[CrudModel]> : ActionTypesMapping["saveOnePayload"];
+			mutationResponseType: ActionTypesMapping["saveOneResponse"] extends undefined ? DefaultSaveOneResponse<RoutesModelMapping[CrudModel]> : ActionTypesMapping["saveOneResponse"];
 		} : RoutesModelMapping[CrudModel];
 	};
 

@@ -20,8 +20,8 @@ The options for an HTTP request
 
 • `Optional` **apiScope**: ``"main"``
 
-The [ApiScope](../modules.md#apiscope-12) for the request.
-Based on this value a specific network configuration will be picked up based con the configuration object passed to [initApi](../modules.md#initapi-12)
+The [ApiScope](../modules.md#apiscope-14) for the request.
+Based on this value a specific network configuration will be picked up based con the configuration object passed to [initApi](../modules.md#initapi-14)
 
 #### Defined in
 
@@ -79,8 +79,8 @@ ___
 • `Optional` **isProtected**: `boolean`
 
 If it is true, the library will put a bearer token in the `Authorization` header which will be read from the localstorage's
-token value. The name of the key to search for in the local storage can be customized with the [ApiConfig](../modules.md#apiconfig-12) object  in the
-[initApi](../modules.md#initapi-12) function
+token value. The name of the key to search for in the local storage can be customized with the [ApiConfig](../modules.md#apiconfig-14) object  in the
+[initApi](../modules.md#initapi-14) function
 
 #### Defined in
 
@@ -90,7 +90,7 @@ ___
 
 ### method
 
-• `Optional` **method**: [`HttpMethod`](../modules.md#httpmethod-12)
+• `Optional` **method**: [`HttpMethod`](../modules.md#httpmethod-14)
 
 The HTTP method
 

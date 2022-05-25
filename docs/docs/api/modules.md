@@ -28,7 +28,7 @@ Configuration object for the apiaaa
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `loggingEnabled?` | `boolean` | - |
-| `servers` | { [key in keyof AppRoutes]: ApiServerConfig } | A key-value pair where the key are all the keys in [AppRoutes](interfaces/AppRoutes.md), and the value an [ApiServerConfig](modules.md#apiserverconfig-12) object |
+| `servers` | { [key in keyof AppRoutes]: ApiServerConfig } | A key-value pair where the key are all the keys in [AppRoutes](interfaces/AppRoutes.md), and the value an [ApiServerConfig](modules.md#apiserverconfig-14) object |
 
 #### Defined in
 
@@ -113,10 +113,10 @@ Api configuration
 | :------ | :------ | :------ |
 | `apiUrl` | `string` | - |
 | `axiosConfig?` | `AxiosRequestConfig` | - |
-| `errorHandlers?` | [`CustomErrorHandler`](modules.md#customerrorhandler-12)[] | - |
+| `errorHandlers?` | [`CustomErrorHandler`](modules.md#customerrorhandler-14)[] | - |
 | `headers?` | { `[key: string]`: `string` \| (`options`: [`HttpRequestOptions`](interfaces/HttpRequestOptions.md)) => `string`;  } | - |
-| `requestInterceptor?` | [`CustomRequestHandler`](modules.md#customrequesthandler-12) | - |
-| `responseHandlers?` | [`CustomResponseHandler`](modules.md#customresponsehandler-12)[] | - |
+| `requestInterceptor?` | [`CustomRequestHandler`](modules.md#customrequesthandler-14) | - |
+| `responseHandlers?` | [`CustomResponseHandler`](modules.md#customresponsehandler-14)[] | - |
 | `timeout?` | `number` | - |
 | `tokenLocalStorageKey?` | `string` | The name of the localstorage key that will be used to store and read the token. Evety request market as authenticated will put in the header the token as Bearer. TODO: Handle Multiple methods. in the meanwhile it possible to use the headers config key to build custom headers |
 
@@ -164,7 +164,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:145](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L145)
+[crud/index.ts:147](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L147)
 
 ___
 
@@ -389,11 +389,11 @@ ___
 
 ### ExecuteMutationFunction
 
-Ƭ **ExecuteMutationFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)<[`ApiPayloadType`](modules.md#apipayloadtype-12)<`Scope`, `Route`\>\>\>) => `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>\>
+Ƭ **ExecuteMutationFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)<[`ApiPayloadType`](modules.md#apipayloadtype-14)<`Scope`, `Route`\>\>\>) => `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>\>
 
 #### Type declaration
 
-▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>\>
+▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>\>
 
 This type only needed for executeMutation because it returns mutation mapped return type
 
@@ -402,18 +402,18 @@ This type only needed for executeMutation because it returns mutation mapped ret
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](interfaces/AppRoutes.md) = ``"main"`` |
-| `Route` | extends [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> |
+| `Route` | extends [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)<[`ApiPayloadType`](modules.md#apipayloadtype-12)<`Scope`, `Route`\>\>\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)<[`ApiPayloadType`](modules.md#apipayloadtype-14)<`Scope`, `Route`\>\>\> |
 
 ##### Returns
 
-`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>\>
+`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>\>
 
 #### Defined in
 
@@ -423,11 +423,11 @@ ___
 
 ### FunctionWithMappedReturnType
 
-Ƭ **FunctionWithMappedReturnType**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)\>) => `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\>
+Ƭ **FunctionWithMappedReturnType**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)\>) => `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\>
 
 #### Type declaration
 
-▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\>
+▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\>
 
 This type is like the previous one but it returns the type mapped by the route
 
@@ -436,18 +436,18 @@ This type is like the previous one but it returns the type mapped by the route
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](interfaces/AppRoutes.md) = ``"main"`` |
-| `Route` | extends [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> |
+| `Route` | extends [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)\> |
 
 ##### Returns
 
-`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\>
+`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\>
 
 #### Defined in
 
@@ -457,7 +457,7 @@ ___
 
 ### FunctionWithTypedRouteAndOptions
 
-Ƭ **FunctionWithTypedRouteAndOptions**<`ReturnType`\>: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)\>) => `ReturnType`
+Ƭ **FunctionWithTypedRouteAndOptions**<`ReturnType`\>: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)\>) => `ReturnType`
 
 #### Type parameters
 
@@ -476,14 +476,14 @@ The function type used by most of the functions
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](interfaces/AppRoutes.md) = ``"main"`` |
-| `Route` | extends [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> |
+| `Route` | extends [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)\> |
 
 ##### Returns
 
@@ -507,7 +507,7 @@ ___
 
 ### NestJsxModelRoute
 
-Ƭ **NestJsxModelRoute**<`T`, `BasePath`\>: [`RoutesForModel`](modules.md#routesformodel-12)<`T`, `BasePath`, [`NestCrudResponseTypes`](interfaces/NestCrudResponseTypes.md)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`T`]\>\>
+Ƭ **NestJsxModelRoute**<`T`, `BasePath`\>: [`RoutesForModel`](modules.md#routesformodel-14)<`T`, `BasePath`, [`NestCrudResponseTypes`](interfaces/NestCrudResponseTypes.md)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`T`]\>\>
 
 #### Type parameters
 
@@ -518,16 +518,16 @@ ___
 
 #### Defined in
 
-[crud/index.ts:168](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L168)
+[crud/index.ts:170](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L170)
 
 ___
 
 ### NestModelRoute
 
-Ƭ **NestModelRoute**<`T`, `BasePath`\>: [`NestJsxModelRoute`](modules.md#nestjsxmodelroute-12)<`T`, `BasePath`\>
+Ƭ **NestModelRoute**<`T`, `BasePath`\>: [`NestJsxModelRoute`](modules.md#nestjsxmodelroute-14)<`T`, `BasePath`\>
 
 **`deprecated`**
-use [NestJsxModelRoute](modules.md#nestjsxmodelroute-12) instead
+use [NestJsxModelRoute](modules.md#nestjsxmodelroute-14) instead
 
 #### Type parameters
 
@@ -538,15 +538,15 @@ use [NestJsxModelRoute](modules.md#nestjsxmodelroute-12) instead
 
 #### Defined in
 
-[crud/index.ts:174](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L174)
+[crud/index.ts:176](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L176)
 
 ___
 
 ### NetworkingConfig
 
-Ƭ **NetworkingConfig**: [`ApiConfig`](modules.md#apiconfig-12)
+Ƭ **NetworkingConfig**: [`ApiConfig`](modules.md#apiconfig-14)
 
-**`deprecated`** use [ApiConfig](modules.md#apiconfig-12) instead
+**`deprecated`** use [ApiConfig](modules.md#apiconfig-14) instead
 
 #### Defined in
 
@@ -567,7 +567,7 @@ For more information about CRUD endpoints, see the [dedicated section](/docs/usa
 | :------ | :------ | :------ |
 | `CrudModel` | extends keyof [`RoutesModelMapping`](interfaces/RoutesModelMapping.md) | one of the keys in [RoutesModelMapping](interfaces/RoutesModelMapping.md) |
 | `BasePath` | extends `string` \| `unknown` = `unknown` | this parameter is used to manipulate the endpoint url.<br/> The value you will put here will be added after the api base url you provided in the [initApi](/docs/api/modules#initapi) function call and before the resource name. For example, if you base api url is http://localhost:8080/api and your resource name is `resource1`, and you pass `custom-path` to this type param, the final endpoint will be http://localhost:8080/api/custom-path/resource1 |
-| `ActionTypesMapping` | extends `CrudActionsDataMapping` = { `getManyResponse?`: [`DefaultGetManyResponse`](modules.md#defaultgetmanyresponse-12)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\> ; `getOneResponse?`: [`DefaultGetOneResponse`](modules.md#defaultgetoneresponse-12)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\> ; `saveManyPayload?`: [`DefaultSaveManyPayload`](modules.md#defaultsavemanypayload-12)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\> ; `saveManyResponse?`: [`DefaultGetManyResponse`](modules.md#defaultgetmanyresponse-12)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\> ; `saveOnePayload?`: [`DefaultSaveOnePayload`](modules.md#defaultsaveonepayload-12)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\> ; `saveOneResponse?`: [`DefaultGetOneResponse`](modules.md#defaultgetoneresponse-12)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\>  } | this parameter is used to manipulate the type of the payloads and responses for the crud endpoints. See the [dedicated section](/docs/usage/crud#data-types-customization) for more information. |
+| `ActionTypesMapping` | extends `CrudActionsDataMapping` = { `getManyResponse?`: [`DefaultGetManyResponse`](modules.md#defaultgetmanyresponse-14)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\> ; `getOneResponse?`: [`DefaultGetOneResponse`](modules.md#defaultgetoneresponse-14)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\> ; `saveManyPayload?`: [`DefaultSaveManyPayload`](modules.md#defaultsavemanypayload-14)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\> ; `saveManyResponse?`: [`DefaultGetManyResponse`](modules.md#defaultgetmanyresponse-14)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\> ; `saveOnePayload?`: [`DefaultSaveOnePayload`](modules.md#defaultsaveonepayload-14)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\> ; `saveOneResponse?`: [`DefaultGetOneResponse`](modules.md#defaultgetoneresponse-14)<[`RoutesModelMapping`](interfaces/RoutesModelMapping.md)[`CrudModel`]\>  } | this parameter is used to manipulate the type of the payloads and responses for the crud endpoints. See the [dedicated section](/docs/usage/crud#data-types-customization) for more information. |
 
 #### Defined in
 
@@ -577,7 +577,7 @@ ___
 
 ### SetMutationDefaultsFunction
 
-Ƭ **SetMutationDefaultsFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)\>, `mutationObserverOptions?`: `MutationObserverOptions`<`any`, `any`, `any`, `any`\>) => `void`
+Ƭ **SetMutationDefaultsFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)\>, `mutationObserverOptions?`: `MutationObserverOptions`<`any`, `any`, `any`, `any`\>) => `void`
 
 #### Type declaration
 
@@ -590,14 +590,14 @@ This type is is only needed for setMutationDefaults because it needs mutationObs
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](interfaces/AppRoutes.md) = ``"main"`` |
-| `Route` | extends [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> |
+| `Route` | extends [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)\> |
 | `mutationObserverOptions?` | `MutationObserverOptions`<`any`, `any`, `any`, `any`\> |
 
 ##### Returns
@@ -612,11 +612,11 @@ ___
 
 ### SetQueryDataFunction
 
-Ƭ **SetQueryDataFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `updater`: `Updater`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>, [`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\>, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)\>) => [`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>
+Ƭ **SetQueryDataFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `updater`: `Updater`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>, [`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\>, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)\>) => [`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>
 
 #### Type declaration
 
-▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `updater`, `appQueryOptions?`): [`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>
+▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `updater`, `appQueryOptions?`): [`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>
 
 This type only needed for setQueryData because it needs the updater param
 
@@ -625,19 +625,19 @@ This type only needed for setQueryData because it needs the updater param
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](interfaces/AppRoutes.md) = ``"main"`` |
-| `Route` | extends [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> |
+| `Route` | extends [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `updater` | `Updater`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>, [`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\> |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)\> |
+| `updater` | `Updater`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>, [`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)\> |
 
 ##### Returns
 
-[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>
+[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>
 
 #### Defined in
 
@@ -647,7 +647,7 @@ ___
 
 ### SetQueryDefaultsFunction
 
-Ƭ **SetQueryDefaultsFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)\>, `queryObserverOptions?`: `QueryObserverOptions`<`any`, `any`, `any`, `any`\>) => `void`
+Ƭ **SetQueryDefaultsFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)\>, `queryObserverOptions?`: `QueryObserverOptions`<`any`, `any`, `any`, `any`\>) => `void`
 
 #### Type declaration
 
@@ -660,14 +660,14 @@ This type is is only needed for setQueryDefaults because it needs queryObserverO
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](interfaces/AppRoutes.md) = ``"main"`` |
-| `Route` | extends [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-12)<`Scope`\> |
+| `Route` | extends [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> = [`ApiRoute`](modules.md#apiroute-14)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)\> |
 | `queryObserverOptions?` | `QueryObserverOptions`<`any`, `any`, `any`, `any`\> |
 
 ##### Returns
@@ -758,7 +758,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | [`AppQueryOptions`](modules.md#appqueryoptions-12)<[`ApiPayloadType`](modules.md#apipayloadtype-12)<`Scope`, `Route`\>\> |
+| `appQueryOptions?` | [`AppQueryOptions`](modules.md#appqueryoptions-14)<[`ApiPayloadType`](modules.md#apipayloadtype-14)<`Scope`, `Route`\>\> |
 
 #### Returns
 
@@ -772,7 +772,7 @@ ___
 
 ### httpGet
 
-▸ **httpGet**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\>
+▸ **httpGet**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\>
 
 #### Type parameters
 
@@ -786,11 +786,11 @@ ___
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } | A string or an object containig  a key of [AppRoutes](interfaces/AppRoutes.md) containing the parameter. |
-| `appQueryOptions?` | [`AppQueryOptions`](modules.md#appqueryoptions-12)<`any`\> |  |
+| `appQueryOptions?` | [`AppQueryOptions`](modules.md#appqueryoptions-14)<`any`\> |  |
 
 #### Returns
 
-`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\>
+`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\>
 
 #### Defined in
 
@@ -800,7 +800,7 @@ ___
 
 ### httpPatch
 
-▸ **httpPatch**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>\>
+▸ **httpPatch**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>\>
 
 #### Type parameters
 
@@ -814,11 +814,11 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | [`AppQueryOptions`](modules.md#appqueryoptions-12)<[`ApiPayloadType`](modules.md#apipayloadtype-12)<`Scope`, `Route`\>\> |
+| `appQueryOptions?` | [`AppQueryOptions`](modules.md#appqueryoptions-14)<[`ApiPayloadType`](modules.md#apipayloadtype-14)<`Scope`, `Route`\>\> |
 
 #### Returns
 
-`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>\>
+`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>\>
 
 #### Defined in
 
@@ -828,7 +828,7 @@ ___
 
 ### httpPost
 
-▸ **httpPost**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>\>
+▸ **httpPost**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>\>
 
 #### Type parameters
 
@@ -842,11 +842,11 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | [`AppQueryOptions`](modules.md#appqueryoptions-12)<[`ApiPayloadType`](modules.md#apipayloadtype-12)<`Scope`, `Route`\>\> |
+| `appQueryOptions?` | [`AppQueryOptions`](modules.md#appqueryoptions-14)<[`ApiPayloadType`](modules.md#apipayloadtype-14)<`Scope`, `Route`\>\> |
 
 #### Returns
 
-`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>\>
+`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>\>
 
 #### Defined in
 
@@ -856,7 +856,7 @@ ___
 
 ### httpPut
 
-▸ **httpPut**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>\>
+▸ **httpPut**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>\>
 
 #### Type parameters
 
@@ -870,11 +870,11 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | [`AppQueryOptions`](modules.md#appqueryoptions-12)<[`ApiPayloadType`](modules.md#apipayloadtype-12)<`Scope`, `Route`\>\> |
+| `appQueryOptions?` | [`AppQueryOptions`](modules.md#appqueryoptions-14)<[`ApiPayloadType`](modules.md#apipayloadtype-14)<`Scope`, `Route`\>\> |
 
 #### Returns
 
-`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>\>
+`Promise`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>\>
 
 #### Defined in
 
@@ -914,7 +914,7 @@ See how to use it in the [usage section](/docs/usage/basic-usage)
 
 | Name | Type |
 | :------ | :------ |
-| `config` | [`ApiConfig`](modules.md#apiconfig-12) |
+| `config` | [`ApiConfig`](modules.md#apiconfig-14) |
 
 #### Returns
 
@@ -931,13 +931,13 @@ ___
 ▸ **initNetworking**(`config`): `void`
 
 **`deprecated`**
-use  [initApi](modules.md#initapi-12) instead
+use  [initApi](modules.md#initapi-14) instead
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `config` | [`ApiConfig`](modules.md#apiconfig-12) |
+| `config` | [`ApiConfig`](modules.md#apiconfig-14) |
 
 #### Returns
 
@@ -951,7 +951,7 @@ ___
 
 ### useAppMutation
 
-▸ **useAppMutation**<`Scope`, `Route`\>(`route`, `queryOptions?`, `mutationOptions?`): `UseMutationResult`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>, `any`, [`ApiPayloadType`](modules.md#apipayloadtype-12)<`Scope`, `Route`\> & { `_pathParams?`: { `[key: string]`: `any`;  }  }, `any`\>
+▸ **useAppMutation**<`Scope`, `Route`\>(`route`, `queryOptions?`, `mutationOptions?`): `UseMutationResult`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>, `any`, [`ApiPayloadType`](modules.md#apipayloadtype-14)<`Scope`, `Route`\> & { `_pathParams?`: { `[key: string]`: `any`;  }  }, `any`\>
 
 #### Type parameters
 
@@ -965,12 +965,12 @@ ___
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `route` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } | a route from AppRoutes or an object with a scope and a route |
-| `queryOptions` | `Partial`<`Omit`<[`AppQueryOptions`](modules.md#appqueryoptions-12)<[`ApiPayloadType`](modules.md#apipayloadtype-12)<`Scope`, `Route`\>\>, ``"apiScope"``\>\> | http options for the query. Path params is needed to replace path variables |
+| `queryOptions` | `Partial`<`Omit`<[`AppQueryOptions`](modules.md#appqueryoptions-14)<[`ApiPayloadType`](modules.md#apipayloadtype-14)<`Scope`, `Route`\>\>, ``"apiScope"``\>\> | http options for the query. Path params is needed to replace path variables |
 | `mutationOptions` | `UseMutationOptions`<`unknown`, `unknown`, `void`, `unknown`\> | react-query's mutation options |
 
 #### Returns
 
-`UseMutationResult`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`, ``"mutation"``\>, `any`, [`ApiPayloadType`](modules.md#apipayloadtype-12)<`Scope`, `Route`\> & { `_pathParams?`: { `[key: string]`: `any`;  }  }, `any`\>
+`UseMutationResult`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`, ``"mutation"``\>, `any`, [`ApiPayloadType`](modules.md#apipayloadtype-14)<`Scope`, `Route`\> & { `_pathParams?`: { `[key: string]`: `any`;  }  }, `any`\>
 
 #### Defined in
 
@@ -980,7 +980,7 @@ ___
 
 ### useAppQuery
 
-▸ **useAppQuery**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`, `useQueryOptions?`): `UseQueryResult`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\>
+▸ **useAppQuery**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`, `useQueryOptions?`): `UseQueryResult`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\>
 
 Alias for array
 
@@ -996,12 +996,12 @@ Alias for array
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions` | `Partial`<`Omit`<[`AppQueryOptions`](modules.md#appqueryoptions-12)<`any`\>, ``"payload"`` \| ``"apiScope"``\>\> |
+| `appQueryOptions` | `Partial`<`Omit`<[`AppQueryOptions`](modules.md#appqueryoptions-14)<`any`\>, ``"payload"`` \| ``"apiScope"``\>\> |
 | `useQueryOptions` | `UseQueryOptions`<`unknown`, `unknown`, `unknown`, `QueryKey`\> |
 
 #### Returns
 
-`UseQueryResult`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\>
+`UseQueryResult`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\>
 
 #### Defined in
 
@@ -1019,25 +1019,25 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `cancelQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`Promise`<`void`\>\> |
-| `executeMutation` | [`ExecuteMutationFunction`](modules.md#executemutationfunction-12) |
-| `fetchQuery` | [`FunctionWithMappedReturnType`](modules.md#functionwithmappedreturntype-12) |
-| `getMutationDefaults` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`undefined` \| `MutationObserverOptions`<`any`, `any`, `any`, `any`\>\> |
-| `getQueryData` | [`FunctionWithMappedReturnType`](modules.md#functionwithmappedreturntype-12) |
-| `getQueryDefaults` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`undefined` \| `QueryObserverOptions`<`any`, `any`, `any`, `any`, `any`\>\> |
-| `invalidateAppQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`Promise`<`void`\>\> |
-| `invalidateQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`Promise`<`void`\>\> |
-| `isFetching` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`number`\> |
-| `isMutating` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`number`\> |
-| `prefetchQuery` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`Promise`<`void`\>\> |
-| `refetchAppQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`Promise`<`void`\>\> |
-| `refetchQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`Promise`<`void`\>\> |
-| `removeQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`void`\> |
-| `resetQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`Promise`<`void`\>\> |
-| `setDefaultOptions` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-12)<`void`\> |
-| `setMutationDefaults` | [`SetMutationDefaultsFunction`](modules.md#setmutationdefaultsfunction-12) |
-| `setQueryData` | [`SetQueryDataFunction`](modules.md#setquerydatafunction-12) |
-| `setQueryDefaults` | [`SetQueryDefaultsFunction`](modules.md#setquerydefaultsfunction-12) |
+| `cancelQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`Promise`<`void`\>\> |
+| `executeMutation` | [`ExecuteMutationFunction`](modules.md#executemutationfunction-14) |
+| `fetchQuery` | [`FunctionWithMappedReturnType`](modules.md#functionwithmappedreturntype-14) |
+| `getMutationDefaults` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`undefined` \| `MutationObserverOptions`<`any`, `any`, `any`, `any`\>\> |
+| `getQueryData` | [`FunctionWithMappedReturnType`](modules.md#functionwithmappedreturntype-14) |
+| `getQueryDefaults` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`undefined` \| `QueryObserverOptions`<`any`, `any`, `any`, `any`, `any`\>\> |
+| `invalidateAppQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`Promise`<`void`\>\> |
+| `invalidateQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`Promise`<`void`\>\> |
+| `isFetching` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`number`\> |
+| `isMutating` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`number`\> |
+| `prefetchQuery` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`Promise`<`void`\>\> |
+| `refetchAppQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`Promise`<`void`\>\> |
+| `refetchQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`Promise`<`void`\>\> |
+| `removeQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`void`\> |
+| `resetQueries` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`Promise`<`void`\>\> |
+| `setDefaultOptions` | [`FunctionWithTypedRouteAndOptions`](modules.md#functionwithtypedrouteandoptions-14)<`void`\> |
+| `setMutationDefaults` | [`SetMutationDefaultsFunction`](modules.md#setmutationdefaultsfunction-14) |
+| `setQueryData` | [`SetQueryDataFunction`](modules.md#setquerydatafunction-14) |
+| `setQueryDefaults` | [`SetQueryDefaultsFunction`](modules.md#setquerydefaultsfunction-14) |
 
 #### Defined in
 
@@ -1047,7 +1047,7 @@ ___
 
 ### useInfiniteAppQuery
 
-▸ **useInfiniteAppQuery**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`, `useQueryOptions?`): `UseInfiniteQueryResult`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\>
+▸ **useInfiniteAppQuery**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`, `useQueryOptions?`): `UseInfiniteQueryResult`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\>
 
 #### Type parameters
 
@@ -1061,12 +1061,12 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-12)<`any`\>\> |
+| `appQueryOptions` | `Partial`<[`AppQueryOptions`](modules.md#appqueryoptions-14)<`any`\>\> |
 | `useQueryOptions` | `UseInfiniteQueryOptions`<`unknown`, `unknown`, `unknown`, `unknown`, `QueryKey`\> |
 
 #### Returns
 
-`UseInfiniteQueryResult`<[`ApiResponseType`](modules.md#apiresponsetype-12)<`Scope`, `Route`\>\>
+`UseInfiniteQueryResult`<[`ApiResponseType`](modules.md#apiresponsetype-14)<`Scope`, `Route`\>\>
 
 #### Defined in
 

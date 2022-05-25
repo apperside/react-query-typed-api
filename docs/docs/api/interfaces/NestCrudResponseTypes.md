@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[crud/index.ts:165](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L165)
+[crud/index.ts:167](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L167)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:164](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L164)
+[crud/index.ts:166](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L166)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:158](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L158)
+[crud/index.ts:160](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L160)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:159](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L159)
+[crud/index.ts:161](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L161)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:162](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L162)
+[crud/index.ts:164](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L164)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:163](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L163)
+[crud/index.ts:165](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L165)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:160](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L160)
+[crud/index.ts:162](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L162)
 
 ___
 
@@ -106,4 +106,4 @@ ___
 
 #### Defined in
 
-[crud/index.ts:161](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L161)
+[crud/index.ts:163](https://github.com/apperside/react-query-typed-api/blob/e3c1c0d/src/crud/index.ts#L163)

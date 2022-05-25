@@ -11,6 +11,6 @@ Augment this interface to add your endpoints, see the [usage section](/docs/usag
 
 ## Hierarchy
 
-- [`CrudRoutes`](../modules.md#crudroutes-12)
+- [`CrudRoutes`](../modules.md#crudroutes-14)
 
   ↳ **`MainApi`**

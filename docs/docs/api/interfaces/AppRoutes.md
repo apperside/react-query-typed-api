@@ -8,7 +8,7 @@ custom_edit_url: null
 
 The interface representing all of your api endpoints.
 It must be a key value pair where the key is an identifier for a specific api and the value and object of type
-[](../modules.md#appendpoint-12)
+[](../modules.md#appendpoint-14)
 
 ## Properties
 
@@ -16,7 +16,7 @@ It must be a key value pair where the key is an identifier for a specific api an
 
 • **main**: [`MainApi`](MainApi.md)
 
-The default [ApiScope](../modules.md#apiscope-12). Augment this interface to add more scopes, see the [usage section](/docs/usage/basic-usage) for more information. for more info
+The default [ApiScope](../modules.md#apiscope-14). Augment this interface to add more scopes, see the [usage section](/docs/usage/basic-usage) for more information. for more info
 
 **`example`**
 Here's a simple example:

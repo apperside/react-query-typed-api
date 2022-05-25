@@ -137,7 +137,9 @@ export type RoutesForModel<CrudModel extends keyof RoutesModelMapping, BasePath 
 	};
 
 
-
+/**
+ * This interface needs to be augmented, for more info on how to do it se the [dedicated section](/docs/usage/crud#usage)
+ */
 export interface CustomCrudRoutes {
 	//to be augmented
 }

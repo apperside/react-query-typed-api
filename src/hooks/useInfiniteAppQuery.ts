@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useInfiniteQuery, UseInfiniteQueryOptions, UseInfiniteQueryResult } from "react-query";
 import { AppQueryOptions } from ".";
-import { AppRoutes, ApiResponseType } from "..";
+import { AppRoutes, ApiResponseType, ApiRoute } from "..";
 import { httpGet } from "../imperative"
 
-export function useInfiniteAppQuery<Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>
+export function useInfiniteAppQuery<Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>
 	(routeOrRouteObj: Route | { scope: Scope, route: Route },
 		appQueryOptions: Partial<AppQueryOptions> = {},
 		useQueryOptions: UseInfiniteQueryOptions = {})

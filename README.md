@@ -497,9 +497,9 @@ Since this is 100% true for `useAppQuery`,  on `useAppMutation` we added there i
   
   
 
-<!-- ROADMAP -->
+<!-- TODO -->
 
-## Roadmap
+## TODO
 
   
 
@@ -508,6 +508,8 @@ Since this is 100% true for `useAppQuery`,  on `useAppMutation` we added there i
  [] Add missing documentation (crud endpoints, 
  
  [] Wrap useInfiniteQuery
+
+ [] Add support for typing errors
  
  [] Add tests
 

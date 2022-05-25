@@ -1,7 +1,7 @@
 ---
 id: "crud.DefaultGetManyResponse"
 title: "Interface: DefaultGetManyResponse<T>"
-sidebar_label: "DefaultGetManyResponse"
+sidebar_label: "crud.DefaultGetManyResponse"
 custom_edit_url: null
 ---
 
@@ -23,7 +23,7 @@ Default response type for getMany request
 
 #### Defined in
 
-[crud/index.ts:46](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L46)
+[crud/index.ts:49](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L49)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:47](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L47)
+[crud/index.ts:50](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L50)
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 #### Defined in
 
-[crud/index.ts:45](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L45)
+[crud/index.ts:48](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L48)

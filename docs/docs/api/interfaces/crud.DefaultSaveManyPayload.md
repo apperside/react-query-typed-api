@@ -1,7 +1,7 @@
 ---
 id: "crud.DefaultSaveManyPayload"
 title: "Interface: DefaultSaveManyPayload<T>"
-sidebar_label: "DefaultSaveManyPayload"
+sidebar_label: "crud.DefaultSaveManyPayload"
 custom_edit_url: null
 ---
 
@@ -23,4 +23,4 @@ Default payload type for saveMany request
 
 #### Defined in
 
-[crud/index.ts:66](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L66)
+[crud/index.ts:69](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L69)

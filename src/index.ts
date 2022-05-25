@@ -9,6 +9,10 @@ export * from "./networking";
 export * from "./components";
 
 
+/**
+ * This interface represents the main API routes.
+ * Augment this interface to add your endpoints, see the [usage section](/docs/usage/basic-usage) for more info
+ */
 export interface MainApi extends CrudRoutes {
 	/**
 	 * TO BE AUGMENTED
@@ -67,7 +71,7 @@ export interface AppRoutes {
  */
 export type ApiScope = keyof AppRoutes;
 
-
+export type ApiRoute<Scope extends keyof AppRoutes = "main"> = keyof AppRoutes[Scope]
 
 export type ApiResponseType<Scope extends keyof AppRoutes, Route extends keyof AppRoutes[Scope], Type extends "query" | "mutation" = "query"> =
 	Type extends "mutation" ?

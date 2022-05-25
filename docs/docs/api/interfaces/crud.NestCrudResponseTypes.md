@@ -1,13 +1,11 @@
 ---
 id: "crud.NestCrudResponseTypes"
 title: "Interface: NestCrudResponseTypes<T>"
-sidebar_label: "NestCrudResponseTypes"
+sidebar_label: "crud.NestCrudResponseTypes"
 custom_edit_url: null
 ---
 
 [crud](../modules/crud.md).NestCrudResponseTypes
-
-INTEGRATION WITH THIRD PARTY LIBRARIES
 
 ## Type parameters
 
@@ -23,7 +21,7 @@ INTEGRATION WITH THIRD PARTY LIBRARIES
 
 #### Defined in
 
-[crud/index.ts:134](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L134)
+[crud/index.ts:139](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L139)
 
 ___
 
@@ -33,7 +31,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:133](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L133)
+[crud/index.ts:138](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L138)
 
 ___
 
@@ -53,7 +51,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:127](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L127)
+[crud/index.ts:132](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L132)
 
 ___
 
@@ -63,7 +61,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:128](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L128)
+[crud/index.ts:133](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L133)
 
 ___
 
@@ -79,7 +77,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:131](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L131)
+[crud/index.ts:136](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L136)
 
 ___
 
@@ -89,7 +87,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:132](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L132)
+[crud/index.ts:137](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L137)
 
 ___
 
@@ -99,7 +97,7 @@ ___
 
 #### Defined in
 
-[crud/index.ts:129](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L129)
+[crud/index.ts:134](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L134)
 
 ___
 
@@ -109,4 +107,4 @@ ___
 
 #### Defined in
 
-[crud/index.ts:130](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L130)
+[crud/index.ts:135](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L135)

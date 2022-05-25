@@ -23,7 +23,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[crud/index.ts:116](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L116)
+[crud/index.ts:119](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L119)
 
 ___
 
@@ -41,7 +41,7 @@ Default payload type for deleteMany request
 
 #### Defined in
 
-[crud/index.ts:77](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L77)
+[crud/index.ts:80](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L80)
 
 ___
 
@@ -59,7 +59,7 @@ Default response type for deleteMany request
 
 #### Defined in
 
-[crud/index.ts:82](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L82)
+[crud/index.ts:85](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L85)
 
 ___
 
@@ -77,7 +77,7 @@ Default response type for getOne request
 
 #### Defined in
 
-[crud/index.ts:53](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L53)
+[crud/index.ts:56](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L56)
 
 ___
 
@@ -95,13 +95,13 @@ Default response type for saveOne request
 
 #### Defined in
 
-[crud/index.ts:72](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L72)
+[crud/index.ts:75](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L75)
 
 ___
 
 ### NestJsxModelRoute
 
-Ƭ **NestJsxModelRoute**<`T`, `BasePath`\>: [`RoutesForModel`](crud.md#routesformodel-88)<`T`, `BasePath`, [`NestCrudResponseTypes`](../interfaces/crud.NestCrudResponseTypes.md)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`T`]\>\>
+Ƭ **NestJsxModelRoute**<`T`, `BasePath`\>: [`RoutesForModel`](crud.md#routesformodel-4)<`T`, `BasePath`, [`NestCrudResponseTypes`](../interfaces/crud.NestCrudResponseTypes.md)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`T`]\>\>
 
 #### Type parameters
 
@@ -112,16 +112,16 @@ ___
 
 #### Defined in
 
-[crud/index.ts:137](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L137)
+[crud/index.ts:142](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L142)
 
 ___
 
 ### NestModelRoute
 
-Ƭ **NestModelRoute**<`T`, `BasePath`\>: [`NestJsxModelRoute`](crud.md#nestjsxmodelroute-76)<`T`, `BasePath`\>
+Ƭ **NestModelRoute**<`T`, `BasePath`\>: [`NestJsxModelRoute`](crud.md#nestjsxmodelroute-4)<`T`, `BasePath`\>
 
 **`deprecated`**
-use [NestJsxModelRoute](crud.md#nestjsxmodelroute-76) instead
+use [NestJsxModelRoute](crud.md#nestjsxmodelroute-4) instead
 
 #### Type parameters
 
@@ -132,22 +132,22 @@ use [NestJsxModelRoute](crud.md#nestjsxmodelroute-76) instead
 
 #### Defined in
 
-[crud/index.ts:143](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L143)
+[crud/index.ts:148](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L148)
 
 ___
 
 ### RoutesForModel
 
-Ƭ **RoutesForModel**<`T`, `BasePath`, `R`\>: { [key in AllRoutes<T, BasePath\>]: key extends \`${string}/bulk\` ? Object : key extends \`${string}/:id\` ? Object : key extends \`${string}/bulk-delete/:ids\` ? Object : key extends \`${string}\` ? Object : RoutesModelMapping[T] }
+Ƭ **RoutesForModel**<`CrudModel`, `BasePath`, `R`\>: { [key in AllRoutes<CrudModel, BasePath\>]: key extends \`${string}/bulk\` ? Object : key extends \`${string}/:id\` ? Object : key extends \`${string}/bulk-delete/:ids\` ? Object : key extends \`${string}\` ? Object : RoutesModelMapping[CrudModel] }
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends keyof [`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md) |
+| `CrudModel` | extends keyof [`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md) |
 | `BasePath` | extends `string` \| `unknown` = `unknown` |
-| `R` | extends `CrudActionsDataMapping` = { `getManyResponse?`: [`DefaultGetManyResponse`](../interfaces/crud.DefaultGetManyResponse.md)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`T`]\> ; `getOneResponse?`: [`DefaultGetOneResponse`](crud.md#defaultgetoneresponse-88)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`T`]\> ; `saveManyPayload?`: [`DefaultSaveManyPayload`](../interfaces/crud.DefaultSaveManyPayload.md)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`T`]\> ; `saveManyResponse?`: [`DefaultGetManyResponse`](../interfaces/crud.DefaultGetManyResponse.md)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`T`]\> ; `saveOnePayload?`: [`DefaultSaveOnePayload`](../interfaces/crud.DefaultSaveOnePayload.md)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`T`]\> ; `saveOneResponse?`: [`DefaultGetOneResponse`](crud.md#defaultgetoneresponse-88)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`T`]\>  } |
+| `R` | extends `CrudActionsDataMapping` = { `getManyResponse?`: [`DefaultGetManyResponse`](../interfaces/crud.DefaultGetManyResponse.md)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`CrudModel`]\> ; `getOneResponse?`: [`DefaultGetOneResponse`](crud.md#defaultgetoneresponse-4)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`CrudModel`]\> ; `saveManyPayload?`: [`DefaultSaveManyPayload`](../interfaces/crud.DefaultSaveManyPayload.md)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`CrudModel`]\> ; `saveManyResponse?`: [`DefaultGetManyResponse`](../interfaces/crud.DefaultGetManyResponse.md)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`CrudModel`]\> ; `saveOnePayload?`: [`DefaultSaveOnePayload`](../interfaces/crud.DefaultSaveOnePayload.md)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`CrudModel`]\> ; `saveOneResponse?`: [`DefaultGetOneResponse`](crud.md#defaultgetoneresponse-4)<[`RoutesModelMapping`](../interfaces/crud.RoutesModelMapping.md)[`CrudModel`]\>  } |
 
 #### Defined in
 
-[crud/index.ts:85](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L85)
+[crud/index.ts:88](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L88)

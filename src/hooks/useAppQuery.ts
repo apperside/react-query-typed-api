@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
 import { AppQueryOptions } from ".";
-import { AppRoutes, ApiResponseType } from "..";
+import { AppRoutes, ApiResponseType, ApiRoute } from "..";
 import { appQueryBuilder } from "./appQueryBuilder";
 import { httpGet } from "../imperative"
 
@@ -10,15 +10,15 @@ import { httpGet } from "../imperative"
  *
  * @typeParam Scope - One of the keys of {@link AppRoutes}
  */
-export function useAppQuery<Scope extends keyof AppRoutes = "main", T extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>
-	(routeOrRouteObj: T | { scope: Scope, route: T },
+export function useAppQuery<Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>
+	(routeOrRouteObj: Route | { scope: Scope, route: Route },
 		appQueryOptions: Partial<Omit<AppQueryOptions, "payload" | "apiScope">> = {},
 		useQueryOptions: UseQueryOptions = {})
-	: UseQueryResult<ApiResponseType<Scope, T>> {
+	: UseQueryResult<ApiResponseType<Scope, Route>> {
 
 	const keyForUseQuery = appQueryBuilder(routeOrRouteObj, appQueryOptions);
 
-	type RES = ApiResponseType<Scope, T>
+	type RES = ApiResponseType<Scope, Route>
 	return useQuery<RES>(keyForUseQuery, (params: any) => {
 		return httpGet(routeOrRouteObj, { ...appQueryOptions }) as Promise<RES>
 	}, useQueryOptions as any);

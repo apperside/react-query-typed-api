@@ -1,13 +1,15 @@
 ---
 id: "crud.RoutesModelMapping"
 title: "Interface: RoutesModelMapping"
-sidebar_label: "RoutesModelMapping"
+sidebar_label: "crud.RoutesModelMapping"
 custom_edit_url: null
 ---
 
 [crud](../modules/crud.md).RoutesModelMapping
 
-This interface is to be augmented. Se the [usage section](/docs/usage/basic-usage) for more info
+This interface allows you to define all your CRUD resources and the name to use to those resources in the api urls.
+This interface need to be augmented with key-value pairs where the key is the name of the resource and the value is the
+type of the resource.
 
 **`example`**
 ```typescript

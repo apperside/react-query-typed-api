@@ -1,0 +1,58 @@
+# CRUD ENDPOINTS
+
+CRUD is an acronim for Create,Read,Update,Delete, which are the four major functions used to interact with data resources.
+This library comes with some utility type to help you consuming RESTFul endpoints for CRUD operations very conventienly.
+CRUD apis are all about conventions, and are usually implemented by following some patterns involving the endpoints structure and the [HTTP Verb](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) used to interact with the endpoint.
+
+Given a resource (which can be a blog post, an ecommerce order, a user or anything), a RESTFul api for CRUD operations should at least allow us to:
+
+- get all resources of a given type
+- get one resource by its id
+- create a new item
+- update an item
+- delete one item
+
+Given for example a resource named `order`, and being `http://myawesomeserver.com/api/` the base api url, these operations can be defined by the following sample endpoints<br />
+
+| HTTP VERB              | ENDPOINT                                  | DESCRIPTION                        |
+| ---------------------- | ----------------------------------------- | ---------------------------------- |
+| **GET**                | http://myawesomeserver.com/api/orders     | get all orders                     |
+| **GET**                | http://myawesomeserver.com/api/orders/:id | get one orer by id                 |
+| **POST**               | http://myawesomeserver.com/api/orders     | create a new order                 |
+| **PUT**( or **PATCH**) | http://myawesomeserver.com/api/orders/:id | update the order with the given id |
+| **DELETE**             | http://myawesomeserver.com/api/orders/:id | delete the order with the given id |
+
+And so on for each resource you have to deal with. <br/><br/>
+In addition to defining a pattern on how to interact with the resources, we also need to define a standard for the responses.<br/>
+Once we have a predictable way to query the resources, and we have a predictable response structure, typescript gives us a lot of room to abstract this concepts.
+
+Let define for example a very simple User object like this:
+
+```typescript
+type User = {
+  id: number;
+  email: string;
+  name: string;
+};
+```
+
+We could define the following responses:
+
+GET ALL
+Being `Order` the type that defines an hipotetical order object of Let say that the responses of our endpoints will have the be the following:
+You can use the following methods:
+
+- httpGet
+- httpPost
+- httpPut
+- httpPatch
+- httpDelete
+
+The parameters you can pass to them are the same you can pass to useAppQuery
+
+TODO: improve this doc
+
+```
+
+```
+

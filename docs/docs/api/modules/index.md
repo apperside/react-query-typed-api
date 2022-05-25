@@ -16,7 +16,7 @@ custom_edit_url: null
 
 ### CrudRoutes
 
-Re-exports [CrudRoutes](crud.md#crudroutes-88)
+Re-exports [CrudRoutes](crud.md#crudroutes-4)
 
 ___
 
@@ -28,13 +28,13 @@ ___
 
 ### DefaultDeleteManyPayload
 
-Re-exports [DefaultDeleteManyPayload](crud.md#defaultdeletemanypayload-88)
+Re-exports [DefaultDeleteManyPayload](crud.md#defaultdeletemanypayload-4)
 
 ___
 
 ### DefaultDeleteManyResponse
 
-Re-exports [DefaultDeleteManyResponse](crud.md#defaultdeletemanyresponse-88)
+Re-exports [DefaultDeleteManyResponse](crud.md#defaultdeletemanyresponse-4)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 ### DefaultGetOneResponse
 
-Re-exports [DefaultGetOneResponse](crud.md#defaultgetoneresponse-88)
+Re-exports [DefaultGetOneResponse](crud.md#defaultgetoneresponse-4)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 ### DefaultSaveOneResponse
 
-Re-exports [DefaultSaveOneResponse](crud.md#defaultsaveoneresponse-88)
+Re-exports [DefaultSaveOneResponse](crud.md#defaultsaveoneresponse-4)
 
 ___
 
@@ -76,19 +76,19 @@ ___
 
 ### NestJsxModelRoute
 
-Re-exports [NestJsxModelRoute](crud.md#nestjsxmodelroute-76)
+Re-exports [NestJsxModelRoute](crud.md#nestjsxmodelroute-4)
 
 ___
 
 ### NestModelRoute
 
-Re-exports [NestModelRoute](crud.md#nestmodelroute-88)
+Re-exports [NestModelRoute](crud.md#nestmodelroute-4)
 
 ___
 
 ### RoutesForModel
 
-Re-exports [RoutesForModel](crud.md#routesformodel-88)
+Re-exports [RoutesForModel](crud.md#routesformodel-4)
 
 ___
 
@@ -100,31 +100,31 @@ ___
 
 ### httpDelete
 
-Re-exports [httpDelete](imperative.md#httpdelete-88)
+Re-exports [httpDelete](imperative.md#httpdelete-4)
 
 ___
 
 ### httpGet
 
-Re-exports [httpGet](imperative.md#httpget-88)
+Re-exports [httpGet](imperative.md#httpget-4)
 
 ___
 
 ### httpPatch
 
-Re-exports [httpPatch](imperative.md#httppatch-88)
+Re-exports [httpPatch](imperative.md#httppatch-4)
 
 ___
 
 ### httpPost
 
-Re-exports [httpPost](imperative.md#httppost-88)
+Re-exports [httpPost](imperative.md#httppost-4)
 
 ___
 
 ### httpPut
 
-Re-exports [httpPut](imperative.md#httpput-88)
+Re-exports [httpPut](imperative.md#httpput-4)
 
 ## Type aliases
 
@@ -139,11 +139,11 @@ Configuration object for the apiaaa
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `loggingEnabled?` | `boolean` | - |
-| `servers` | { [key in keyof AppRoutes]: ApiServerConfig } | A key-value pair where the key are all the keys in [AppRoutes](../interfaces/.AppRoutes), and the value an [ApiServerConfig](#apiserverconfig-88) object |
+| `servers` | { [key in keyof AppRoutes]: ApiServerConfig } | A key-value pair where the key are all the keys in [AppRoutes](../interfaces/.AppRoutes), and the value an [ApiServerConfig](#apiserverconfig-4) object |
 
 #### Defined in
 
-[networking/httpManager.ts:105](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/networking/httpManager.ts#L105)
+[networking/httpManager.ts:105](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L105)
 
 ___
 
@@ -160,7 +160,7 @@ ___
 
 #### Defined in
 
-[index.ts:86](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/index.ts#L86)
+[index.ts:90](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/index.ts#L90)
 
 ___
 
@@ -178,7 +178,23 @@ ___
 
 #### Defined in
 
-[index.ts:72](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/index.ts#L72)
+[index.ts:76](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/index.ts#L76)
+
+___
+
+### ApiRoute
+
+Ƭ **ApiRoute**<`Scope`\>: keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`]
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `Scope` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes) = ``"main"`` |
+
+#### Defined in
+
+[index.ts:74](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/index.ts#L74)
 
 ___
 
@@ -192,7 +208,7 @@ for all of your endpoints
 
 #### Defined in
 
-[index.ts:68](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/index.ts#L68)
+[index.ts:72](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/index.ts#L72)
 
 ___
 
@@ -208,16 +224,16 @@ Api configuration
 | :------ | :------ | :------ |
 | `apiUrl` | `string` | - |
 | `axiosConfig?` | `AxiosRequestConfig` | - |
-| `errorHandlers?` | [`CustomErrorHandler`](#customerrorhandler-88)[] | - |
+| `errorHandlers?` | [`CustomErrorHandler`](#customerrorhandler-4)[] | - |
 | `headers?` | { `[key: string]`: `string` \| (`options`: [`HttpRequestOptions`](../interfaces/.HttpRequestOptions)) => `string`;  } | - |
-| `requestInterceptor?` | [`CustomRequestHandler`](#customrequesthandler-88) | - |
-| `responseHandlers?` | [`CustomResponseHandler`](#customresponsehandler-88)[] | - |
+| `requestInterceptor?` | [`CustomRequestHandler`](#customrequesthandler-4) | - |
+| `responseHandlers?` | [`CustomResponseHandler`](#customresponsehandler-4)[] | - |
 | `timeout?` | `number` | - |
 | `tokenLocalStorageKey?` | `string` | The name of the localstorage key that will be used to store and read the token. Evety request market as authenticated will put in the header the token as Bearer. TODO: Handle Multiple methods. in the meanwhile it possible to use the headers config key to build custom headers |
 
 #### Defined in
 
-[networking/httpManager.ts:85](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/networking/httpManager.ts#L85)
+[networking/httpManager.ts:85](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L85)
 
 ___
 
@@ -233,7 +249,7 @@ This type represent the structure of one endpoint.
 
 #### Defined in
 
-[index.ts:21](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/index.ts#L21)
+[index.ts:25](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/index.ts#L25)
 
 ___
 
@@ -249,7 +265,7 @@ ___
 
 #### Defined in
 
-[hooks/index.ts:9](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/index.ts#L9)
+[hooks/index.ts:9](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/index.ts#L9)
 
 ___
 
@@ -274,7 +290,7 @@ ___
 
 #### Defined in
 
-[networking/httpManager.ts:77](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/networking/httpManager.ts#L77)
+[networking/httpManager.ts:77](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L77)
 
 ___
 
@@ -298,7 +314,7 @@ ___
 
 #### Defined in
 
-[networking/httpManager.ts:75](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/networking/httpManager.ts#L75)
+[networking/httpManager.ts:75](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L75)
 
 ___
 
@@ -322,17 +338,17 @@ ___
 
 #### Defined in
 
-[networking/httpManager.ts:76](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/networking/httpManager.ts#L76)
+[networking/httpManager.ts:76](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L76)
 
 ___
 
 ### ExecuteMutationFunction
 
-Ƭ **ExecuteMutationFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-88)<[`ApiPayloadType`](#apipayloadtype-88)<`Scope`, `Route`\>\>\>) => `Promise`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`, ``"mutation"``\>\>
+Ƭ **ExecuteMutationFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-4)<[`ApiPayloadType`](#apipayloadtype-4)<`Scope`, `Route`\>\>\>) => `Promise`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`, ``"mutation"``\>\>
 
 #### Type declaration
 
-▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`, ``"mutation"``\>\>
+▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`, ``"mutation"``\>\>
 
 This type only needed for executeMutation because it returns mutation mapped return type
 
@@ -341,32 +357,32 @@ This type only needed for executeMutation because it returns mutation mapped ret
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes) = ``"main"`` |
-| `Route` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] = keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] |
+| `Route` | extends [`ApiRoute`](#apiroute-4)<`Scope`\> = [`ApiRoute`](#apiroute-4)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-88)<[`ApiPayloadType`](#apipayloadtype-88)<`Scope`, `Route`\>\>\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-4)<[`ApiPayloadType`](#apipayloadtype-4)<`Scope`, `Route`\>\>\> |
 
 ##### Returns
 
-`Promise`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`, ``"mutation"``\>\>
+`Promise`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`, ``"mutation"``\>\>
 
 #### Defined in
 
-[hooks/useAppQueryClient.ts:58](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/useAppQueryClient.ts#L58)
+[hooks/useAppQueryClient.ts:58](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/useAppQueryClient.ts#L58)
 
 ___
 
 ### FunctionWithMappedReturnType
 
-Ƭ **FunctionWithMappedReturnType**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-88)\>) => `Promise`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>\>
+Ƭ **FunctionWithMappedReturnType**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-4)\>) => `Promise`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>\>
 
 #### Type declaration
 
-▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>\>
+▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`): `Promise`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>\>
 
 This type is like the previous one but it returns the type mapped by the route
 
@@ -375,28 +391,28 @@ This type is like the previous one but it returns the type mapped by the route
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes) = ``"main"`` |
-| `Route` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] = keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] |
+| `Route` | extends [`ApiRoute`](#apiroute-4)<`Scope`\> = [`ApiRoute`](#apiroute-4)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-88)\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-4)\> |
 
 ##### Returns
 
-`Promise`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>\>
+`Promise`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>\>
 
 #### Defined in
 
-[hooks/useAppQueryClient.ts:33](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/useAppQueryClient.ts#L33)
+[hooks/useAppQueryClient.ts:33](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/useAppQueryClient.ts#L33)
 
 ___
 
 ### FunctionWithTypedRouteAndOptions
 
-Ƭ **FunctionWithTypedRouteAndOptions**<`ReturnType`\>: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-88)\>) => `ReturnType`
+Ƭ **FunctionWithTypedRouteAndOptions**<`ReturnType`\>: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-4)\>) => `ReturnType`
 
 #### Type parameters
 
@@ -415,14 +431,14 @@ The function type used by most of the functions
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes) = ``"main"`` |
-| `Route` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] = keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] |
+| `Route` | extends [`ApiRoute`](#apiroute-4)<`Scope`\> = [`ApiRoute`](#apiroute-4)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-88)\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-4)\> |
 
 ##### Returns
 
@@ -430,7 +446,7 @@ The function type used by most of the functions
 
 #### Defined in
 
-[hooks/useAppQueryClient.ts:27](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/useAppQueryClient.ts#L27)
+[hooks/useAppQueryClient.ts:27](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/useAppQueryClient.ts#L27)
 
 ___
 
@@ -440,25 +456,25 @@ ___
 
 #### Defined in
 
-[networking/httpManager.ts:16](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/networking/httpManager.ts#L16)
+[networking/httpManager.ts:16](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L16)
 
 ___
 
 ### NetworkingConfig
 
-Ƭ **NetworkingConfig**: [`ApiConfig`](#apiconfig-88)
+Ƭ **NetworkingConfig**: [`ApiConfig`](#apiconfig-4)
 
-**`deprecated`** use [ApiConfig](#apiconfig-88) instead
+**`deprecated`** use [ApiConfig](#apiconfig-4) instead
 
 #### Defined in
 
-[networking/httpManager.ts:118](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/networking/httpManager.ts#L118)
+[networking/httpManager.ts:118](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L118)
 
 ___
 
 ### SetMutationDefaultsFunction
 
-Ƭ **SetMutationDefaultsFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-88)\>, `mutationObserverOptions?`: `MutationObserverOptions`<`any`, `any`, `any`, `any`\>) => `void`
+Ƭ **SetMutationDefaultsFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-4)\>, `mutationObserverOptions?`: `MutationObserverOptions`<`any`, `any`, `any`, `any`\>) => `void`
 
 #### Type declaration
 
@@ -471,14 +487,14 @@ This type is is only needed for setMutationDefaults because it needs mutationObs
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes) = ``"main"`` |
-| `Route` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] = keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] |
+| `Route` | extends [`ApiRoute`](#apiroute-4)<`Scope`\> = [`ApiRoute`](#apiroute-4)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-88)\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-4)\> |
 | `mutationObserverOptions?` | `MutationObserverOptions`<`any`, `any`, `any`, `any`\> |
 
 ##### Returns
@@ -487,17 +503,17 @@ This type is is only needed for setMutationDefaults because it needs mutationObs
 
 #### Defined in
 
-[hooks/useAppQueryClient.ts:45](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/useAppQueryClient.ts#L45)
+[hooks/useAppQueryClient.ts:45](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/useAppQueryClient.ts#L45)
 
 ___
 
 ### SetQueryDataFunction
 
-Ƭ **SetQueryDataFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `updater`: `Updater`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>, [`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>\>, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-88)\>) => [`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>
+Ƭ **SetQueryDataFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `updater`: `Updater`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>, [`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>\>, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-4)\>) => [`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>
 
 #### Type declaration
 
-▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `updater`, `appQueryOptions?`): [`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>
+▸ <`Scope`, `Route`\>(`routeOrRouteObj`, `updater`, `appQueryOptions?`): [`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>
 
 This type only needed for setQueryData because it needs the updater param
 
@@ -506,29 +522,29 @@ This type only needed for setQueryData because it needs the updater param
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes) = ``"main"`` |
-| `Route` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] = keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] |
+| `Route` | extends [`ApiRoute`](#apiroute-4)<`Scope`\> = [`ApiRoute`](#apiroute-4)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `updater` | `Updater`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>, [`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>\> |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-88)\> |
+| `updater` | `Updater`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>, [`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-4)\> |
 
 ##### Returns
 
-[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>
+[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>
 
 #### Defined in
 
-[hooks/useAppQueryClient.ts:51](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/useAppQueryClient.ts#L51)
+[hooks/useAppQueryClient.ts:51](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/useAppQueryClient.ts#L51)
 
 ___
 
 ### SetQueryDefaultsFunction
 
-Ƭ **SetQueryDefaultsFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-88)\>, `queryObserverOptions?`: `QueryObserverOptions`<`any`, `any`, `any`, `any`\>) => `void`
+Ƭ **SetQueryDefaultsFunction**: <Scope, Route\>(`routeOrRouteObj`: `Route` \| { `route`: `Route` ; `scope`: `Scope`  }, `appQueryOptions?`: `Partial`<[`AppQueryOptions`](#appqueryoptions-4)\>, `queryObserverOptions?`: `QueryObserverOptions`<`any`, `any`, `any`, `any`\>) => `void`
 
 #### Type declaration
 
@@ -541,14 +557,14 @@ This type is is only needed for setQueryDefaults because it needs queryObserverO
 | Name | Type |
 | :------ | :------ |
 | `Scope` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes) = ``"main"`` |
-| `Route` | extends keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] = keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] |
+| `Route` | extends [`ApiRoute`](#apiroute-4)<`Scope`\> = [`ApiRoute`](#apiroute-4)<`Scope`\> |
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-88)\> |
+| `appQueryOptions?` | `Partial`<[`AppQueryOptions`](#appqueryoptions-4)\> |
 | `queryObserverOptions?` | `QueryObserverOptions`<`any`, `any`, `any`, `any`\> |
 
 ##### Returns
@@ -557,7 +573,7 @@ This type is is only needed for setQueryDefaults because it needs queryObserverO
 
 #### Defined in
 
-[hooks/useAppQueryClient.ts:39](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/useAppQueryClient.ts#L39)
+[hooks/useAppQueryClient.ts:39](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/useAppQueryClient.ts#L39)
 
 ## Variables
 
@@ -573,7 +589,7 @@ This type is is only needed for setQueryDefaults because it needs queryObserverO
 
 #### Defined in
 
-[helpers/appQueryBuilder.ts:34](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/helpers/appQueryBuilder.ts#L34)
+[helpers/appQueryBuilder.ts:34](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/helpers/appQueryBuilder.ts#L34)
 
 ___
 
@@ -592,7 +608,7 @@ Use appQueryBuilder instead
 
 #### Defined in
 
-[helpers/appQueryUtils.ts:15](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/helpers/appQueryUtils.ts#L15)
+[helpers/appQueryUtils.ts:15](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/helpers/appQueryUtils.ts#L15)
 
 ## Functions
 
@@ -619,7 +635,7 @@ Use appQueryBuilder instead
 
 #### Defined in
 
-components/AppQuery.ts:10
+[components/AppQuery.ts:10](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/components/AppQuery.ts#L10)
 
 ___
 
@@ -639,7 +655,7 @@ ___
 
 #### Defined in
 
-[networking/httpManager.ts:178](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/networking/httpManager.ts#L178)
+[networking/httpManager.ts:178](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L178)
 
 ___
 
@@ -655,7 +671,7 @@ See how to use it in the [usage section](/docs/usage/basic-usage)
 
 | Name | Type |
 | :------ | :------ |
-| `config` | [`ApiConfig`](#apiconfig-88) |
+| `config` | [`ApiConfig`](#apiconfig-4) |
 
 #### Returns
 
@@ -663,7 +679,7 @@ See how to use it in the [usage section](/docs/usage/basic-usage)
 
 #### Defined in
 
-[networking/httpManager.ts:137](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/networking/httpManager.ts#L137)
+[networking/httpManager.ts:137](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L137)
 
 ___
 
@@ -672,13 +688,13 @@ ___
 ▸ **initNetworking**(`config`): `void`
 
 **`deprecated`**
-use  [initApi](#initapi-88) instead
+use  [initApi](#initapi-4) instead
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `config` | [`ApiConfig`](#apiconfig-88) |
+| `config` | [`ApiConfig`](#apiconfig-4) |
 
 #### Returns
 
@@ -686,42 +702,42 @@ use  [initApi](#initapi-88) instead
 
 #### Defined in
 
-[networking/httpManager.ts:176](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/networking/httpManager.ts#L176)
+[networking/httpManager.ts:176](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/networking/httpManager.ts#L176)
 
 ___
 
 ### useAppMutation
 
-▸ **useAppMutation**<`S`, `T`\>(`route`, `queryOptions?`, `mutationOptions?`): `UseMutationResult`<[`ApiResponseType`](#apiresponsetype-88)<`S`, `T`, ``"mutation"``\>, `any`, [`ApiPayloadType`](#apipayloadtype-88)<`S`, `T`\> & { `_pathParams?`: { `[key: string]`: `any`;  }  }, `any`\>
+▸ **useAppMutation**<`Scope`, `Route`\>(`route`, `queryOptions?`, `mutationOptions?`): `UseMutationResult`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`, ``"mutation"``\>, `any`, [`ApiPayloadType`](#apipayloadtype-4)<`Scope`, `Route`\> & { `_pathParams?`: { `[key: string]`: `any`;  }  }, `any`\>
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
-| `S` | extends ``"main"`` = ``"main"`` |
-| `T` | extends `string` \| `number` \| `symbol` = keyof [`AppRoutes`](../interfaces/.AppRoutes)[`S`] |
+| `Scope` | extends ``"main"`` = ``"main"`` |
+| `Route` | extends `string` \| `number` \| `symbol` = keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `route` | `T` \| { `route`: `T` ; `scope`: `S`  } | a route from AppRoutes or an object with a scope and a route |
-| `queryOptions` | `Partial`<`Omit`<[`AppQueryOptions`](#appqueryoptions-88)<[`ApiPayloadType`](#apipayloadtype-88)<`S`, `T`\>\>, ``"apiScope"``\>\> | http options for the query. Path params is needed to replace path variables |
+| `route` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } | a route from AppRoutes or an object with a scope and a route |
+| `queryOptions` | `Partial`<`Omit`<[`AppQueryOptions`](#appqueryoptions-4)<[`ApiPayloadType`](#apipayloadtype-4)<`Scope`, `Route`\>\>, ``"apiScope"``\>\> | http options for the query. Path params is needed to replace path variables |
 | `mutationOptions` | `UseMutationOptions`<`unknown`, `unknown`, `void`, `unknown`\> | react-query's mutation options |
 
 #### Returns
 
-`UseMutationResult`<[`ApiResponseType`](#apiresponsetype-88)<`S`, `T`, ``"mutation"``\>, `any`, [`ApiPayloadType`](#apipayloadtype-88)<`S`, `T`\> & { `_pathParams?`: { `[key: string]`: `any`;  }  }, `any`\>
+`UseMutationResult`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`, ``"mutation"``\>, `any`, [`ApiPayloadType`](#apipayloadtype-4)<`Scope`, `Route`\> & { `_pathParams?`: { `[key: string]`: `any`;  }  }, `any`\>
 
 #### Defined in
 
-[hooks/useAppMutation.ts:13](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/useAppMutation.ts#L13)
+[hooks/useAppMutation.ts:13](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/useAppMutation.ts#L13)
 
 ___
 
 ### useAppQuery
 
-▸ **useAppQuery**<`Scope`, `T`\>(`routeOrRouteObj`, `appQueryOptions?`, `useQueryOptions?`): `UseQueryResult`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `T`\>\>
+▸ **useAppQuery**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`, `useQueryOptions?`): `UseQueryResult`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>\>
 
 Alias for array
 
@@ -730,23 +746,23 @@ Alias for array
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `Scope` | extends ``"main"`` = ``"main"`` | One of the keys of [AppRoutes](../interfaces/.AppRoutes) |
-| `T` | extends `string` \| `number` \| `symbol` = keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] | - |
+| `Route` | extends `string` \| `number` \| `symbol` = keyof [`AppRoutes`](../interfaces/.AppRoutes)[`Scope`] | - |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `routeOrRouteObj` | `T` \| { `route`: `T` ; `scope`: `Scope`  } |
-| `appQueryOptions` | `Partial`<`Omit`<[`AppQueryOptions`](#appqueryoptions-88)<`any`\>, ``"payload"`` \| ``"apiScope"``\>\> |
+| `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
+| `appQueryOptions` | `Partial`<`Omit`<[`AppQueryOptions`](#appqueryoptions-4)<`any`\>, ``"payload"`` \| ``"apiScope"``\>\> |
 | `useQueryOptions` | `UseQueryOptions`<`unknown`, `unknown`, `unknown`, `QueryKey`\> |
 
 #### Returns
 
-`UseQueryResult`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `T`\>\>
+`UseQueryResult`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>\>
 
 #### Defined in
 
-[hooks/useAppQuery.ts:13](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/useAppQuery.ts#L13)
+[hooks/useAppQuery.ts:13](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/useAppQuery.ts#L13)
 
 ___
 
@@ -760,35 +776,35 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `cancelQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`Promise`<`void`\>\> |
-| `executeMutation` | [`ExecuteMutationFunction`](#executemutationfunction-88) |
-| `fetchQuery` | [`FunctionWithMappedReturnType`](#functionwithmappedreturntype-88) |
-| `getMutationDefaults` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`undefined` \| `MutationObserverOptions`<`any`, `any`, `any`, `any`\>\> |
-| `getQueryData` | [`FunctionWithMappedReturnType`](#functionwithmappedreturntype-88) |
-| `getQueryDefaults` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`undefined` \| `QueryObserverOptions`<`any`, `any`, `any`, `any`, `any`\>\> |
-| `invalidateAppQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`Promise`<`void`\>\> |
-| `invalidateQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`Promise`<`void`\>\> |
-| `isFetching` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`number`\> |
-| `isMutating` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`number`\> |
-| `prefetchQuery` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`Promise`<`void`\>\> |
-| `refetchAppQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`Promise`<`void`\>\> |
-| `refetchQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`Promise`<`void`\>\> |
-| `removeQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`void`\> |
-| `resetQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`Promise`<`void`\>\> |
-| `setDefaultOptions` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-88)<`void`\> |
-| `setMutationDefaults` | [`SetMutationDefaultsFunction`](#setmutationdefaultsfunction-88) |
-| `setQueryData` | [`SetQueryDataFunction`](#setquerydatafunction-88) |
-| `setQueryDefaults` | [`SetQueryDefaultsFunction`](#setquerydefaultsfunction-88) |
+| `cancelQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`Promise`<`void`\>\> |
+| `executeMutation` | [`ExecuteMutationFunction`](#executemutationfunction-4) |
+| `fetchQuery` | [`FunctionWithMappedReturnType`](#functionwithmappedreturntype-4) |
+| `getMutationDefaults` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`undefined` \| `MutationObserverOptions`<`any`, `any`, `any`, `any`\>\> |
+| `getQueryData` | [`FunctionWithMappedReturnType`](#functionwithmappedreturntype-4) |
+| `getQueryDefaults` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`undefined` \| `QueryObserverOptions`<`any`, `any`, `any`, `any`, `any`\>\> |
+| `invalidateAppQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`Promise`<`void`\>\> |
+| `invalidateQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`Promise`<`void`\>\> |
+| `isFetching` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`number`\> |
+| `isMutating` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`number`\> |
+| `prefetchQuery` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`Promise`<`void`\>\> |
+| `refetchAppQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`Promise`<`void`\>\> |
+| `refetchQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`Promise`<`void`\>\> |
+| `removeQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`void`\> |
+| `resetQueries` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`Promise`<`void`\>\> |
+| `setDefaultOptions` | [`FunctionWithTypedRouteAndOptions`](#functionwithtypedrouteandoptions-4)<`void`\> |
+| `setMutationDefaults` | [`SetMutationDefaultsFunction`](#setmutationdefaultsfunction-4) |
+| `setQueryData` | [`SetQueryDataFunction`](#setquerydatafunction-4) |
+| `setQueryDefaults` | [`SetQueryDefaultsFunction`](#setquerydefaultsfunction-4) |
 
 #### Defined in
 
-[hooks/useAppQueryClient.ts:61](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/useAppQueryClient.ts#L61)
+[hooks/useAppQueryClient.ts:61](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/useAppQueryClient.ts#L61)
 
 ___
 
 ### useInfiniteAppQuery
 
-▸ **useInfiniteAppQuery**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`, `useQueryOptions?`): `UseInfiniteQueryResult`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>\>
+▸ **useInfiniteAppQuery**<`Scope`, `Route`\>(`routeOrRouteObj`, `appQueryOptions?`, `useQueryOptions?`): `UseInfiniteQueryResult`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>\>
 
 #### Type parameters
 
@@ -802,13 +818,13 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `routeOrRouteObj` | `Route` \| { `route`: `Route` ; `scope`: `Scope`  } |
-| `appQueryOptions` | `Partial`<[`AppQueryOptions`](#appqueryoptions-88)<`any`\>\> |
+| `appQueryOptions` | `Partial`<[`AppQueryOptions`](#appqueryoptions-4)<`any`\>\> |
 | `useQueryOptions` | `UseInfiniteQueryOptions`<`unknown`, `unknown`, `unknown`, `unknown`, `QueryKey`\> |
 
 #### Returns
 
-`UseInfiniteQueryResult`<[`ApiResponseType`](#apiresponsetype-88)<`Scope`, `Route`\>\>
+`UseInfiniteQueryResult`<[`ApiResponseType`](#apiresponsetype-4)<`Scope`, `Route`\>\>
 
 #### Defined in
 
-[hooks/useInfiniteAppQuery.ts:7](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/hooks/useInfiniteAppQuery.ts#L7)
+[hooks/useInfiniteAppQuery.ts:7](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/hooks/useInfiniteAppQuery.ts#L7)

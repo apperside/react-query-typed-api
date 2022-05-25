@@ -1,7 +1,7 @@
 import { MutationObserverOptions, QueryObserverOptions, useQueryClient } from "react-query";
 import { Updater } from "react-query/types/core/utils";
 import { AppQueryOptions } from ".";
-import { AppRoutes, ApiPayloadType, ApiResponseType } from "..";
+import { AppRoutes, ApiPayloadType, ApiResponseType, ApiRoute } from "..";
 import { appQueryBuilder } from "./appQueryBuilder";
 
 
@@ -24,38 +24,38 @@ import { appQueryBuilder } from "./appQueryBuilder";
 /**
  * The function type used by most of the functions
  */
-export type FunctionWithTypedRouteAndOptions<ReturnType = any> = <Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(routeOrRouteObj: Route | { scope: Scope, route: Route },
+export type FunctionWithTypedRouteAndOptions<ReturnType = any> = <Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(routeOrRouteObj: Route | { scope: Scope, route: Route },
 	appQueryOptions?: Partial<AppQueryOptions>) => ReturnType;
 
 /**
  * This type is like the previous one but it returns the type mapped by the route
  */
-export type FunctionWithMappedReturnType = <Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(routeOrRouteObj: Route | { scope: Scope, route: Route },
+export type FunctionWithMappedReturnType = <Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(routeOrRouteObj: Route | { scope: Scope, route: Route },
 	appQueryOptions?: Partial<AppQueryOptions>) => Promise<ApiResponseType<Scope, Route>>;
 
 /**
 * This type is is only needed for setQueryDefaults because it needs queryObserverOptions
 */
-export type SetQueryDefaultsFunction = <Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(routeOrRouteObj: Route | { scope: Scope, route: Route },
+export type SetQueryDefaultsFunction = <Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(routeOrRouteObj: Route | { scope: Scope, route: Route },
 	appQueryOptions?: Partial<AppQueryOptions>, queryObserverOptions?: QueryObserverOptions<any, any, any, any>) => void
 
 /**
 * This type is is only needed for setMutationDefaults because it needs mutationObserverOptions
 */
-export type SetMutationDefaultsFunction = <Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(routeOrRouteObj: Route | { scope: Scope, route: Route },
+export type SetMutationDefaultsFunction = <Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(routeOrRouteObj: Route | { scope: Scope, route: Route },
 	appQueryOptions?: Partial<AppQueryOptions>, mutationObserverOptions?: MutationObserverOptions<any, any, any, any>) => void
 
 /**
  * This type only needed for setQueryData because it needs the updater param
  */
-export type SetQueryDataFunction = <Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(
+export type SetQueryDataFunction = <Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(
 	routeOrRouteObj: Route | { scope: Scope, route: Route },
 	updater: Updater<ApiResponseType<Scope, Route>, ApiResponseType<Scope, Route>>, appQueryOptions?: Partial<AppQueryOptions>,) => ApiResponseType<Scope, Route>
 
 /**
 * This type only needed for executeMutation because it returns mutation mapped return type
 */
-export type ExecuteMutationFunction = <Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(routeOrRouteObj: Route | { scope: Scope, route: Route },
+export type ExecuteMutationFunction = <Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(routeOrRouteObj: Route | { scope: Scope, route: Route },
 	appQueryOptions?: Partial<AppQueryOptions<ApiPayloadType<Scope, Route>>>) => Promise<ApiResponseType<Scope, Route, "mutation">>;
 
 export function useAppQueryClient() {

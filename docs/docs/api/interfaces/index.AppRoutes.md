@@ -1,7 +1,7 @@
 ---
 id: "index.AppRoutes"
 title: "Interface: AppRoutes"
-sidebar_label: "AppRoutes"
+sidebar_label: "index.AppRoutes"
 custom_edit_url: null
 ---
 
@@ -9,7 +9,7 @@ custom_edit_url: null
 
 The interface representing all of your api endpoints.
 It must be a key value pair where the key is an identifier for a specific api and the value and object of type
-[](../modules/#appendpoint-88)
+[](../modules/#appendpoint-4)
 
 ## Properties
 
@@ -17,7 +17,7 @@ It must be a key value pair where the key is an identifier for a specific api an
 
 • **main**: [`MainApi`](.MainApi)
 
-The default [ApiScope](../modules/#apiscope-88). Augment this interface to add more scopes, see the [usage section](/docs/usage/basic-usage) for more information. for more info
+The default [ApiScope](../modules/#apiscope-4). Augment this interface to add more scopes, see the [usage section](/docs/usage/basic-usage) for more information. for more info
 
 **`example`**
 Here's a simple example:
@@ -33,4 +33,4 @@ export interface AppRoutes {
 
 #### Defined in
 
-[index.ts:59](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/index.ts#L59)
+[index.ts:63](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/index.ts#L63)

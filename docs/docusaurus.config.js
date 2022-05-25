@@ -38,8 +38,13 @@ const config = {
           "../src/imperative/index.ts",
         ],
         tsconfig: "../tsconfig.json",
-        entryPointStrategy: "expand",
+        // entryPointStrategy: "expand",
         watch: process.env.TYPEDOC_WATCH,
+        sidebar: {
+          categoryLabel: "API",
+          position: 3,
+          fullNames: true,
+        },
       },
     ],
   ],
@@ -85,7 +90,7 @@ const config = {
             position: "left",
             label: "Usage",
           },
-          { to: "/docs/category/api", label: "API", position: "left" },
+          { to: "/docs/api", label: "API", position: "left" },
           {
             href: "https://github.com/apperside/react-query-typed-api",
             label: "GitHub",

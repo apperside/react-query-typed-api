@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AppRoutes, ApiPayloadType, ApiResponseType } from "..";
+import { AppRoutes, ApiPayloadType, ApiResponseType, ApiRoute } from "..";
 import { AppQueryOptions } from "..";
 import apiUtils from "../helpers/apiUtils";
 import { HttpMethod, httpRequest } from "../networking/httpManager";
@@ -15,41 +15,44 @@ function performRequest(method: HttpMethod, routeOrRouteObj: string | { scope: s
 	});
 }
 
+
 /**
  * 
  * @param routeOrRouteObj A string or an object containig  a key of {@link AppRoutes} containing the parameter. 
  * @param appQueryOptions 
+ * @typeParam Scope - the api scope
+ * @param <Route> - One route in the scope
  * @returns 
  */
-export function httpGet<Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(
+export function httpGet<Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(
 	routeOrRouteObj: Route | { scope: Scope, route: Route },
 	appQueryOptions?: AppQueryOptions
 ): Promise<ApiResponseType<Scope, Route>> {
 	return performRequest("GET", routeOrRouteObj as any, appQueryOptions);
 }
 
-export function httpPost<Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(
+export function httpPost<Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(
 	routeOrRouteObj: Route | { scope: Scope, route: Route },
 	appQueryOptions?: AppQueryOptions<ApiPayloadType<Scope, Route>>
 ): Promise<ApiResponseType<Scope, Route, "mutation">> {
 	return performRequest("POST", routeOrRouteObj as any, appQueryOptions)
 }
 
-export function httpPut<Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(
+export function httpPut<Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(
 	routeOrRouteObj: Route | { scope: Scope, route: Route },
 	appQueryOptions?: AppQueryOptions<ApiPayloadType<Scope, Route>>
 ): Promise<ApiResponseType<Scope, Route, "mutation">> {
 	return performRequest("PUT", routeOrRouteObj as any, appQueryOptions);
 }
 
-export function httpPatch<Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(
+export function httpPatch<Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(
 	routeOrRouteObj: Route | { scope: Scope, route: Route },
 	appQueryOptions?: AppQueryOptions<ApiPayloadType<Scope, Route>>
 ): Promise<ApiResponseType<Scope, Route, "mutation">> {
 	return performRequest("PATCH", routeOrRouteObj as any, appQueryOptions);
 }
 
-export function httpDelete<Scope extends keyof AppRoutes = "main", Route extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(
+export function httpDelete<Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(
 	routeOrRouteObj: Route | { scope: Scope, route: Route },
 	appQueryOptions?: AppQueryOptions<ApiPayloadType<Scope, Route>>
 ): Promise<{ result: boolean }> {

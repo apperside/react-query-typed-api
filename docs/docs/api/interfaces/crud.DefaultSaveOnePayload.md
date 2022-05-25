@@ -1,7 +1,7 @@
 ---
 id: "crud.DefaultSaveOnePayload"
 title: "Interface: DefaultSaveOnePayload<T>"
-sidebar_label: "DefaultSaveOnePayload"
+sidebar_label: "crud.DefaultSaveOnePayload"
 custom_edit_url: null
 ---
 
@@ -23,4 +23,4 @@ Default payload type for saveOne request
 
 #### Defined in
 
-[crud/index.ts:59](https://github.com/apperside/react-query-typed-api/blob/299ed8e/src/crud/index.ts#L59)
+[crud/index.ts:62](https://github.com/apperside/react-query-typed-api/blob/c75dd68/src/crud/index.ts#L62)

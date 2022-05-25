@@ -6,16 +6,13 @@ import {
   useAppMutation,
   useAppQuery,
   useAppQueryClient,
-  AppModels,
   AppQuery,
 } from "react-query-typed-api";
 import "./App.css";
 import logo from "./logo.svg";
 
 function App() {
-  const item: keyof typeof AppModels = "mymodel";
 
-  console.log(item);
   const queryClient = useQueryClient();
   /**
    * returns UseQueryResult<GetManyResponse<AFakeObject> | undefined, unknown>

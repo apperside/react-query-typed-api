@@ -1,8 +1,8 @@
 /* eslint-disable testing-library/no-node-access */
 import { render } from "@testing-library/react";
 import * as rq from "react-query";
-import { OpenMeteoResponse } from "src/open-meteo.spec";
-import { WeatherReactResponse } from "src/weather-react.spec";
+import { OpenMeteoResponse } from "src/test/open-meteo";
+import { WeatherReactResponse } from "src/test/weather-react";
 import { expectType } from "tsd";
 import { DefaultGetManyResponse } from "..";
 import { useAppQuery } from "./useAppQuery";

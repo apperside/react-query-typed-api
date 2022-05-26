@@ -115,28 +115,27 @@ export type DefaultDeleteManyResponse<T> = T
  * @typeParam ActionTypesMapping this parameter is used to manipulate the type of the payloads and responses for the crud endpoints.
  * See the [dedicated section](/docs/usage/crud#data-types-customization) for more information.
  */
-export type RoutesForModel<CrudModel extends keyof RoutesModelMapping, BasePath extends string | unknown = unknown,
-	ActionTypesMapping extends CrudActionsDataMapping = {
-		getManyResponse?: DefaultGetManyResponse<RoutesModelMapping[CrudModel]>
-		getOneResponse?: DefaultGetOneResponse<RoutesModelMapping[CrudModel]>
-		saveOnePayload?: DefaultSaveOnePayload<RoutesModelMapping[CrudModel]>
-		saveOneResponse?: DefaultGetOneResponse<RoutesModelMapping[CrudModel]>
-		saveManyPayload?: DefaultSaveManyPayload<RoutesModelMapping[CrudModel]>
-		saveManyResponse?: DefaultGetManyResponse<RoutesModelMapping[CrudModel]>
-	}> = {
+export type RoutesForModel<CrudModel extends keyof RoutesModelMapping, BasePath extends string | unknown = unknown, ActionTypesMapping extends CrudActionsDataMapping = {
+	getManyResponse: DefaultGetManyResponse<RoutesModelMapping[CrudModel]>;
+	getOneResponse: DefaultGetOneResponse<RoutesModelMapping[CrudModel]>;
+	saveOnePayload: DefaultSaveOnePayload<RoutesModelMapping[CrudModel]>;
+	saveOneResponse: DefaultGetOneResponse<RoutesModelMapping[CrudModel]>;
+	saveManyPayload: DefaultSaveManyPayload<RoutesModelMapping[CrudModel]>;
+	saveManyResponse: DefaultGetManyResponse<RoutesModelMapping[CrudModel]>;
+}> = {
 		[key in AllRoutes<CrudModel, BasePath>]: key extends `${string}/bulk` ? {
-			responseType: ActionTypesMapping["saveManyResponse"] extends unknown ? DefaultGetManyResponse<RoutesModelMapping[CrudModel]> : ActionTypesMapping["saveManyResponse"]
-			payloadType: ActionTypesMapping["saveManyPayload"] extends unknown ? DefaultSaveManyPayload<RoutesModelMapping[CrudModel]> : ActionTypesMapping["saveManyPayload"]
+			responseType: ActionTypesMapping["saveManyResponse"] extends Record<string, any> ? ActionTypesMapping["saveManyResponse"] : DefaultGetManyResponse<RoutesModelMapping[CrudModel]>;
+			payloadType: ActionTypesMapping["saveManyPayload"] extends Record<string, any> ? ActionTypesMapping["saveManyPayload"] : DefaultSaveManyPayload<RoutesModelMapping[CrudModel]>;
 		} : key extends `${string}/:id` ? {
-			responseType: ActionTypesMapping["getOneResponse"] extends unknown ? DefaultGetOneResponse<RoutesModelMapping[CrudModel]> : ActionTypesMapping["getOneResponse"]
-			payloadType: ActionTypesMapping["saveOnePayload"] extends unknown ? DefaultSaveOnePayload<RoutesModelMapping[CrudModel]> : ActionTypesMapping["saveOnePayload"]
+			responseType: ActionTypesMapping["getOneResponse"] extends Record<string, any> ? ActionTypesMapping["getOneResponse"] : DefaultGetOneResponse<RoutesModelMapping[CrudModel]>;
+			payloadType: ActionTypesMapping["saveOnePayload"] extends Record<string, any> ? ActionTypesMapping["saveOnePayload"] : DefaultSaveOnePayload<RoutesModelMapping[CrudModel]>;
 		} : key extends `${string}/bulk-delete/:ids` ? {
-			responseType: ActionTypesMapping["deleteManyResponse"] extends unknown ? DefaultDeleteManyResponse<RoutesModelMapping[CrudModel]> : ActionTypesMapping["deleteManyResponse"]
-			payloadType: ActionTypesMapping["deleteManyPayload"] extends unknown ? DefaultDeleteManyPayload<RoutesModelMapping[CrudModel]> : ActionTypesMapping["deleteManyPayload"]
+			responseType: ActionTypesMapping["deleteManyResponse"] extends Record<string, any> ? ActionTypesMapping["deleteManyResponse"] : DefaultDeleteManyResponse<RoutesModelMapping[CrudModel]>;
+			payloadType: ActionTypesMapping["deleteManyPayload"] extends Record<string, any> ? ActionTypesMapping["deleteManyPayload"] : DefaultDeleteManyPayload<RoutesModelMapping[CrudModel]>;
 		} : key extends `${string}` ? {
-			responseType: ActionTypesMapping["getManyResponse"] extends unknown ? DefaultGetManyResponse<RoutesModelMapping[CrudModel]> : ActionTypesMapping["getManyResponse"]
-			payloadType: ActionTypesMapping["saveOnePayload"] extends unknown ? DefaultSaveOnePayload<RoutesModelMapping[CrudModel]> : ActionTypesMapping["saveOnePayload"];
-			mutationResponseType: ActionTypesMapping["saveOneResponse"] extends unknown ? DefaultSaveOneResponse<RoutesModelMapping[CrudModel]> : ActionTypesMapping["saveOneResponse"];
+			responseType: ActionTypesMapping["getManyResponse"] extends Record<string, any> ? ActionTypesMapping["getManyResponse"] : DefaultGetManyResponse<RoutesModelMapping[CrudModel]>;
+			payloadType: ActionTypesMapping["saveOnePayload"] extends Record<string, any> ? ActionTypesMapping["saveOnePayload"] : DefaultSaveOnePayload<RoutesModelMapping[CrudModel]>;
+			mutationResponseType: ActionTypesMapping["saveOneResponse"] extends Record<string, any> ? ActionTypesMapping["saveOneResponse"] : DefaultSaveOneResponse<RoutesModelMapping[CrudModel]>;
 		} : RoutesModelMapping[CrudModel];
 	};
 

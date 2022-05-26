@@ -53,9 +53,10 @@ export interface HttpRequestOptions<Payload = any> {
 	 * (passed in the [initialization options](#initialization) and before the endpoint url. 
 	 * For example if the apiUrl is http://localhost:8080/api and your endpoint is `/my-endpoint`, 
 	 * if you pass for example `"custom-path"` to this propery, 
-	 * the final endpoint will be http://localhost:8080/api/custom-path/my-endpoint 
+	 * the final endpoint will be http://localhost:8080/api/custom-path/my-endpoint.
+	 * The value can also be an array, in this case the url will be built joining the array values with a slash
 	 */
-	extraRoutePath?: string | string[] | (string | number)[]
+	extraRoutePath?: string | number | string[] | (string | number)[]
 	/**
 	 * An [Axios's cancel token](https://axios-http.com/docs/cancellation) to cancel pending requests if needed
 	 */

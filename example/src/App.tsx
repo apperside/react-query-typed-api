@@ -33,6 +33,9 @@ function App() {
    * returns UseQueryResult<CustomGetManyResponse<"bookings">, unknown>
    * because for this endpoint, we have a custom response type for getMany function
    */
+  const anotherCustomCrudQuery1 = useAppQuery("custom-crud/bookings/:id");
+  const aaaa = anotherCustomCrudQuery1.data;
+
   const anotherCustomCrudQuery = useAppQuery("custom-crud/bookings");
   const aaa = anotherCustomCrudQuery.data?.items;
 

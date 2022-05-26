@@ -5,8 +5,10 @@
 	"main": "lib/index.js",
 	"module": "lib/index.esm.js",
 	"scripts": {
-		"test": "echo todo: add test script",
-		"test:watch": "echo todo: add test script",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"test:coverage": "jest --coverage",
+		"test:coverage:watch": "jest --coverage --watch",
 		"chromatic": "chromatic --exit-zero-on-changes",
 		"lint": "eslint --fix 'src/**/*.{js,ts,tsx}'",
 		"prepare": "husky install",

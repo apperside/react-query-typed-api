@@ -116,7 +116,7 @@ describe("basic usage", () => {
     render(<Comp />);
     expect(fn).toHaveBeenCalled();
     const queryKeyParameter = fn.mock.calls[0][0];
-    console.log("query parameter", queryKeyParameter);
+
     expect(queryKeyParameter).toEqual([
       "fake-object/:id",
       { queryParam1: "testValue", queryParam2: 6 },
@@ -148,6 +148,68 @@ describe("basic usage", () => {
       { id: 1 },
       { queryParam1: "testValue", queryParam2: 6 },
     ]);
+    const query = useAppQuery("fake-object/:id");
+    expectType<rq.UseQueryResult<AFakeObject, unknown>>(query);
+  });
+
+  test("query call with extraRoutePath", () => {
+    jest.mock("cross-local-storage");
+    const fn = jest.spyOn(rq, "useQuery").mockImplementation(jest.fn());
+    fn.mockClear();
+
+    const Comp = () => {
+      const query = useAppQuery("fake-object/:id", {
+        pathParams: { id: 1 },
+        query: { queryParam1: "testValue", queryParam2: 6 },
+        extraRoutePath: "extra-route-path",
+      });
+
+      return <div />;
+    };
+
+    render(<Comp />);
+    expect(fn).toHaveBeenCalled();
+    const queryKeyParameter = fn.mock.calls[0][0];
+    console.log("query parameter", queryKeyParameter);
+    expect(queryKeyParameter).toEqual([
+      "fake-object/:id",
+      "extra-route-path",
+      { id: 1 },
+      { queryParam1: "testValue", queryParam2: 6 },
+    ]);
+
+    fn.mockClear();
+    const query = useAppQuery("fake-object/:id");
+    expectType<rq.UseQueryResult<AFakeObject, unknown>>(query);
+  });
+
+  test("query call with extraRoutePath array", () => {
+    jest.mock("cross-local-storage");
+    const fn = jest.spyOn(rq, "useQuery").mockImplementation(jest.fn());
+    fn.mockClear();
+
+    const Comp = () => {
+      const query = useAppQuery("fake-object/:id", {
+        pathParams: { id: 1 },
+        query: { queryParam1: "testValue", queryParam2: 6 },
+        extraRoutePath: ["extra-route-path1", "extra-route-path2"],
+      });
+
+      return <div />;
+    };
+
+    render(<Comp />);
+    expect(fn).toHaveBeenCalled();
+    const queryKeyParameter = fn.mock.calls[0][0];
+
+    expect(queryKeyParameter).toEqual([
+      "fake-object/:id",
+      ["extra-route-path1", "extra-route-path2"],
+      { id: 1 },
+      { queryParam1: "testValue", queryParam2: 6 },
+    ]);
+
+    fn.mockClear();
     const query = useAppQuery("fake-object/:id");
     expectType<rq.UseQueryResult<AFakeObject, unknown>>(query);
   });

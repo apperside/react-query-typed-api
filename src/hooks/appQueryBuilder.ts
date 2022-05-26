@@ -12,7 +12,7 @@ export function appQueryBuilder<Scope extends keyof AppRoutes = "main", T extend
 	const { extraRoutePath, query, pathParams } = appQueryOptions
 	if (extraRoutePath) {
 		if (typeof extraRoutePath === "object") {
-			keyForUseQuery.concat([...extraRoutePath])
+			keyForUseQuery.push([...extraRoutePath])
 		}
 		else {
 			keyForUseQuery.push(extraRoutePath)
@@ -25,7 +25,7 @@ export function appQueryBuilder<Scope extends keyof AppRoutes = "main", T extend
 		const itemToPush = typeof query === "string" ? query : { ...query }
 		keyForUseQuery.push(itemToPush)
 	}
-
+	console.log("returning keyForUseQuery", keyForUseQuery)
 	return keyForUseQuery;
 
 }

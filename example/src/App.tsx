@@ -12,7 +12,6 @@ import "./App.css";
 import logo from "./logo.svg";
 
 function App() {
-
   const queryClient = useQueryClient();
   /**
    * returns UseQueryResult<GetManyResponse<AFakeObject> | undefined, unknown>
@@ -29,7 +28,7 @@ function App() {
    * returns UseQueryRe	sult<GetManyResponse<FakeEventObject> | undefined, unknown>
    */
   const customCrudQuery = useAppQuery("custom-nest-crud/events");
-
+  //   const anotherCustomCrudQuery = useAppQuery("custom-crud/bookings/:id");
   /**
    * returns UseQueryResult<CustomGetManyResponse<"bookings">, unknown>
    * because for this endpoint, we have a custom response type for getMany function
@@ -144,15 +143,15 @@ function App() {
         <p>Openmeteo response with AppQuery component</p>
         <AppQuery
           routeOrRouteObj={{ scope: "openmeteo", route: "forecast" }}
-          appQueryOptions={ {
-			query: {
-			  latitude: "52.52",
-			  longitude: "13.41",
-			  hourly: "temperature_2m",
-			},
-		  }}>
+          appQueryOptions={{
+            query: {
+              latitude: "52.52",
+              longitude: "13.41",
+              hourly: "temperature_2m",
+            },
+          }}>
           {(query) => {
-            return <div>{JSON.stringify(query.data)}</div>
+            return <div>{JSON.stringify(query.data)}</div>;
           }}
         </AppQuery>
       </header>

@@ -15,7 +15,7 @@ const replacePathVariables = (routeOrRouteObj: any | { scope: any, route: any },
 
 }
 
-function buildQueryString(query: { [key: string]: string }): string {
+function buildQueryString(query: { [key: string]: string | number | boolean }): string {
 	let queryParams = "";
 	const paramKeys = Object.keys(query);
 	if (paramKeys.length > 0) {

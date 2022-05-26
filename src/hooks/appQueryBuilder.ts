@@ -9,12 +9,6 @@ export function appQueryBuilder<Scope extends keyof AppRoutes = "main", T extend
 
 	const keyForUseQuery: any[] = [routeOrRouteObj];
 
-	if (appQueryOptions.query) {
-		const itemToPush = typeof appQueryOptions.query === "string" ? appQueryOptions.query : { ...appQueryOptions.query }
-		keyForUseQuery.push(itemToPush)
-	}
-
-
 	const { extraRoutePath, query, pathParams } = appQueryOptions
 	if (extraRoutePath) {
 		if (typeof extraRoutePath === "object") {
@@ -24,11 +18,12 @@ export function appQueryBuilder<Scope extends keyof AppRoutes = "main", T extend
 			keyForUseQuery.push(extraRoutePath)
 		}
 	}
-	if (query) {
-		keyForUseQuery.push(query)
-	}
 	if (pathParams) {
 		keyForUseQuery.push(pathParams)
+	}
+	if (query) {
+		const itemToPush = typeof query === "string" ? query : { ...query }
+		keyForUseQuery.push(itemToPush)
 	}
 
 	return keyForUseQuery;

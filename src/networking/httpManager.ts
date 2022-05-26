@@ -32,7 +32,7 @@ export interface HttpRequestOptions<Payload = any> {
 	 * - a plain string: in this case it must be a valid query string
 	 * - a key value pair: in this case the query string will be built using the keys and their stringified values
 	 */
-	query?: string | { [key: string]: string };
+	query?: string | { [key: string]: string | number | boolean };
 	/**
 	 * The headers for the request.
 	 * It must be a key-value pair with with the values being a string or a number (which will be stringified )

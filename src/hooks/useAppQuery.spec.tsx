@@ -1,12 +1,18 @@
-/* eslint-disable testing-library/no-node-access */
-import { render } from "@testing-library/react";
+import {
+  act,
+  cleanup,
+  renderHook,
+  waitFor,
+  waitForOptions,
+} from "@testing-library/react";
 import * as rq from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { OpenMeteoResponse } from "src/test/open-meteo";
 import { WeatherReactResponse } from "src/test/weather-react";
 import { expectType } from "tsd";
 import { DefaultGetManyResponse } from "..";
+import * as imperative from "../imperative";
 import { useAppQuery } from "./useAppQuery";
-
 type AFakeObject = { fakeObjectField: string };
 type FakeEventObject = { eventField: string };
 type FakeBookingObject = { bookingField: string };
@@ -61,116 +67,140 @@ declare module "../crud" {
       NestJsxModelRoute<"events", "custom-nest-crud"> {}
 }
 
+const queryClient = new QueryClient();
+const wrapper = ({ children }: any) => (
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+);
+
 describe("basic usage", () => {
-  test("simple query call, only endpoint name", () => {
+  let useQueryMock: jest.SpyInstance;
+  let httpGetMock: jest.SpyInstance;
+
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
+
+  beforeAll(() => {
     jest.mock("cross-local-storage");
-    const fn = jest.spyOn(rq, "useQuery").mockImplementation(jest.fn());
-    const Comp = () => {
-      const query = useAppQuery("fake-object");
 
-      return <div />;
-    };
+    httpGetMock = jest
+      .spyOn(imperative, "httpGet")
+      .mockImplementation(jest.fn());
+  });
 
-    render(<Comp />);
-    expect(fn).toHaveBeenCalled();
-    const queryKeyParameter = fn.mock.calls[0][0];
-    expect(queryKeyParameter).toEqual(["fake-object"]);
-    const query = useAppQuery("fake-object");
-    expectType<rq.UseQueryResult<DefaultGetManyResponse<AFakeObject>, unknown>>(
-      query
+  beforeEach(() => {
+    useQueryMock = jest.spyOn(rq, "useQuery"); //.mockImplementation(jest.fn());
+    useQueryMock.mockClear();
+    httpGetMock.mockClear();
+  });
+
+  afterEach(cleanup);
+
+  /**
+   * Withouth this cumbersome setup, the test pass but we get various errors
+   * about code not wrapped in act() function, but wrapping the code in act()
+   * does not help.
+   * The waitFor + renderHook is the only way to get rid of these warnings
+   * @param callback
+   * @param options
+   * @returns
+   */
+  function waitForHook<T>(callback: () => T, options?: waitForOptions) {
+    return waitFor(
+      async () =>
+        renderHook(callback, {
+          wrapper,
+        }),
+      options
     );
+  }
+
+  test("simple query call, only endpoint name", async () => {
+    const { result } = await waitForHook(() => useAppQuery("fake-object"));
+    // await waitFor(() => {
+    //   return true;
+    // });
+    expect(useQueryMock).toHaveBeenCalled();
+    const queryKeyParameter = useQueryMock.mock.calls[0][0];
+    expect(queryKeyParameter).toEqual(["fake-object"]);
+
+    expect(httpGetMock).toHaveBeenCalledWith("fake-object", {});
   });
 
-  test("query call with path param", () => {
-    jest.mock("cross-local-storage");
-    const fn = jest.spyOn(rq, "useQuery").mockImplementation(jest.fn());
-    fn.mockClear();
+  test("query call with path param", async () => {
+    const { result } = await waitForHook(() =>
+      useAppQuery("fake-object/:id", { pathParams: { id: 1 } })
+    );
 
-    const Comp = () => {
-      const query = useAppQuery("fake-object/:id", { pathParams: { id: 1 } });
-
-      return <div />;
-    };
-
-    render(<Comp />);
-    expect(fn).toHaveBeenCalled();
-    const queryKeyParameter = fn.mock.calls[0][0];
+    expect(useQueryMock).toHaveBeenCalled();
+    const queryKeyParameter = useQueryMock.mock.calls[0][0];
     expect(queryKeyParameter).toEqual(["fake-object/:id", { id: 1 }]);
-    const query = useAppQuery("fake-object/:id");
-    expectType<rq.UseQueryResult<AFakeObject, unknown>>(query);
+
+    expect(httpGetMock).toHaveBeenCalledWith("fake-object/:id", {
+      pathParams: { id: 1 },
+    });
   });
 
-  test("query call with query object", () => {
-    jest.mock("cross-local-storage");
-    const fn = jest.spyOn(rq, "useQuery").mockImplementation(jest.fn());
-    fn.mockClear();
-
-    const Comp = () => {
-      const query = useAppQuery("fake-object/:id", {
+  test("query call with query object", async () => {
+    const { result } = await waitForHook(() =>
+      useAppQuery("fake-object", {
         query: { queryParam1: "testValue", queryParam2: 6 },
-      });
+      })
+    );
 
-      return <div />;
-    };
-
-    render(<Comp />);
-    expect(fn).toHaveBeenCalled();
-    const queryKeyParameter = fn.mock.calls[0][0];
+    expect(useQueryMock).toHaveBeenCalled();
+    const queryKeyParameter = useQueryMock.mock.calls[0][0];
 
     expect(queryKeyParameter).toEqual([
-      "fake-object/:id",
+      "fake-object",
       { queryParam1: "testValue", queryParam2: 6 },
     ]);
-    const query = useAppQuery("fake-object/:id");
-    expectType<rq.UseQueryResult<AFakeObject, unknown>>(query);
+
+    expect(httpGetMock).toHaveBeenCalledWith("fake-object", {
+      query: { queryParam1: "testValue", queryParam2: 6 },
+    });
   });
 
-  test("query call with path param and query object", () => {
-    jest.mock("cross-local-storage");
-    const fn = jest.spyOn(rq, "useQuery").mockImplementation(jest.fn());
-    fn.mockClear();
-
-    const Comp = () => {
-      const query = useAppQuery("fake-object/:id", {
+  test("query call with path param and query object", async () => {
+    const { result } = await waitForHook(() =>
+      useAppQuery("fake-object/:id", {
         pathParams: { id: 1 },
         query: { queryParam1: "testValue", queryParam2: 6 },
-      });
+      })
+    );
 
-      return <div />;
-    };
+    expect(useQueryMock).toHaveBeenCalled();
+    const queryKeyParameter = useQueryMock.mock.calls[0][0];
 
-    render(<Comp />);
-    expect(fn).toHaveBeenCalled();
-    const queryKeyParameter = fn.mock.calls[0][0];
-    console.log("query parameter", queryKeyParameter);
     expect(queryKeyParameter).toEqual([
       "fake-object/:id",
       { id: 1 },
       { queryParam1: "testValue", queryParam2: 6 },
     ]);
-    const query = useAppQuery("fake-object/:id");
-    expectType<rq.UseQueryResult<AFakeObject, unknown>>(query);
+
+    expect(httpGetMock).toHaveBeenCalledWith("fake-object/:id", {
+      pathParams: { id: 1 },
+      query: { queryParam1: "testValue", queryParam2: 6 },
+    });
   });
 
-  test("query call with extraRoutePath", () => {
-    jest.mock("cross-local-storage");
-    const fn = jest.spyOn(rq, "useQuery").mockImplementation(jest.fn());
-    fn.mockClear();
-
-    const Comp = () => {
-      const query = useAppQuery("fake-object/:id", {
+  test("query call with extraRoutePath", async () => {
+    const { result } = await waitForHook(() =>
+      useAppQuery("fake-object/:id", {
         pathParams: { id: 1 },
         query: { queryParam1: "testValue", queryParam2: 6 },
         extraRoutePath: "extra-route-path",
-      });
+      })
+    );
 
-      return <div />;
-    };
+    expect(useQueryMock).toHaveBeenCalled();
+    const queryKeyParameter = useQueryMock.mock.calls[0][0];
 
-    render(<Comp />);
-    expect(fn).toHaveBeenCalled();
-    const queryKeyParameter = fn.mock.calls[0][0];
-    console.log("query parameter", queryKeyParameter);
     expect(queryKeyParameter).toEqual([
       "fake-object/:id",
       "extra-route-path",
@@ -178,29 +208,24 @@ describe("basic usage", () => {
       { queryParam1: "testValue", queryParam2: 6 },
     ]);
 
-    fn.mockClear();
-    const query = useAppQuery("fake-object/:id");
-    expectType<rq.UseQueryResult<AFakeObject, unknown>>(query);
+    expect(httpGetMock).toHaveBeenCalledWith("fake-object/:id", {
+      pathParams: { id: 1 },
+      query: { queryParam1: "testValue", queryParam2: 6 },
+      extraRoutePath: "extra-route-path",
+    });
   });
 
-  test("query call with extraRoutePath array", () => {
-    jest.mock("cross-local-storage");
-    const fn = jest.spyOn(rq, "useQuery").mockImplementation(jest.fn());
-    fn.mockClear();
-
-    const Comp = () => {
-      const query = useAppQuery("fake-object/:id", {
+  test("query call with extraRoutePath array", async () => {
+    const { result } = await waitForHook(() =>
+      useAppQuery("fake-object/:id", {
         pathParams: { id: 1 },
         query: { queryParam1: "testValue", queryParam2: 6 },
         extraRoutePath: ["extra-route-path1", "extra-route-path2"],
-      });
+      })
+    );
 
-      return <div />;
-    };
-
-    render(<Comp />);
-    expect(fn).toHaveBeenCalled();
-    const queryKeyParameter = fn.mock.calls[0][0];
+    expect(useQueryMock).toHaveBeenCalled();
+    const queryKeyParameter = useQueryMock.mock.calls[0][0];
 
     expect(queryKeyParameter).toEqual([
       "fake-object/:id",
@@ -209,9 +234,27 @@ describe("basic usage", () => {
       { queryParam1: "testValue", queryParam2: 6 },
     ]);
 
-    fn.mockClear();
-    const query = useAppQuery("fake-object/:id");
-    expectType<rq.UseQueryResult<AFakeObject, unknown>>(query);
+    expect(httpGetMock).toHaveBeenCalledWith("fake-object/:id", {
+      pathParams: { id: 1 },
+      query: { queryParam1: "testValue", queryParam2: 6 },
+      extraRoutePath: ["extra-route-path1", "extra-route-path2"],
+    });
+  });
+
+  test("typings are correct", () => {
+    useQueryMock = jest.spyOn(rq, "useQuery").mockImplementation(jest.fn());
+    act(() => {
+      const query = useAppQuery("fake-object");
+      expectType<
+        rq.UseQueryResult<DefaultGetManyResponse<AFakeObject>, unknown>
+      >(query);
+    });
+
+    useQueryMock.mockClear();
+    act(() => {
+      const query = useAppQuery("fake-object/:id");
+      expectType<rq.UseQueryResult<AFakeObject, unknown>>(query);
+    });
   });
 });
 

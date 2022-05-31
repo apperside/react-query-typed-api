@@ -1,0 +1,289 @@
+<?xml version="1.0" ?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage lines-valid="124" lines-covered="42" line-rate="0.3387" branches-valid="145" branches-covered="8" branch-rate="0.0552" timestamp="1653987815028" complexity="0" version="0.1">
+  <sources>
+    <source>/Users/simone/dev/react/react-query-typed-api</source>
+  </sources>
+  <packages>
+    <package name="helpers" line-rate="0.1379" branch-rate="0">
+      <classes>
+        <class name="apiUtils.ts" filename="src/helpers/apiUtils.ts" line-rate="0.1379" branch-rate="0">
+          <methods>
+            <method name="(anonymous_1)" hits="0" signature="()V">
+              <lines>
+                <line number="5" hits="0"/>
+              </lines>
+            </method>
+            <method name="(anonymous_2)" hits="0" signature="()V">
+              <lines>
+                <line number="8" hits="0"/>
+              </lines>
+            </method>
+            <method name="buildQueryString" hits="0" signature="()V">
+              <lines>
+                <line number="18" hits="0"/>
+              </lines>
+            </method>
+            <method name="(anonymous_4)" hits="0" signature="()V">
+              <lines>
+                <line number="22" hits="0"/>
+              </lines>
+            </method>
+            <method name="buildUrl" hits="0" signature="()V">
+              <lines>
+                <line number="33" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="2" hits="1" branch="false"/>
+            <line number="5" hits="1" branch="false"/>
+            <line number="6" hits="0" branch="true" condition-coverage="0% (0/8)"/>
+            <line number="7" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+            <line number="9" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+            <line number="10" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+            <line number="12" hits="0" branch="false"/>
+            <line number="19" hits="0" branch="false"/>
+            <line number="20" hits="0" branch="false"/>
+            <line number="21" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="22" hits="0" branch="false"/>
+            <line number="23" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="24" hits="0" branch="false"/>
+            <line number="26" hits="0" branch="false"/>
+            <line number="29" hits="0" branch="false"/>
+            <line number="34" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="35" hits="0" branch="false"/>
+            <line number="37" hits="0" branch="false"/>
+            <line number="39" hits="0" branch="false"/>
+            <line number="40" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+            <line number="41" hits="0" branch="false"/>
+            <line number="44" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+            <line number="45" hits="0" branch="false"/>
+            <line number="47" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+            <line number="48" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="49" hits="0" branch="false"/>
+            <line number="51" hits="0" branch="false"/>
+            <line number="54" hits="1" branch="false"/>
+            <line number="56" hits="1" branch="false"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="hooks" line-rate="0.9582999999999999" branch-rate="0.5">
+      <classes>
+        <class name="appQueryBuilder.ts" filename="src/hooks/appQueryBuilder.ts" line-rate="0.9333" branch-rate="0.5">
+          <methods>
+            <method name="appQueryBuilder" hits="1" signature="()V">
+              <lines>
+                <line number="5" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="5" hits="1" branch="false"/>
+            <line number="7" hits="1" branch="true" condition-coverage="50% (1/2)"/>
+            <line number="10" hits="1" branch="false"/>
+            <line number="12" hits="3" branch="false"/>
+            <line number="13" hits="1" branch="true" condition-coverage="50% (1/2)"/>
+            <line number="14" hits="1" branch="true" condition-coverage="50% (1/2)"/>
+            <line number="15" hits="1" branch="false"/>
+            <line number="18" hits="0" branch="false"/>
+            <line number="21" hits="1" branch="true" condition-coverage="50% (1/2)"/>
+            <line number="22" hits="1" branch="false"/>
+            <line number="24" hits="1" branch="true" condition-coverage="50% (1/2)"/>
+            <line number="25" hits="1" branch="true" condition-coverage="50% (1/2)"/>
+            <line number="26" hits="1" branch="false"/>
+            <line number="28" hits="1" branch="false"/>
+            <line number="29" hits="1" branch="false"/>
+          </lines>
+        </class>
+        <class name="useAppQuery.ts" filename="src/hooks/useAppQuery.ts" line-rate="1" branch-rate="0.5">
+          <methods>
+            <method name="useAppQuery" hits="1" signature="()V">
+              <lines>
+                <line number="13" hits="1"/>
+              </lines>
+            </method>
+            <method name="(anonymous_3)" hits="1" signature="()V">
+              <lines>
+                <line number="22" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="2" hits="1" branch="false"/>
+            <line number="5" hits="1" branch="false"/>
+            <line number="6" hits="1" branch="false"/>
+            <line number="13" hits="1" branch="false"/>
+            <line number="15" hits="1" branch="true" condition-coverage="50% (1/2)"/>
+            <line number="16" hits="2" branch="true" condition-coverage="50% (1/2)"/>
+            <line number="19" hits="1" branch="false"/>
+            <line number="22" hits="1" branch="false"/>
+            <line number="23" hits="1" branch="false"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="imperative" line-rate="0.4667" branch-rate="0">
+      <classes>
+        <class name="index.ts" filename="src/imperative/index.ts" line-rate="0.4667" branch-rate="0">
+          <methods>
+            <method name="performRequest" hits="0" signature="()V">
+              <lines>
+                <line number="7" hits="0"/>
+              </lines>
+            </method>
+            <method name="httpGet" hits="0" signature="()V">
+              <lines>
+                <line number="27" hits="0"/>
+              </lines>
+            </method>
+            <method name="httpPost" hits="0" signature="()V">
+              <lines>
+                <line number="34" hits="0"/>
+              </lines>
+            </method>
+            <method name="httpPut" hits="0" signature="()V">
+              <lines>
+                <line number="41" hits="0"/>
+              </lines>
+            </method>
+            <method name="httpPatch" hits="0" signature="()V">
+              <lines>
+                <line number="48" hits="0"/>
+              </lines>
+            </method>
+            <method name="httpDelete" hits="0" signature="()V">
+              <lines>
+                <line number="55" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="1" branch="false"/>
+            <line number="5" hits="1" branch="false"/>
+            <line number="8" hits="0" branch="false"/>
+            <line number="9" hits="0" branch="false"/>
+            <line number="10" hits="0" branch="false"/>
+            <line number="27" hits="1" branch="false"/>
+            <line number="31" hits="0" branch="false"/>
+            <line number="34" hits="1" branch="false"/>
+            <line number="38" hits="0" branch="false"/>
+            <line number="41" hits="1" branch="false"/>
+            <line number="45" hits="0" branch="false"/>
+            <line number="48" hits="1" branch="false"/>
+            <line number="52" hits="0" branch="false"/>
+            <line number="55" hits="1" branch="false"/>
+            <line number="59" hits="0" branch="false"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="networking" line-rate="0.1429" branch-rate="0">
+      <classes>
+        <class name="httpManager.ts" filename="src/networking/httpManager.ts" line-rate="0.1429" branch-rate="0">
+          <methods>
+            <method name="(anonymous_24)" hits="0" signature="()V">
+              <lines>
+                <line number="123" hits="0"/>
+              </lines>
+            </method>
+            <method name="initApi" hits="0" signature="()V">
+              <lines>
+                <line number="138" hits="0"/>
+              </lines>
+            </method>
+            <method name="(anonymous_26)" hits="0" signature="()V">
+              <lines>
+                <line number="140" hits="0"/>
+              </lines>
+            </method>
+            <method name="(anonymous_27)" hits="0" signature="()V">
+              <lines>
+                <line number="157" hits="0"/>
+              </lines>
+            </method>
+            <method name="(anonymous_28)" hits="0" signature="()V">
+              <lines>
+                <line number="164" hits="0"/>
+              </lines>
+            </method>
+            <method name="httpRequest" hits="0" signature="()V">
+              <lines>
+                <line number="179" hits="0"/>
+              </lines>
+            </method>
+            <method name="(anonymous_32)" hits="0" signature="()V">
+              <lines>
+                <line number="234" hits="0"/>
+              </lines>
+            </method>
+            <method name="(anonymous_33)" hits="0" signature="()V">
+              <lines>
+                <line number="254" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="1" hits="1" branch="false"/>
+            <line number="2" hits="1" branch="false"/>
+            <line number="4" hits="1" branch="false"/>
+            <line number="123" hits="1" branch="false"/>
+            <line number="124" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="125" hits="0" branch="true" condition-coverage="0% (0/20)"/>
+            <line number="127" hits="0" branch="false"/>
+            <line number="131" hits="1" branch="false"/>
+            <line number="138" hits="1" branch="false"/>
+            <line number="139" hits="0" branch="false"/>
+            <line number="140" hits="0" branch="false"/>
+            <line number="141" hits="0" branch="false"/>
+            <line number="142" hits="0" branch="false"/>
+            <line number="156" hits="0" branch="false"/>
+            <line number="158" hits="0" branch="false"/>
+            <line number="159" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="160" hits="0" branch="false"/>
+            <line number="162" hits="0" branch="false"/>
+            <line number="165" hits="0" branch="false"/>
+            <line number="169" hits="0" branch="false"/>
+            <line number="177" hits="1" branch="false"/>
+            <line number="179" hits="1" branch="false"/>
+            <line number="181" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="185" hits="0" branch="false"/>
+            <line number="186" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="189" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+            <line number="190" hits="0" branch="false"/>
+            <line number="191" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="192" hits="0" branch="false"/>
+            <line number="195" hits="0" branch="false"/>
+            <line number="200" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="201" hits="0" branch="false"/>
+            <line number="202" hits="0" branch="true" condition-coverage="0% (0/5)"/>
+            <line number="203" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+            <line number="204" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="205" hits="0" branch="false"/>
+            <line number="208" hits="0" branch="false"/>
+            <line number="209" hits="0" branch="false"/>
+            <line number="210" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="211" hits="0" branch="false"/>
+            <line number="212" hits="0" branch="false"/>
+            <line number="213" hits="0" branch="false"/>
+            <line number="218" hits="0" branch="false"/>
+            <line number="231" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="232" hits="0" branch="false"/>
+            <line number="234" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+            <line number="235" hits="0" branch="false"/>
+            <line number="236" hits="0" branch="false"/>
+            <line number="238" hits="0" branch="false"/>
+            <line number="241" hits="0" branch="false"/>
+            <line number="243" hits="0" branch="false"/>
+            <line number="254" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+            <line number="255" hits="0" branch="false"/>
+            <line number="256" hits="0" branch="false"/>
+            <line number="258" hits="0" branch="false"/>
+            <line number="261" hits="0" branch="false"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

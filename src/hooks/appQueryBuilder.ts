@@ -25,7 +25,6 @@ export function appQueryBuilder<Scope extends keyof AppRoutes = "main", T extend
 		const itemToPush = typeof query === "string" ? query : { ...query }
 		keyForUseQuery.push(itemToPush)
 	}
-	console.log("returning keyForUseQuery", keyForUseQuery)
 	return keyForUseQuery;
 
 }

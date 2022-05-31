@@ -3,28 +3,21 @@ import { MutationKey, useMutation, UseMutationOptions, UseMutationResult, useQue
 import { AppQueryOptions } from ".";
 import { AppRoutes, ApiPayloadType, ApiResponseType, ApiRoute } from "..";
 import { httpPost } from "../imperative";
+import { appQueryBuilder } from "./appQueryBuilder";
 /**
  * 
- * @param route a route from AppRoutes or an object with a scope and a route
-* @param queryOptions http options for the query. Path params is needed to replace path variables
+ * @param routeOrRouteObj a route from AppRoutes or an object with a scope and a route
+* @param appQueryOptions http options for the query. Path params is needed to replace path variables
  * @param mutationOptions react-query's mutation options
  * @returns 
  */
 export function useAppMutation<Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>
-	(route: Route | { scope: Scope, route: Route }, queryOptions: Partial<Omit<AppQueryOptions<ApiPayloadType<Scope, Route>>, "apiScope">> = {},
+	(routeOrRouteObj: Route | { scope: Scope, route: Route }, appQueryOptions: Partial<Omit<AppQueryOptions<ApiPayloadType<Scope, Route>>, "apiScope">> = {},
 		mutationOptions: UseMutationOptions = {}
 	): UseMutationResult<ApiResponseType<Scope, Route, "mutation">, any, (ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } }), any> {
+
 	const queryClient = useQueryClient();
-	const keyForUseQuery: any = [route, typeof queryOptions.query === "string" ? queryOptions.query : { ...queryOptions.query }];
-	const { extraRoutePath } = queryOptions
-	if (extraRoutePath) {
-		if (typeof extraRoutePath === "object") {
-			keyForUseQuery.concat([...extraRoutePath])
-		}
-		else {
-			keyForUseQuery.push(extraRoutePath)
-		}
-	}
+	const keyForUseQuery = appQueryBuilder(routeOrRouteObj, appQueryOptions);// any = [route, typeof queryOptions.query === "string" ? queryOptions.query : { ...queryOptions.query }];
 
 
 	/**
@@ -37,15 +30,15 @@ export function useAppMutation<Scope extends keyof AppRoutes = "main", Route ext
 	 * If you need to send a post request with a _pathParams property, it will not work
 	 */
 	return useMutation<ApiResponseType<Scope, Route, "mutation">, any, (ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } }), any>(keyForUseQuery as MutationKey, ({ _pathParams, ...params }: any) => {
-		console.log("options", queryOptions)
+		console.log("options", appQueryOptions)
 		console.log("params", params, _pathParams)
-		const finalRoute = (route as string).split("/")
+		const finalRoute = (routeOrRouteObj as string).split("/")
 			.map((part) => {
 				if (part.startsWith(":")) {
 					const finalPart = part.substring(1);
-					const pathParam = _pathParams?.[finalPart] ?? queryOptions.pathParams?.[finalPart];
+					const pathParam = _pathParams?.[finalPart] ?? appQueryOptions.pathParams?.[finalPart];
 					if (!pathParam) {
-						console.warn("you are missing a path param for route", route)
+						console.warn("you are missing a path param for route", routeOrRouteObj)
 						return undefined;
 					}
 					return pathParam
@@ -53,13 +46,13 @@ export function useAppMutation<Scope extends keyof AppRoutes = "main", Route ext
 				return part;
 			})
 			.join("/");
-		return httpPost(finalRoute as any, { payload: params, ...queryOptions }) as Promise<ApiResponseType<Scope, Route, "mutation">>
+		return httpPost(finalRoute as any, { payload: params, ...appQueryOptions }) as Promise<ApiResponseType<Scope, Route, "mutation">>
 
 	}, {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		//@ts-ignore
 		onSuccess: (data: any, variables: any, context: any) => {
-			queryClient.invalidateQueries({ queryKey: route as any });
+			queryClient.invalidateQueries({ queryKey: routeOrRouteObj as any });
 			mutationOptions.onSuccess?.(data, variables, context)
 			// return true;
 		},

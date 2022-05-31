@@ -14,5 +14,13 @@ module.exports = {
   },
   setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
   modulePathIgnorePatterns: ["example"],
+  coverageReporters: [
+    "json",
+    "json-summary",
+    "text",
+    "lcov",
+    "text-summary",
+    "cobertura",
+  ],
 };
 

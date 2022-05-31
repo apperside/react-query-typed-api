@@ -32,21 +32,22 @@ export function useAppMutation<Scope extends keyof AppRoutes = "main", Route ext
 	return useMutation<ApiResponseType<Scope, Route, "mutation">, any, (ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } }), any>(keyForUseQuery as MutationKey, ({ _pathParams, ...params }: any) => {
 		console.log("options", appQueryOptions)
 		console.log("params", params, _pathParams)
-		const finalRoute = (routeOrRouteObj as string).split("/")
-			.map((part) => {
-				if (part.startsWith(":")) {
-					const finalPart = part.substring(1);
-					const pathParam = _pathParams?.[finalPart] ?? appQueryOptions.pathParams?.[finalPart];
-					if (!pathParam) {
-						console.warn("you are missing a path param for route", routeOrRouteObj)
-						return undefined;
-					}
-					return pathParam
-				}
-				return part;
-			})
-			.join("/");
-		return httpPost(finalRoute as any, { payload: params, ...appQueryOptions }) as Promise<ApiResponseType<Scope, Route, "mutation">>
+		// const finalRoute = (routeOrRouteObj as string).split("/")
+		// 	.map((part) => {
+		// 		if (part.startsWith(":")) {
+		// 			const finalPart = part.substring(1);
+		// 			const pathParam = _pathParams?.[finalPart] ?? appQueryOptions.pathParams?.[finalPart];
+		// 			if (!pathParam) {
+		// 				console.warn("you are missing a path param for route", routeOrRouteObj)
+		// 				return undefined;
+		// 			}
+		// 			return pathParam
+		// 		}
+		// 		return part;
+		// 	})
+		// 	.join("/");
+		// const { pathParams, ...restOfAppQueryOptions } = appQueryOptions;
+		return httpPost(routeOrRouteObj as any, { payload: params, ...appQueryOptions, pathParams: _pathParams ?? appQueryOptions.pathParams }) as Promise<ApiResponseType<Scope, Route, "mutation">>
 
 	}, {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment

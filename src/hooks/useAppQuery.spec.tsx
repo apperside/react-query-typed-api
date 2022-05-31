@@ -1,18 +1,13 @@
-import {
-  act,
-  cleanup,
-  renderHook,
-  waitFor,
-  waitForOptions,
-} from "@testing-library/react";
+import { act, cleanup } from "@testing-library/react";
 import * as rq from "react-query";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { OpenMeteoResponse } from "src/test/open-meteo";
-import { WeatherReactResponse } from "src/test/weather-react";
 import { expectType } from "tsd";
 import { DefaultGetManyResponse } from "..";
 import * as imperative from "../imperative";
+import { waitForHook } from "../test/test-utils";
+import { WeatherReactResponse } from "../test/weather-react";
 import { useAppQuery } from "./useAppQuery";
+
 type AFakeObject = { fakeObjectField: string };
 type FakeEventObject = { eventField: string };
 type FakeBookingObject = { bookingField: string };
@@ -67,58 +62,24 @@ declare module "../crud" {
       NestJsxModelRoute<"events", "custom-nest-crud"> {}
 }
 
-const queryClient = new QueryClient();
-const wrapper = ({ children }: any) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-);
-
 describe("basic usage", () => {
   let useQueryMock: jest.SpyInstance;
   let httpGetMock: jest.SpyInstance;
 
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-        refetchOnWindowFocus: false,
-      },
-    },
-  });
-
   beforeAll(() => {
     jest.mock("cross-local-storage");
-
-    httpGetMock = jest
-      .spyOn(imperative, "httpGet")
-      .mockImplementation(jest.fn());
   });
 
   beforeEach(() => {
-    useQueryMock = jest.spyOn(rq, "useQuery"); //.mockImplementation(jest.fn());
+    useQueryMock = jest.spyOn(rq, "useQuery");
+    httpGetMock = jest
+      .spyOn(imperative, "httpGet")
+      .mockImplementation(jest.fn());
     useQueryMock.mockClear();
     httpGetMock.mockClear();
   });
 
   afterEach(cleanup);
-
-  /**
-   * Withouth this cumbersome setup, the test pass but we get various errors
-   * about code not wrapped in act() function, but wrapping the code in act()
-   * does not help.
-   * The waitFor + renderHook is the only way to get rid of these warnings
-   * @param callback
-   * @param options
-   * @returns
-   */
-  function waitForHook<T>(callback: () => T, options?: waitForOptions) {
-    return waitFor(
-      async () =>
-        renderHook(callback, {
-          wrapper,
-        }),
-      options
-    );
-  }
 
   test("simple query call, only endpoint name", async () => {
     const { result } = await waitForHook(() => useAppQuery("fake-object"));

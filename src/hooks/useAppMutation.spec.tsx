@@ -1,10 +1,12 @@
 /* eslint-disable testing-library/no-node-access */
-import { render } from "@testing-library/react";
+import { act, cleanup, render } from "@testing-library/react";
 import * as rq from "react-query";
 import { OpenMeteoResponse } from "src/test/open-meteo";
-import { WeatherReactResponse } from "src/test/weather-react";
+import { waitForHook } from "../test/test-utils";
+import { WeatherReactResponse } from "../test/weather-react";
 import { expectType } from "tsd";
-import { DefaultSaveOnePayload, useAppMutation } from "..";
+import { DefaultSaveOnePayload, useAppMutation, useAppQuery } from "..";
+import * as imperative from "../imperative";
 
 type AFakeObject = { fakeObjectField: string };
 type FakeEventObject = { eventField: string };
@@ -62,121 +64,132 @@ declare module "../crud" {
 
 describe("basic usage", () => {
   let useMutationMock: jest.SpyInstance;
+  let httpPostMock: jest.SpyInstance;
 
   beforeAll(() => {
     jest.mock("cross-local-storage");
-    useMutationMock = jest
-      .spyOn(rq, "useMutation")
-      .mockImplementation(jest.fn());
-    jest.spyOn(rq, "useQueryClient").mockImplementation(jest.fn());
   });
 
   beforeEach(() => {
+    useMutationMock = jest.spyOn(rq, "useMutation");
+    httpPostMock = jest
+      .spyOn(imperative, "httpPost")
+      .mockImplementation(jest.fn());
     useMutationMock.mockClear();
-    // jest.mock("react-query", () => {
-    //   return {
-    //     useQueryClient: jest.fn(),
-    //     useQuery: jest.fn(),
-    //     useMutation: jest.fn(),
-    //   };
-    // });
+    httpPostMock.mockClear();
     // jest.spyOn(rq, "useQueryClient").mockImplementation(jest.fn());
   });
-  test("simple query call, only endpoint name", () => {
-    const Comp = () => {
-      useAppMutation("fake-object");
 
-      return <div />;
-    };
+  afterEach(cleanup);
+  test("simple query call, only endpoint name", async () => {
+    const {
+      result: { current: hook },
+    } = await waitForHook(() => useAppMutation("fake-object"));
 
-    render(<Comp />);
     expect(useMutationMock).toHaveBeenCalled();
     const queryKeyParameter = useMutationMock.mock.calls[0][0];
-    console.log("queryKeyParameter", queryKeyParameter);
     expect(queryKeyParameter).toEqual(["fake-object"]);
-    const query = useAppMutation("fake-object");
-    expectType<
-      rq.UseMutationResult<AFakeObject, any, DefaultSaveOnePayload<AFakeObject>>
-    >(query);
+
+    await act(async () => {
+      const payload = { item: { fakeObjectField: "value" } };
+      await hook.mutateAsync(payload);
+      expect(httpPostMock).toHaveBeenCalledWith("fake-object", { payload });
+    });
+    // const query = useAppMutation("fake-object");
+    // expectType<
+    //   rq.UseMutationResult<AFakeObject, any, DefaultSaveOnePayload<AFakeObject>>
+    // >(query);
   });
 
-  test("query call with path param", () => {
-    const Comp = () => {
-      useAppMutation("fake-object/:id", { pathParams: { id: 1 } });
+  test("with path variables", async () => {
+    const {
+      result: { current: hook },
+    } = await waitForHook(() =>
+      useAppMutation("fake-object/:id", { pathParams: { id: 1 } })
+    );
 
-      return <div />;
-    };
-
-    render(<Comp />);
     expect(useMutationMock).toHaveBeenCalled();
     const queryKeyParameter = useMutationMock.mock.calls[0][0];
     expect(queryKeyParameter).toEqual(["fake-object/:id", { id: 1 }]);
-    const query = useAppMutation("fake-object/:id");
-    expectType<
-      rq.UseMutationResult<AFakeObject, any, DefaultSaveOnePayload<AFakeObject>>
-    >(query);
+
+    await act(async () => {
+      const payload = { item: { fakeObjectField: "value" } };
+      await hook.mutateAsync(payload);
+      expect(httpPostMock).toHaveBeenCalledWith("fake-object/:id", {
+        payload,
+        pathParams: { id: 1 },
+      });
+    });
   });
 
-  test("query call with query object", () => {
-    const Comp = () => {
-      const query = useAppMutation("fake-object/:id", {
+  test("query call with only query object", async () => {
+    const {
+      result: { current: hook },
+    } = await waitForHook(() =>
+      useAppMutation("fake-object", {
         query: { queryParam1: "testValue", queryParam2: 6 },
-      });
+      })
+    );
 
-      return <div />;
-    };
-
-    render(<Comp />);
     expect(useMutationMock).toHaveBeenCalled();
     const queryKeyParameter = useMutationMock.mock.calls[0][0];
 
     expect(queryKeyParameter).toEqual([
-      "fake-object/:id",
+      "fake-object",
       { queryParam1: "testValue", queryParam2: 6 },
     ]);
-    const query = useAppMutation("fake-object/:id");
-    expectType<
-      rq.UseMutationResult<AFakeObject, any, DefaultSaveOnePayload<AFakeObject>>
-    >(query);
-  });
 
-  test("query call with path param and query object", () => {
-    const Comp = () => {
-      const query = useAppMutation("fake-object/:id", {
-        pathParams: { id: 1 },
+    await act(async () => {
+      const payload = { item: { fakeObjectField: "value" } };
+      await hook.mutateAsync({ ...payload });
+      expect(httpPostMock).toHaveBeenCalledWith("fake-object", {
+        payload,
         query: { queryParam1: "testValue", queryParam2: 6 },
       });
+    });
+  });
 
-      return <div />;
-    };
+  test("query call with path param and query object", async () => {
+    const {
+      result: { current: hook },
+    } = await waitForHook(() =>
+      useAppMutation("fake-object/:id", {
+        pathParams: { id: 1 },
+        query: { queryParam1: "testValue", queryParam2: 6 },
+      })
+    );
 
-    render(<Comp />);
     expect(useMutationMock).toHaveBeenCalled();
     const queryKeyParameter = useMutationMock.mock.calls[0][0];
-    console.log("query parameter", queryKeyParameter);
+
     expect(queryKeyParameter).toEqual([
       "fake-object/:id",
       { id: 1 },
       { queryParam1: "testValue", queryParam2: 6 },
     ]);
-    const query = useAppMutation("fake-object/:id");
-    expectType<
-      rq.UseMutationResult<AFakeObject, any, DefaultSaveOnePayload<AFakeObject>>
-    >(query);
+
+    await act(async () => {
+      const payload = { item: { fakeObjectField: "value" } };
+      await hook.mutateAsync({ ...payload });
+      expect(httpPostMock).toHaveBeenCalledWith("fake-object/:id", {
+        payload,
+        pathParams: { id: 1 },
+        query: { queryParam1: "testValue", queryParam2: 6 },
+      });
+    });
   });
 
-  test("query call with extraRoutePath", () => {
-    const Comp = () => {
-      const query = useAppMutation("fake-object/:id", {
+  test("query call with extraRoutePath", async () => {
+    const {
+      result: { current: hook },
+    } = await waitForHook(() =>
+      useAppMutation("fake-object/:id", {
         pathParams: { id: 1 },
         query: { queryParam1: "testValue", queryParam2: 6 },
         extraRoutePath: "extra-route-path",
-      });
+      })
+    );
 
-      return <div />;
-    };
-
-    render(<Comp />);
     expect(useMutationMock).toHaveBeenCalled();
     const queryKeyParameter = useMutationMock.mock.calls[0][0];
     console.log("query parameter", queryKeyParameter);
@@ -187,25 +200,28 @@ describe("basic usage", () => {
       { queryParam1: "testValue", queryParam2: 6 },
     ]);
 
-    useMutationMock.mockClear();
-    const query = useAppMutation("fake-object/:id");
-    expectType<
-      rq.UseMutationResult<AFakeObject, any, DefaultSaveOnePayload<AFakeObject>>
-    >(query);
+    await act(async () => {
+      const payload = { item: { fakeObjectField: "value" } };
+      await hook.mutateAsync({ ...payload });
+      expect(httpPostMock).toHaveBeenCalledWith("fake-object/:id", {
+        payload,
+        pathParams: { id: 1 },
+        query: { queryParam1: "testValue", queryParam2: 6 },
+        extraRoutePath: "extra-route-path",
+      });
+    });
   });
 
-  test("query call with extraRoutePath array", () => {
-    const Comp = () => {
-      const query = useAppMutation("fake-object/:id", {
+  test("query call with extraRoutePath array", async () => {
+    const {
+      result: { current: hook },
+    } = await waitForHook(() =>
+      useAppMutation("fake-object/:id", {
         pathParams: { id: 1 },
         query: { queryParam1: "testValue", queryParam2: 6 },
         extraRoutePath: ["extra-route-path1", "extra-route-path2"],
-      });
-
-      return <div />;
-    };
-
-    render(<Comp />);
+      })
+    );
     expect(useMutationMock).toHaveBeenCalled();
     const queryKeyParameter = useMutationMock.mock.calls[0][0];
 
@@ -216,11 +232,51 @@ describe("basic usage", () => {
       { queryParam1: "testValue", queryParam2: 6 },
     ]);
 
-    useMutationMock.mockClear();
-    const query = useAppMutation("fake-object/:id");
-    expectType<
-      rq.UseMutationResult<AFakeObject, any, DefaultSaveOnePayload<AFakeObject>>
-    >(query);
+    await act(async () => {
+      const payload = { item: { fakeObjectField: "value" } };
+      await hook.mutateAsync({ ...payload });
+      expect(httpPostMock).toHaveBeenCalledWith("fake-object/:id", {
+        payload,
+        pathParams: { id: 1 },
+        query: { queryParam1: "testValue", queryParam2: 6 },
+        extraRoutePath: ["extra-route-path1", "extra-route-path2"],
+      });
+    });
+  });
+
+  test("typings are correct", async () => {
+    type MutationResulType<Res, Payload> = rq.UseMutationResult<
+      Res,
+      any,
+      Payload & {
+        _pathParams?:
+          | {
+              [key: string]: any;
+            }
+          | undefined;
+      },
+      any
+    >;
+
+    {
+      const {
+        result: { current: hook },
+      } = await waitForHook(() => useAppMutation("fake-object"));
+
+      expectType<
+        MutationResulType<AFakeObject, DefaultSaveOnePayload<AFakeObject>>
+      >(hook);
+    }
+
+    {
+      const {
+        result: { current: hook },
+      } = await waitForHook(() => useAppMutation("fake-object/:id"));
+
+      expectType<
+        MutationResulType<AFakeObject, DefaultSaveOnePayload<AFakeObject>>
+      >(hook);
+    }
   });
 });
 

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/hooks/useAppQuery.ts</title>
+    <title>Code coverage report for src/test/test-utils.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/hooks</a> useAppQuery.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/test</a> test-utils.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -83,58 +83,61 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
-import { AppQueryOptions } from ".";
-import { AppRoutes, ApiResponseType, ApiRoute } from "..";
-import { appQueryBuilder } from "./appQueryBuilder";
-import { httpGet } from "../imperative"
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { waitForOptions, waitFor, renderHook } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 &nbsp;
 /**
- * Alias for array
- *
- * @typeParam Scope - One of the keys of {@link AppRoutes}
+ * Withouth this cumbersome setup, the test pass but we get various errors
+ * about code not wrapped in act() function, but wrapping the code in act()
+ * does not help.
+ * The waitFor + renderHook is the only way to get rid of these warnings
+ * @param callback
+ * @param options
+ * @returns
  */
-export function useAppQuery&lt;Scope extends keyof AppRoutes = "main", Route extends ApiRoute&lt;Scope&gt; = ApiRoute&lt;Scope&gt;&gt;
-	(routeOrRouteObj: Route | { scope: Scope, route: Route },
-		appQueryOptions: Partial&lt;Omit&lt;AppQueryOptions, "payload" | "apiScope"&gt;&gt; = {},
-		<span class="missing-if-branch" title="else path not taken" >E</span>useQueryOptions: UseQueryOptions = {})
-	: UseQueryResult&lt;ApiResponseType&lt;Scope, Route&gt;&gt; {
-&nbsp;
-	const keyForUseQuery = appQueryBuilder(routeOrRouteObj, appQueryOptions);
-&nbsp;
-	type RES = ApiResponseType&lt;Scope, Route&gt;
-	return useQuery&lt;RES&gt;(keyForUseQuery, (params: any) =&gt; {
-		return httpGet(routeOrRouteObj, { ...appQueryOptions }) as Promise&lt;RES&gt;
-	}, useQueryOptions as any);
-&nbsp;
+export function waitForHook&lt;T&gt;(callback: () =&gt; T, options?: waitForOptions) {
+  return waitFor(
+    async () =&gt;
+      renderHook(callback, {
+        wrapper: withQueryClient,
+      }),
+    options
+  );
 }
+&nbsp;
+const queryClient = new QueryClient();
+export const withQueryClient = ({ children }: any) =&gt; (
+  &lt;QueryClientProvider client={queryClient}&gt;{children}&lt;/QueryClientProvider&gt;
+);
+&nbsp;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

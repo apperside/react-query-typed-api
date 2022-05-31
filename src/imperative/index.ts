@@ -58,3 +58,7 @@ export function httpDelete<Scope extends keyof AppRoutes = "main", Route extends
 ): Promise<{ result: boolean }> {
 	return performRequest("DELETE", routeOrRouteObj as any, appQueryOptions);
 }
+
+export const exportedForTesting = {
+	performRequest
+}

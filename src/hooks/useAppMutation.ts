@@ -3,7 +3,7 @@ import { MutationKey, useMutation, UseMutationOptions, UseMutationResult, useQue
 import { AppQueryOptions } from ".";
 import { AppRoutes, ApiPayloadType, ApiResponseType, ApiRoute } from "..";
 import { httpPost } from "../imperative";
-import { appQueryBuilder } from "./appQueryBuilder";
+import { appQueryKeyBuilder } from "./appQueryKeyBuilder";
 /**
  * 
  * @param routeOrRouteObj a route from AppRoutes or an object with a scope and a route
@@ -17,7 +17,7 @@ export function useAppMutation<Scope extends keyof AppRoutes = "main", Route ext
 	): UseMutationResult<ApiResponseType<Scope, Route, "mutation">, any, (ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } }), any> {
 
 	const queryClient = useQueryClient();
-	const keyForUseQuery = appQueryBuilder(routeOrRouteObj, appQueryOptions);// any = [route, typeof queryOptions.query === "string" ? queryOptions.query : { ...queryOptions.query }];
+	const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);// any = [route, typeof queryOptions.query === "string" ? queryOptions.query : { ...queryOptions.query }];
 
 
 	/**

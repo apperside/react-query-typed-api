@@ -2,7 +2,7 @@
 import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
 import { AppQueryOptions } from ".";
 import { AppRoutes, ApiResponseType, ApiRoute } from "..";
-import { appQueryBuilder } from "./appQueryBuilder";
+import { appQueryKeyBuilder } from "./appQueryKeyBuilder";
 import { httpGet } from "../imperative"
 
 /**
@@ -16,7 +16,7 @@ export function useAppQuery<Scope extends keyof AppRoutes = "main", Route extend
 		useQueryOptions: UseQueryOptions = {})
 	: UseQueryResult<ApiResponseType<Scope, Route>> {
 
-	const keyForUseQuery = appQueryBuilder(routeOrRouteObj, appQueryOptions);
+	const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 
 	type RES = ApiResponseType<Scope, Route>
 	return useQuery<RES>(keyForUseQuery, (params: any) => {

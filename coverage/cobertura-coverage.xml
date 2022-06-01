@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="239" lines-covered="205" line-rate="0.8576999999999999" branches-valid="173" branches-covered="93" branch-rate="0.5376" timestamp="1654090605511" complexity="0" version="0.1">
+<coverage lines-valid="239" lines-covered="205" line-rate="0.8576999999999999" branches-valid="173" branches-covered="93" branch-rate="0.5376" timestamp="1654095040666" complexity="0" version="0.1">
   <sources>
     <source>/Users/simone/dev/react/react-query-typed-api</source>
   </sources>

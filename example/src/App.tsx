@@ -127,11 +127,11 @@ function App() {
 
   const task = useAppTask("my-task", myTask);
 
-  //   const performTask = useCallback(() => {
-  //     task.execute("test").then((result) => {
-  //       alert("result");
-  //     });
-  //   }, [task]);
+  const performTask = useCallback(() => {
+    task.execute("test").then((result) => {
+      alert("result");
+    });
+  }, [task]);
 
   return (
     <div className="App">
@@ -139,6 +139,8 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <button onClick={onDemandQuery}>ON DEMAND QUERY</button>
         <button onClick={onDemandMutation}>ON DEMAND MUTATION</button>
+        {task.isLoading && <div>Loading...</div>}
+        {!task.isLoading && <button onClick={performTask}>EXECUTE TASK</button>}
         <p>Metaweather response</p>
         <div>
           {metaweatherQuery.isLoading && <div>Loading...</div>}
@@ -175,9 +177,6 @@ function App() {
             return <div>{JSON.stringify(query.data)}</div>;
           }}
         </AppQuery>
-
-        {/* {task.isLoading && <div>Loading...</div>}
-        {!task.isLoading && <button onClick={performTask}>EXECUTE TASK</button>} */}
       </header>
     </div>
   );

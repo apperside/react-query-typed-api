@@ -510,11 +510,11 @@ Since this is 100% true for `useAppQuery`,  on `useAppMutation` we added there i
 
 - [x] Publish initial version
 
- [] Add missing documentation (crud endpoints, 
+ [] Add missing documentation 
  
  [] Wrap useInfiniteQuery
  
- [] Add tests
+ [] Improve tests
 
 
 [] Much more 😅

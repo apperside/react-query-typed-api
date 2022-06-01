@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="239" lines-covered="205" line-rate="0.8576999999999999" branches-valid="173" branches-covered="93" branch-rate="0.5376" timestamp="1654095040666" complexity="0" version="0.1">
+<coverage lines-valid="239" lines-covered="207" line-rate="0.8661" branches-valid="173" branches-covered="93" branch-rate="0.5376" timestamp="1654095655343" complexity="0" version="0.1">
   <sources>
     <source>/Users/simone/dev/react/react-query-typed-api</source>
   </sources>
@@ -11,39 +11,39 @@
           <methods>
           </methods>
           <lines>
-            <line number="4" hits="3" branch="false"/>
-            <line number="5" hits="3" branch="false"/>
-            <line number="6" hits="3" branch="false"/>
-            <line number="7" hits="3" branch="false"/>
-            <line number="8" hits="3" branch="false"/>
-            <line number="9" hits="3" branch="false"/>
+            <line number="4" hits="4" branch="false"/>
+            <line number="5" hits="4" branch="false"/>
+            <line number="6" hits="4" branch="false"/>
+            <line number="7" hits="4" branch="false"/>
+            <line number="8" hits="4" branch="false"/>
+            <line number="9" hits="4" branch="false"/>
           </lines>
         </class>
       </classes>
     </package>
-    <package name="src.components" line-rate="0.6667000000000001" branch-rate="1">
+    <package name="src.components" line-rate="1" branch-rate="1">
       <classes>
-        <class name="AppQuery.ts" filename="src/components/AppQuery.ts" line-rate="0.6" branch-rate="1">
+        <class name="AppQuery.ts" filename="src/components/AppQuery.ts" line-rate="1" branch-rate="1">
           <methods>
-            <method name="AppQuery" hits="0" signature="()V">
+            <method name="AppQuery" hits="2" signature="()V">
               <lines>
-                <line number="10" hits="0"/>
+                <line number="10" hits="2"/>
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="2" hits="3" branch="false"/>
-            <line number="10" hits="3" branch="false"/>
-            <line number="12" hits="0" branch="false"/>
-            <line number="13" hits="0" branch="false"/>
-            <line number="16" hits="3" branch="false"/>
+            <line number="2" hits="4" branch="false"/>
+            <line number="10" hits="4" branch="false"/>
+            <line number="12" hits="2" branch="false"/>
+            <line number="13" hits="2" branch="false"/>
+            <line number="16" hits="4" branch="false"/>
           </lines>
         </class>
         <class name="index.ts" filename="src/components/index.ts" line-rate="1" branch-rate="1">
           <methods>
           </methods>
           <lines>
-            <line number="1" hits="3" branch="false"/>
+            <line number="1" hits="4" branch="false"/>
           </lines>
         </class>
       </classes>
@@ -79,8 +79,8 @@
             </method>
           </methods>
           <lines>
-            <line number="2" hits="4" branch="false"/>
-            <line number="5" hits="4" branch="false"/>
+            <line number="2" hits="5" branch="false"/>
+            <line number="5" hits="5" branch="false"/>
             <line number="6" hits="20" branch="true" condition-coverage="87.5% (7/8)"/>
             <line number="7" hits="20" branch="true" condition-coverage="75% (3/4)"/>
             <line number="9" hits="30" branch="true" condition-coverage="100% (4/4)"/>
@@ -106,8 +106,8 @@
             <line number="48" hits="14" branch="true" condition-coverage="100% (2/2)"/>
             <line number="49" hits="5" branch="false"/>
             <line number="51" hits="14" branch="false"/>
-            <line number="54" hits="4" branch="false"/>
-            <line number="56" hits="4" branch="false"/>
+            <line number="54" hits="5" branch="false"/>
+            <line number="56" hits="5" branch="false"/>
           </lines>
         </class>
         <class name="appQueryBuilder.ts" filename="src/helpers/appQueryBuilder.ts" line-rate="0.5" branch-rate="0">
@@ -129,34 +129,34 @@
             </method>
           </methods>
           <lines>
-            <line number="3" hits="3" branch="false"/>
-            <line number="19" hits="3" branch="false"/>
+            <line number="3" hits="4" branch="false"/>
+            <line number="19" hits="4" branch="false"/>
             <line number="20" hits="0" branch="true" condition-coverage="0% (0/6)"/>
             <line number="21" hits="0" branch="false"/>
             <line number="23" hits="0" branch="false"/>
-            <line number="26" hits="3" branch="true" condition-coverage="0% (0/2)"/>
+            <line number="26" hits="4" branch="true" condition-coverage="0% (0/2)"/>
             <line number="27" hits="0" branch="false"/>
             <line number="28" hits="0" branch="false"/>
-            <line number="34" hits="3" branch="false"/>
-            <line number="39" hits="3" branch="false"/>
+            <line number="34" hits="4" branch="false"/>
+            <line number="39" hits="4" branch="false"/>
           </lines>
         </class>
         <class name="appQueryUtils.ts" filename="src/helpers/appQueryUtils.ts" line-rate="1" branch-rate="1">
           <methods>
           </methods>
           <lines>
-            <line number="3" hits="3" branch="false"/>
-            <line number="9" hits="3" branch="false"/>
-            <line number="15" hits="3" branch="false"/>
-            <line number="21" hits="3" branch="false"/>
+            <line number="3" hits="4" branch="false"/>
+            <line number="9" hits="4" branch="false"/>
+            <line number="15" hits="4" branch="false"/>
+            <line number="21" hits="4" branch="false"/>
           </lines>
         </class>
         <class name="index.ts" filename="src/helpers/index.ts" line-rate="1" branch-rate="1">
           <methods>
           </methods>
           <lines>
-            <line number="1" hits="3" branch="false"/>
-            <line number="2" hits="3" branch="false"/>
+            <line number="1" hits="4" branch="false"/>
+            <line number="2" hits="4" branch="false"/>
           </lines>
         </class>
       </classes>
@@ -165,27 +165,27 @@
       <classes>
         <class name="appQueryKeyBuilder.ts" filename="src/hooks/appQueryKeyBuilder.ts" line-rate="1" branch-rate="0.9167000000000001">
           <methods>
-            <method name="appQueryKeyBuilder" hits="43" signature="()V">
+            <method name="appQueryKeyBuilder" hits="45" signature="()V">
               <lines>
-                <line number="5" hits="43"/>
+                <line number="5" hits="45"/>
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="5" hits="4" branch="false"/>
-            <line number="7" hits="58" branch="true" condition-coverage="100% (2/2)"/>
-            <line number="10" hits="43" branch="false"/>
-            <line number="12" hits="129" branch="false"/>
-            <line number="13" hits="43" branch="true" condition-coverage="100% (2/2)"/>
+            <line number="5" hits="5" branch="false"/>
+            <line number="7" hits="60" branch="true" condition-coverage="100% (2/2)"/>
+            <line number="10" hits="45" branch="false"/>
+            <line number="12" hits="135" branch="false"/>
+            <line number="13" hits="45" branch="true" condition-coverage="100% (2/2)"/>
             <line number="14" hits="6" branch="true" condition-coverage="100% (2/2)"/>
             <line number="15" hits="3" branch="false"/>
             <line number="18" hits="3" branch="false"/>
-            <line number="21" hits="43" branch="true" condition-coverage="100% (2/2)"/>
-            <line number="22" hits="15" branch="false"/>
-            <line number="24" hits="43" branch="true" condition-coverage="100% (2/2)"/>
+            <line number="21" hits="45" branch="true" condition-coverage="100% (2/2)"/>
+            <line number="22" hits="16" branch="false"/>
+            <line number="24" hits="45" branch="true" condition-coverage="100% (2/2)"/>
             <line number="25" hits="15" branch="true" condition-coverage="50% (1/2)"/>
             <line number="26" hits="15" branch="false"/>
-            <line number="28" hits="43" branch="false"/>
+            <line number="28" hits="45" branch="false"/>
           </lines>
         </class>
         <class name="index.ts" filename="src/hooks/index.ts" line-rate="1" branch-rate="1">
@@ -195,16 +195,16 @@
                 <line number="3" hits="14"/>
               </lines>
             </method>
-            <method name="(anonymous_5)" hits="0" signature="()V">
+            <method name="(anonymous_5)" hits="2" signature="()V">
               <lines>
-                <line number="4" hits="0"/>
+                <line number="4" hits="2"/>
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="3" hits="17" branch="false"/>
-            <line number="4" hits="3" branch="false"/>
-            <line number="5" hits="3" branch="false"/>
+            <line number="3" hits="18" branch="false"/>
+            <line number="4" hits="6" branch="false"/>
+            <line number="5" hits="4" branch="false"/>
           </lines>
         </class>
         <class name="useAppMutation.ts" filename="src/hooks/useAppMutation.ts" line-rate="1" branch-rate="0.75">
@@ -226,10 +226,10 @@
             </method>
           </methods>
           <lines>
-            <line number="2" hits="3" branch="false"/>
-            <line number="5" hits="3" branch="false"/>
-            <line number="6" hits="3" branch="false"/>
-            <line number="14" hits="3" branch="false"/>
+            <line number="2" hits="4" branch="false"/>
+            <line number="5" hits="4" branch="false"/>
+            <line number="6" hits="4" branch="false"/>
+            <line number="14" hits="4" branch="false"/>
             <line number="15" hits="18" branch="true" condition-coverage="100% (2/2)"/>
             <line number="16" hits="28" branch="true" condition-coverage="50% (1/2)"/>
             <line number="19" hits="14" branch="false"/>
@@ -244,9 +244,9 @@
         </class>
         <class name="useAppQuery.ts" filename="src/hooks/useAppQuery.ts" line-rate="1" branch-rate="0.75">
           <methods>
-            <method name="useAppQuery" hits="8" signature="()V">
+            <method name="useAppQuery" hits="10" signature="()V">
               <lines>
-                <line number="13" hits="8"/>
+                <line number="13" hits="10"/>
               </lines>
             </method>
             <method name="(anonymous_3)" hits="6" signature="()V">
@@ -256,14 +256,14 @@
             </method>
           </methods>
           <lines>
-            <line number="2" hits="4" branch="false"/>
-            <line number="5" hits="4" branch="false"/>
-            <line number="6" hits="4" branch="false"/>
-            <line number="13" hits="4" branch="false"/>
-            <line number="15" hits="11" branch="true" condition-coverage="100% (2/2)"/>
-            <line number="16" hits="16" branch="true" condition-coverage="50% (1/2)"/>
-            <line number="19" hits="8" branch="false"/>
-            <line number="22" hits="8" branch="false"/>
+            <line number="2" hits="5" branch="false"/>
+            <line number="5" hits="5" branch="false"/>
+            <line number="6" hits="5" branch="false"/>
+            <line number="13" hits="5" branch="false"/>
+            <line number="15" hits="14" branch="true" condition-coverage="100% (2/2)"/>
+            <line number="16" hits="20" branch="true" condition-coverage="50% (1/2)"/>
+            <line number="19" hits="10" branch="false"/>
+            <line number="22" hits="10" branch="false"/>
             <line number="23" hits="6" branch="false"/>
           </lines>
         </class>
@@ -366,9 +366,9 @@
             </method>
           </methods>
           <lines>
-            <line number="1" hits="3" branch="false"/>
-            <line number="6" hits="3" branch="false"/>
-            <line number="78" hits="3" branch="false"/>
+            <line number="1" hits="4" branch="false"/>
+            <line number="6" hits="4" branch="false"/>
+            <line number="78" hits="4" branch="false"/>
             <line number="80" hits="1" branch="false"/>
             <line number="82" hits="1" branch="false"/>
             <line number="83" hits="5" branch="false"/>
@@ -467,22 +467,22 @@
             </method>
           </methods>
           <lines>
-            <line number="4" hits="4" branch="false"/>
-            <line number="5" hits="4" branch="false"/>
+            <line number="4" hits="5" branch="false"/>
+            <line number="5" hits="5" branch="false"/>
             <line number="8" hits="20" branch="false"/>
             <line number="9" hits="20" branch="false"/>
             <line number="10" hits="20" branch="false"/>
-            <line number="27" hits="4" branch="false"/>
+            <line number="27" hits="5" branch="false"/>
             <line number="31" hits="4" branch="false"/>
-            <line number="34" hits="4" branch="false"/>
+            <line number="34" hits="5" branch="false"/>
             <line number="38" hits="4" branch="false"/>
-            <line number="41" hits="4" branch="false"/>
+            <line number="41" hits="5" branch="false"/>
             <line number="45" hits="4" branch="false"/>
-            <line number="48" hits="4" branch="false"/>
+            <line number="48" hits="5" branch="false"/>
             <line number="52" hits="4" branch="false"/>
-            <line number="55" hits="4" branch="false"/>
+            <line number="55" hits="5" branch="false"/>
             <line number="59" hits="4" branch="false"/>
-            <line number="62" hits="4" branch="false"/>
+            <line number="62" hits="5" branch="false"/>
           </lines>
         </class>
       </classes>
@@ -533,15 +533,15 @@
             </method>
           </methods>
           <lines>
-            <line number="1" hits="4" branch="false"/>
-            <line number="2" hits="4" branch="false"/>
-            <line number="4" hits="4" branch="false"/>
-            <line number="123" hits="4" branch="false"/>
+            <line number="1" hits="5" branch="false"/>
+            <line number="2" hits="5" branch="false"/>
+            <line number="4" hits="5" branch="false"/>
+            <line number="123" hits="5" branch="false"/>
             <line number="124" hits="0" branch="true" condition-coverage="0% (0/2)"/>
             <line number="125" hits="0" branch="true" condition-coverage="0% (0/20)"/>
             <line number="127" hits="0" branch="false"/>
-            <line number="131" hits="4" branch="false"/>
-            <line number="138" hits="4" branch="false"/>
+            <line number="131" hits="5" branch="false"/>
+            <line number="138" hits="5" branch="false"/>
             <line number="139" hits="1" branch="false"/>
             <line number="140" hits="1" branch="false"/>
             <line number="141" hits="2" branch="false"/>
@@ -553,8 +553,8 @@
             <line number="162" hits="0" branch="false"/>
             <line number="165" hits="0" branch="false"/>
             <line number="169" hits="2" branch="false"/>
-            <line number="177" hits="4" branch="false"/>
-            <line number="179" hits="4" branch="false"/>
+            <line number="177" hits="5" branch="false"/>
+            <line number="179" hits="5" branch="false"/>
             <line number="181" hits="20" branch="true" condition-coverage="50% (1/2)"/>
             <line number="185" hits="20" branch="false"/>
             <line number="186" hits="20" branch="true" condition-coverage="50% (1/2)"/>
@@ -595,7 +595,7 @@
           <methods>
           </methods>
           <lines>
-            <line number="1" hits="3" branch="false"/>
+            <line number="1" hits="4" branch="false"/>
           </lines>
         </class>
       </classes>

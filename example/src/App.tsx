@@ -7,6 +7,7 @@ import {
   useAppQuery,
   useAppQueryClient,
   AppQuery,
+  useAppTask,
 } from "react-query-typed-api";
 import "./App.css";
 import logo from "./logo.svg";
@@ -115,6 +116,23 @@ function App() {
     alert(JSON.stringify(data));
   }, []);
 
+  const myTask = useCallback(async (prova: string) => {
+    const promise = new Promise<boolean>((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, 2000);
+    });
+    return await promise;
+  }, []);
+
+  const task = useAppTask("my-task", myTask);
+
+  //   const performTask = useCallback(() => {
+  //     task.execute("test").then((result) => {
+  //       alert("result");
+  //     });
+  //   }, [task]);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -157,6 +175,9 @@ function App() {
             return <div>{JSON.stringify(query.data)}</div>;
           }}
         </AppQuery>
+
+        {/* {task.isLoading && <div>Loading...</div>}
+        {!task.isLoading && <button onClick={performTask}>EXECUTE TASK</button>} */}
       </header>
     </div>
   );

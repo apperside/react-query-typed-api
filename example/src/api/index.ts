@@ -16,6 +16,9 @@ export interface CustomGetManyResponse<T> {
 }
 declare module "react-query-typed-api" {
 
+	export enum AppTasks {
+		"my-task"
+	}
 
 	export interface RoutesModelMapping {
 		"fake-object": AFakeObject;

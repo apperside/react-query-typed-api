@@ -8,7 +8,6 @@ export * from "./imperative";
 export * from "./networking";
 export * from "./components";
 
-
 /**
  * This interface represents the main API routes.
  * Augment this interface to add your endpoints, see the [usage section](/docs/usage/basic-usage) for more info
@@ -95,3 +94,6 @@ export type ApiPayloadType<Scope extends keyof AppRoutes, Route extends keyof Ap
 	never;
 
 
+export enum AppTasks {
+	// TO BE AUGMENTED
+}

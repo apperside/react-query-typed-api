@@ -1,66 +1,11 @@
 /* eslint-disable testing-library/no-node-access */
-import { act, cleanup, render } from "@testing-library/react";
+import { act, cleanup } from "@testing-library/react";
 import * as rq from "react-query";
-import { OpenMeteoResponse } from "src/test/open-meteo";
-import { waitForHook } from "../test/test-utils";
-import { WeatherReactResponse } from "../test/weather-react";
+import { MyObject } from "src/test/types.spec";
 import { expectType } from "tsd";
-import { DefaultSaveOnePayload, useAppMutation, useAppQuery } from "..";
+import { DefaultSaveOnePayload, useAppMutation } from "..";
 import * as imperative from "../imperative";
-
-type AFakeObject = { fakeObjectField: string };
-type FakeEventObject = { eventField: string };
-type FakeBookingObject = { bookingField: string };
-
-export interface CustomGetManyResponse<T> {
-  items: T[];
-  itemCount: number;
-  pages: number;
-}
-
-declare module "../index" {
-  export interface AppRoutes {
-    openmeteo: {
-      forecast: { responseType: OpenMeteoResponse };
-    };
-  }
-
-  /**
-   * Augment this interface to add al custom endpoints
-   */
-  export interface MainApi {
-    prova: { prova: WeatherReactResponse };
-    "forecast/coords/:coordinates": { responseType: WeatherReactResponse };
-    "another-custom-route": {
-      responseType: { customResponseField: string };
-      payloadType: { field1: string; field2: number };
-    };
-    "another-custom-route/:id": {
-      responseType: { customResponseField: string };
-      payloadType: { field1: string; field2: number };
-    };
-  }
-}
-declare module "../crud" {
-  export interface RoutesModelMapping {
-    "fake-object": AFakeObject;
-    events: FakeEventObject;
-    bookings: FakeBookingObject;
-  }
-
-  /**
-   * Augment this interface to add al crud endpoints
-   * you can customize everything you need
-   */
-  export interface CustomCrudRoutes
-    extends RoutesForModel<"fake-object">,
-      RoutesForModel<
-        "bookings",
-        "custom-crud",
-        { getManyResponse: CustomGetManyResponse<FakeBookingObject> }
-      >,
-      NestJsxModelRoute<"events", "custom-nest-crud"> {}
-}
+import { waitForHook } from "../test/test-utils";
 
 describe("basic usage", () => {
   let useMutationMock: jest.SpyInstance;
@@ -91,13 +36,13 @@ describe("basic usage", () => {
     expect(queryKeyParameter).toEqual(["fake-object"]);
 
     await act(async () => {
-      const payload = { item: { fakeObjectField: "value" } };
+      const payload = { item: { myField: "value" } };
       await hook.mutateAsync(payload);
       expect(httpPostMock).toHaveBeenCalledWith("fake-object", { payload });
     });
     // const query = useAppMutation("fake-object");
     // expectType<
-    //   rq.UseMutationResult<AFakeObject, any, DefaultSaveOnePayload<AFakeObject>>
+    //   rq.UseMutationResult<MyObject, any, DefaultSaveOnePayload<MyObject>>
     // >(query);
   });
 
@@ -113,7 +58,7 @@ describe("basic usage", () => {
     expect(queryKeyParameter).toEqual(["fake-object/:id", { id: 1 }]);
 
     await act(async () => {
-      const payload = { item: { fakeObjectField: "value" } };
+      const payload = { item: { myField: "value" } };
       await hook.mutateAsync(payload);
       expect(httpPostMock).toHaveBeenCalledWith("fake-object/:id", {
         payload,
@@ -140,7 +85,7 @@ describe("basic usage", () => {
     ]);
 
     await act(async () => {
-      const payload = { item: { fakeObjectField: "value" } };
+      const payload = { item: { myField: "value" } };
       await hook.mutateAsync({ ...payload });
       expect(httpPostMock).toHaveBeenCalledWith("fake-object", {
         payload,
@@ -169,7 +114,7 @@ describe("basic usage", () => {
     ]);
 
     await act(async () => {
-      const payload = { item: { fakeObjectField: "value" } };
+      const payload = { item: { myField: "value" } };
       await hook.mutateAsync({ ...payload });
       expect(httpPostMock).toHaveBeenCalledWith("fake-object/:id", {
         payload,
@@ -201,7 +146,7 @@ describe("basic usage", () => {
     ]);
 
     await act(async () => {
-      const payload = { item: { fakeObjectField: "value" } };
+      const payload = { item: { myField: "value" } };
       await hook.mutateAsync({ ...payload });
       expect(httpPostMock).toHaveBeenCalledWith("fake-object/:id", {
         payload,
@@ -233,7 +178,7 @@ describe("basic usage", () => {
     ]);
 
     await act(async () => {
-      const payload = { item: { fakeObjectField: "value" } };
+      const payload = { item: { myField: "value" } };
       await hook.mutateAsync({ ...payload });
       expect(httpPostMock).toHaveBeenCalledWith("fake-object/:id", {
         payload,
@@ -263,9 +208,9 @@ describe("basic usage", () => {
         result: { current: hook },
       } = await waitForHook(() => useAppMutation("fake-object"));
 
-      expectType<
-        MutationResulType<AFakeObject, DefaultSaveOnePayload<AFakeObject>>
-      >(hook);
+      expectType<MutationResulType<MyObject, DefaultSaveOnePayload<MyObject>>>(
+        hook
+      );
     }
 
     {
@@ -273,9 +218,9 @@ describe("basic usage", () => {
         result: { current: hook },
       } = await waitForHook(() => useAppMutation("fake-object/:id"));
 
-      expectType<
-        MutationResulType<AFakeObject, DefaultSaveOnePayload<AFakeObject>>
-      >(hook);
+      expectType<MutationResulType<MyObject, DefaultSaveOnePayload<MyObject>>>(
+        hook
+      );
     }
   });
 });

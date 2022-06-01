@@ -1,67 +1,7 @@
 /* eslint-disable testing-library/no-node-access */
-import { act, cleanup, render } from "@testing-library/react";
-import * as rq from "react-query";
-import { OpenMeteoResponse } from "src/test/open-meteo";
-import { waitForHook } from "../test/test-utils";
-import { WeatherReactResponse } from "../test/weather-react";
-import { expectType } from "tsd";
-import { DefaultSaveOnePayload, httpGet, httpPost, initApi, useAppMutation, useAppQuery } from "..";
-import * as imperative from "../imperative";
-import * as axios from "axios";
-import { exportedForTesting, httpDelete, httpPatch, httpPut } from "./"
-type AFakeObject = { fakeObjectField: string };
-type FakeEventObject = { eventField: string };
-type FakeBookingObject = { bookingField: string };
-
-export interface CustomGetManyResponse<T> {
-	items: T[];
-	itemCount: number;
-	pages: number;
-}
-
-declare module "../index" {
-	export interface AppRoutes {
-		openmeteo: {
-			forecast: { responseType: OpenMeteoResponse };
-		};
-	}
-
-	/**
-	 * Augment this interface to add al custom endpoints
-	 */
-	export interface MainApi {
-		prova: { prova: WeatherReactResponse };
-		"forecast/coords/:coordinates": { responseType: WeatherReactResponse };
-		"another-custom-route": {
-			responseType: { customResponseField: string };
-			payloadType: { field1: string; field2: number };
-		};
-		"another-custom-route/:id": {
-			responseType: { customResponseField: string };
-			payloadType: { field1: string; field2: number };
-		};
-	}
-}
-declare module "../crud" {
-	export interface RoutesModelMapping {
-		"fake-object": AFakeObject;
-		events: FakeEventObject;
-		bookings: FakeBookingObject;
-	}
-
-	/**
-	 * Augment this interface to add al crud endpoints
-	 * you can customize everything you need
-	 */
-	export interface CustomCrudRoutes
-		extends RoutesForModel<"fake-object">,
-		RoutesForModel<
-		"bookings",
-		"custom-crud",
-		{ getManyResponse: CustomGetManyResponse<FakeBookingObject> }
-		>,
-		NestJsxModelRoute<"events", "custom-nest-crud"> { }
-}
+import { cleanup } from "@testing-library/react";
+import { httpGet, httpPost, initApi } from "..";
+import { httpDelete, httpPatch, httpPut } from "./";
 
 const requestMethodMock = jest.fn().mockReturnValue({ result: "ok" });
 const axiosInstanceMock = {
@@ -85,7 +25,6 @@ jest.mock('axios', () => {
 const BASE_API_URL_1 = "http://localhost:3000/api1";
 const BASE_API_URL_2 = "http://localhost:3000/api2";
 describe("imperative usage", () => {
-
 	beforeAll(() => {
 		initApi({
 			servers: {
@@ -104,7 +43,7 @@ describe("imperative usage", () => {
 					//   },
 					// ],
 				},
-				openmeteo: {
+				anotherApiScope: {
 					apiUrl: BASE_API_URL_2
 					// requestInterceptor: (config) => {
 					//   console.log("openmeteo api request interceptor", config);
@@ -125,6 +64,7 @@ describe("imperative usage", () => {
 
 
 	afterEach(cleanup);
+
 	test("test GET", async () => {
 
 		// simple get
@@ -158,9 +98,9 @@ describe("imperative usage", () => {
 		})
 
 		// custom api scope
-		await httpGet({ scope: "openmeteo", route: "forecast" })
+		await httpGet({ scope: "anotherApiScope", route: "another-api-endpiont" })
 		expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
-			url: `${BASE_API_URL_2}/forecast`,
+			url: `${BASE_API_URL_2}/another-api-endpiont`,
 			headers: {},
 			data: undefined,
 			method: "GET",
@@ -172,7 +112,7 @@ describe("imperative usage", () => {
 	test("test POST", async () => {
 
 		// simple get
-		const payload = { item: { fakeObjectField: "value" } };
+		const payload = { item: { myField: "value" } };
 
 		await httpPost("fake-object", { payload })
 		expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
@@ -203,9 +143,9 @@ describe("imperative usage", () => {
 		})
 
 		// custom api scope
-		await httpPost({ scope: "openmeteo", route: "forecast" })
+		await httpPost({ scope: "anotherApiScope", route: "another-api-endpiont" })
 		expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
-			url: `${BASE_API_URL_2}/forecast`,
+			url: `${BASE_API_URL_2}/another-api-endpiont`,
 			headers: {},
 			data: undefined,
 			method: "POST",
@@ -217,7 +157,7 @@ describe("imperative usage", () => {
 	test("test PUT", async () => {
 
 		// simple get
-		const payload = { item: { fakeObjectField: "value" } };
+		const payload = { item: { myField: "value" } };
 
 		await httpPut("fake-object", { payload })
 		expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
@@ -248,9 +188,9 @@ describe("imperative usage", () => {
 		})
 
 		// custom api scope
-		await httpPut({ scope: "openmeteo", route: "forecast" })
+		await httpPut({ scope: "anotherApiScope", route: "another-api-endpiont" })
 		expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
-			url: `${BASE_API_URL_2}/forecast`,
+			url: `${BASE_API_URL_2}/another-api-endpiont`,
 			headers: {},
 			data: undefined,
 			method: "PUT",
@@ -262,7 +202,7 @@ describe("imperative usage", () => {
 	test("test PATCH", async () => {
 
 		// simple get
-		const payload = { item: { fakeObjectField: "value" } };
+		const payload = { item: { myField: "value" } };
 
 		await httpPatch("fake-object", { payload })
 		expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
@@ -293,9 +233,9 @@ describe("imperative usage", () => {
 		})
 
 		// custom api scope
-		await httpPatch({ scope: "openmeteo", route: "forecast" })
+		await httpPatch({ scope: "anotherApiScope", route: "another-api-endpiont" })
 		expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
-			url: `${BASE_API_URL_2}/forecast`,
+			url: `${BASE_API_URL_2}/another-api-endpiont`,
 			headers: {},
 			data: undefined,
 			method: "PATCH",
@@ -307,7 +247,7 @@ describe("imperative usage", () => {
 	test("test DELETE", async () => {
 
 		// simple get
-		const payload = { item: { fakeObjectField: "value" } };
+		const payload = { item: { myField: "value" } };
 
 		await httpDelete("fake-object", { payload })
 		expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
@@ -338,9 +278,9 @@ describe("imperative usage", () => {
 		})
 
 		// custom api scope
-		await httpDelete({ scope: "openmeteo", route: "forecast" })
+		await httpDelete({ scope: "anotherApiScope", route: "another-api-endpiont" })
 		expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
-			url: `${BASE_API_URL_2}/forecast`,
+			url: `${BASE_API_URL_2}/another-api-endpiont`,
 			headers: {},
 			data: undefined,
 			method: "DELETE",

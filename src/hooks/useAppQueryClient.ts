@@ -1,5 +1,6 @@
-import { MutationObserverOptions, QueryObserverOptions, useQueryClient } from "react-query";
-import { Updater } from "react-query/types/core/utils";
+import { DefaultOptions, MutationObserverOptions, MutationOptions, QueryObserverOptions, SetDataOptions, useQueryClient } from "react-query";
+import { QueryState } from "react-query/types/core/query";
+import { QueryFilters, Updater } from "react-query/types/core/utils";
 import { AppQueryOptions } from ".";
 import { AppRoutes, ApiPayloadType, ApiResponseType, ApiRoute } from "..";
 import { appQueryKeyBuilder } from "./appQueryKeyBuilder";
@@ -46,32 +47,46 @@ export type SetMutationDefaultsFunction = <Scope extends keyof AppRoutes = "main
 	appQueryOptions?: Partial<AppQueryOptions>, mutationObserverOptions?: MutationObserverOptions<any, any, any, any>) => void
 
 /**
- * This type only needed for setQueryData because it needs the updater param
+ * This type is only needed for setQueryData because it needs the updater param
  */
 export type SetQueryDataFunction = <Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(
 	routeOrRouteObj: Route | { scope: Scope, route: Route },
 	updater: Updater<ApiResponseType<Scope, Route>, ApiResponseType<Scope, Route>>, appQueryOptions?: Partial<AppQueryOptions>,) => ApiResponseType<Scope, Route>
 
 /**
-* This type only needed for executeMutation because it returns mutation mapped return type
+* This type is only needed for setQueryData because it needs the updater param
+*/
+export type SetQueriesDataFunction = <Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(
+	routeOrRouteObj: Route | { scope: Scope, route: Route },
+	updater: Updater<ApiResponseType<Scope, Route> | undefined, ApiResponseType<Scope, Route>>,
+	appQueryOptions?: Partial<AppQueryOptions>,
+	updaterOptions?: SetDataOptions) => [any, ApiResponseType<Scope, Route>][]
+
+
+/**
+* This type is only needed for getQueryState because it needs the filter param
+*/
+export type GetQueryStateFunction = <Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(routeOrRouteObj: Route | { scope: Scope, route: Route },
+	appQueryOptions?: Partial<AppQueryOptions>, filters?: QueryFilters) => (QueryState<ApiResponseType<Scope, Route>, any> | undefined)
+
+/**
+* This type is only needed for executeMutation because it returns mutation mapped return type
 */
 export type ExecuteMutationFunction = <Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>(routeOrRouteObj: Route | { scope: Scope, route: Route },
-	appQueryOptions?: Partial<AppQueryOptions<ApiPayloadType<Scope, Route>>>) => Promise<ApiResponseType<Scope, Route, "mutation">>;
+	appQueryOptions?: Partial<AppQueryOptions<ApiPayloadType<Scope, Route>>>, mutationOptions?: MutationOptions<ApiResponseType<Scope, Route, "mutation">, any, ApiPayloadType<Scope, Route>>) => Promise<ApiResponseType<Scope, Route, "mutation">>;
 
 export function useAppQueryClient() {
 
 	const queryClient = useQueryClient();
 
-	const invalidateAppQueries: FunctionWithTypedRouteAndOptions<Promise<void>> = (routeOrRouteObj, appQueryOptions) => {
+	const invalidateQueries: FunctionWithTypedRouteAndOptions<Promise<void>> = (routeOrRouteObj, appQueryOptions) => {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 		return queryClient.invalidateQueries(keyForUseQuery)
 	}
-
-	const refetchAppQueries: FunctionWithTypedRouteAndOptions<Promise<void>> = (routeOrRouteObj, appQueryOptions) => {
+	const refetchQueries: FunctionWithTypedRouteAndOptions<Promise<void>> = (routeOrRouteObj, appQueryOptions) => {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 		return queryClient.refetchQueries(keyForUseQuery)
 	}
-
 	const isFetching: FunctionWithTypedRouteAndOptions<number> = (routeOrRouteObj, appQueryOptions) => {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 		return queryClient.isFetching(keyForUseQuery)
@@ -84,26 +99,23 @@ export function useAppQueryClient() {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 		return queryClient.getQueryData<any>(keyForUseQuery)
 	}
-	// function getQueriesData <S extends keyof AppRoutes = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>(routeOrRouteObj: T | { scope: S, route: T },
-	// 	appQueryOptions?: Partial<AppQueryOptions> = {}) {
-	// 	const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
-	// 	return queryClient.getQueriesData<ApiResponseType<S, T>>(keyForUseQuery)
-	// }
 	const setQueryData: SetQueryDataFunction = (routeOrRouteObj, updater, appQueryOptions = {}) => {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 		return queryClient.setQueryData(keyForUseQuery, updater as any)
 	}
-	// function setQueriesData <S extends keyof AppRoutes = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>(routeOrRouteObj: T | { scope: S, route: T },
-	// 	updater?: Updater<ApiResponseType<S, T>, ApiResponseType<S, T>>,
-	// 	appQueryOptions?: Partial<AppQueryOptions> = {}) {
-	// 	const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
-	// 	return queryClient.setQueriesData(keyForUseQuery, updater as any)
-	// }
-	// function getQueryState <S extends keyof AppRoutes = "main", T extends keyof AppRoutes[S] = keyof AppRoutes[S]>(routeOrRouteObj: T | { scope: S, route: T },
-	// 	appQueryOptions?: Partial<AppQueryOptions> = {}) {
-	// 	const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
-	// 	return queryClient.getQueryState(keyForUseQuery)
-	// }
+	const setQueriesData: SetQueriesDataFunction = (routeOrRouteObj,
+		updater, appQueryOptions, updaterOptions) => {
+		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
+		const result = queryClient.setQueriesData(keyForUseQuery, updater, updaterOptions,)
+		return result
+	}
+	const getQueryState: GetQueryStateFunction = (routeOrRouteObj,
+		appQueryOptions,
+		filters) => {
+		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
+		const result = queryClient.getQueryState<any, any>(keyForUseQuery, filters)
+		return result;
+	}
 	const removeQueries: FunctionWithTypedRouteAndOptions<void> = (routeOrRouteObj, appQueryOptions) => {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 		return queryClient.removeQueries(keyForUseQuery)
@@ -116,14 +128,7 @@ export function useAppQueryClient() {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 		return queryClient.cancelQueries(keyForUseQuery)
 	}
-	const invalidateQueries: FunctionWithTypedRouteAndOptions<Promise<void>> = (routeOrRouteObj, appQueryOptions) => {
-		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
-		return queryClient.invalidateQueries(keyForUseQuery)
-	}
-	const refetchQueries: FunctionWithTypedRouteAndOptions<Promise<void>> = (routeOrRouteObj, appQueryOptions) => {
-		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
-		return queryClient.refetchQueries(keyForUseQuery)
-	}
+
 	const fetchQuery: FunctionWithMappedReturnType = (routeOrRouteObj, appQueryOptions) => {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 		return queryClient.fetchQuery(keyForUseQuery)
@@ -132,15 +137,14 @@ export function useAppQueryClient() {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 		return queryClient.prefetchQuery(keyForUseQuery)
 	}
-	const executeMutation: ExecuteMutationFunction = (routeOrRouteObj, appQueryOptions) => {
+	const executeMutation: ExecuteMutationFunction = (routeOrRouteObj, appQueryOptions, mutationOptions) => {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
-		return queryClient.executeMutation(keyForUseQuery)
+		return queryClient.executeMutation({
+			...mutationOptions,
+			mutationKey: keyForUseQuery,
+		})
 	}
 
-	const setDefaultOptions: FunctionWithTypedRouteAndOptions<void> = (routeOrRouteObj, appQueryOptions) => {
-		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
-		return queryClient.setDefaultOptions(keyForUseQuery)
-	}
 	const setQueryDefaults: SetQueryDefaultsFunction = (routeOrRouteObj, appQueryOptions, queryObserverOptions = {}) => {
 		const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
 		return queryClient.setQueryDefaults(keyForUseQuery, queryObserverOptions)
@@ -159,24 +163,21 @@ export function useAppQueryClient() {
 	}
 
 	return {
-		invalidateAppQueries,
-		refetchAppQueries,
+		invalidateQueries,
+		refetchQueries,
 		isFetching,
 		isMutating,
 		getQueryData,
 		// getQueriesData,
 		setQueryData,
-		// setQueriesData,
-		// getQueryState,
+		setQueriesData,
+		getQueryState,
 		removeQueries,
 		resetQueries,
 		cancelQueries,
-		invalidateQueries,
-		refetchQueries,
 		fetchQuery,
 		prefetchQuery,
 		executeMutation,
-		setDefaultOptions,
 		setQueryDefaults,
 		getQueryDefaults,
 		setMutationDefaults,

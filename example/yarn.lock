@@ -7130,10 +7130,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-query-typed-api@^0.0.108:
-  version "0.0.108"
-  resolved "https://registry.yarnpkg.com/react-query-typed-api/-/react-query-typed-api-0.0.108.tgz#f9a592eb175381eb8d6294f1ff352dc6f3d0e3a2"
-  integrity sha512-dEwFNooFyA8UIvK9khszyoWYhLYeg0XehPxjG33qBYno33Pzgag3/BNAtSs8KumRfd7BfncA9mSU4Tv0lAtALg==
+react-query-typed-api@^0.0.110:
+  version "0.0.110"
+  resolved "https://registry.yarnpkg.com/react-query-typed-api/-/react-query-typed-api-0.0.110.tgz#b99b4ea33ae669f205bdad7d29f5aef1c5b7da83"
+  integrity sha512-q/Yjn3fci35agYFc1OfwsXKNJLmpD/hrF3OAFQPT9RznKePamIU4GYsg6nYSe0s+3uQawnFw2K+7cLY1zsRiCg==
   dependencies:
     "@nestjsx/crud-request" "^5.0.0-alpha.3"
     cross-local-storage "^0.0.1"

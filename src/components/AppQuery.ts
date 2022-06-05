@@ -7,10 +7,10 @@ type AppQueryProps<Scope extends keyof AppRoutes = "main", T extends keyof AppRo
 	appQueryOptions?: Partial<Omit<AppQueryOptions, "payload" | "apiScope">>,
 	useQueryOptions?: UseQueryOptions
 }
-export function AppQuery<Scope extends keyof AppRoutes = "main", T extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(props: AppQueryProps<Scope, T>) {
+export function AppQuery<Scope extends keyof AppRoutes = "main", T extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>(props: AppQueryProps<Scope, T>): JSX.Element {
 
 	const query = useAppQuery(props.routeOrRouteObj, props.appQueryOptions, props.useQueryOptions)
-	return props.children(query)
+	return props.children(query) as JSX.Element
 }
 
 export default AppQuery;

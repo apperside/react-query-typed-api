@@ -1,6 +1,7 @@
 /* eslint-disable testing-library/no-node-access */
 import { act, cleanup } from "@testing-library/react";
 import * as rq from "react-query";
+import { DeepPartial } from "src/helpers/typeUtils";
 import { MyObject } from "src/test/types.spec";
 import { expectType } from "tsd";
 import { DefaultSaveOnePayload, useAppMutation } from "..";
@@ -208,9 +209,12 @@ describe("basic usage", () => {
         result: { current: hook },
       } = await waitForHook(() => useAppMutation("fake-object"));
 
-      expectType<MutationResulType<MyObject, DefaultSaveOnePayload<MyObject>>>(
-        hook
-      );
+      expectType<
+        MutationResulType<
+          MyObject,
+          DeepPartial<DefaultSaveOnePayload<MyObject>>
+        >
+      >(hook);
     }
 
     {
@@ -218,9 +222,12 @@ describe("basic usage", () => {
         result: { current: hook },
       } = await waitForHook(() => useAppMutation("fake-object/:id"));
 
-      expectType<MutationResulType<MyObject, DefaultSaveOnePayload<MyObject>>>(
-        hook
-      );
+      expectType<
+        MutationResulType<
+          MyObject,
+          DeepPartial<DefaultSaveOnePayload<MyObject>>
+        >
+      >(hook);
     }
   });
 });

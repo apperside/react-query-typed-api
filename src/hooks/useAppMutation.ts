@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MutationKey, useMutation, UseMutationOptions, UseMutationResult, useQueryClient } from "react-query";
+import { DeepPartial } from "src/helpers/typeUtils";
 import { AppQueryOptions } from ".";
 import { AppRoutes, ApiPayloadType, ApiResponseType, ApiRoute } from "..";
 import { httpPost } from "../imperative";
@@ -14,7 +15,7 @@ import { appQueryKeyBuilder } from "./appQueryKeyBuilder";
 export function useAppMutation<Scope extends keyof AppRoutes = "main", Route extends ApiRoute<Scope> = ApiRoute<Scope>>
 	(routeOrRouteObj: Route | { scope: Scope, route: Route }, appQueryOptions: Partial<Omit<AppQueryOptions<ApiPayloadType<Scope, Route>>, "apiScope">> = {},
 		mutationOptions: UseMutationOptions = {}
-	): UseMutationResult<ApiResponseType<Scope, Route, "mutation">, any, (ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } }), any> {
+	): UseMutationResult<ApiResponseType<Scope, Route, "mutation">, any, DeepPartial<(ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } })>, any> {
 
 	const queryClient = useQueryClient();
 	const keyForUseQuery = appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);// any = [route, typeof queryOptions.query === "string" ? queryOptions.query : { ...queryOptions.query }];
@@ -29,7 +30,7 @@ export function useAppMutation<Scope extends keyof AppRoutes = "main", Route ext
 	 * in the request payload.
 	 * If you need to send a post request with a _pathParams property, it will not work
 	 */
-	return useMutation<ApiResponseType<Scope, Route, "mutation">, any, (ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } }), any>(keyForUseQuery as MutationKey, ({ _pathParams, ...params }: any) => {
+	return useMutation<ApiResponseType<Scope, Route, "mutation">, any, DeepPartial<(ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } })>, any>(keyForUseQuery as MutationKey, ({ _pathParams, ...params }: any) => {
 		console.log("options", appQueryOptions)
 		console.log("params", params, _pathParams)
 		// const finalRoute = (routeOrRouteObj as string).split("/")

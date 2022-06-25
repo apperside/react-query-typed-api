@@ -1,4 +1,5 @@
-import { waitForOptions, waitFor, renderHook } from "@testing-library/react";
+import { waitFor, waitForOptions } from "@testing-library/react";
+import { renderHook } from '@testing-library/react-hooks';
 import { QueryClient, QueryClientProvider } from "react-query";
 
 /**

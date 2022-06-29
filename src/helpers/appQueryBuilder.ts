@@ -35,7 +35,7 @@ const buildNestJsxQuery = (
 //prepare for when there will be more than one query engine
 export type QueryBuilderEngine = "nestJsx";
 
-const builQuery = (
+const buildQuery = (
   queryOptions: Omit<CreateQueryParams, "join"> & {
     join?: string[];
     engine?: QueryBuilderEngine;
@@ -46,7 +46,7 @@ const builQuery = (
 
 export const appQueryBuilder = {
   nestJsx: buildNestJsxQuery,
-  builQuery,
+  buildQuery,
 };
 
 export default appQueryBuilder;

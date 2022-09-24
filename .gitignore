@@ -4,3 +4,4 @@ lib
 storybook-static
 build-storybook.log
 *.sh
+.DS_Store

@@ -103,7 +103,7 @@
   },
   "dependencies": {
     "@nestjsx/crud-request": "^5.0.0-alpha.3",
-    "cross-local-storage": "^0.0.4",
+    "cross-local-storage": "^0.0.5",
     "url-join": "^4.0.0"
   }
 }

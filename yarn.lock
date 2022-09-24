@@ -5355,10 +5355,10 @@ create-react-context@0.3.0:
     gud "^1.0.0"
     warning "^4.0.3"
 
-cross-local-storage@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/cross-local-storage/-/cross-local-storage-0.0.4.tgz#b761c201cb0d18f23d29f1232dcba837a5eb7452"
-  integrity sha512-CbXuNwYIVj/THMSMaDVa0k/71KTUNfvK5Eyi3WKBLDiQ+rJu35+p3WaZU8C21lil+IE7++oLQqv94eUWdvBaBQ==
+cross-local-storage@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/cross-local-storage/-/cross-local-storage-0.0.5.tgz#626be01820e72b12647f9f291a1d17d5f8ac9b0e"
+  integrity sha512-2OIOzMnCQ9t0kpCtN29hfEzDlczHHbTkuj00FuGYJhcW91DAYm9AY/QhD41M7lWmUsmfq1ENBy/9CCPxJZ+R2A==
   dependencies:
     "@nestjsx/crud-request" "^5.0.0-alpha.3"
     url-join "^4.0.0"

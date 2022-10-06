@@ -147,9 +147,9 @@ describe("basic usage", () => {
     });
   });
 
-  test("typings are correct", () => {
+  test("typings are correct", async () => {
     useQueryMock = jest.spyOn(rq, "useQuery").mockImplementation(jest.fn());
-    act(() => {
+    await waitForHook(() => {
       const query = useAppQuery("fake-object");
       expectType<rq.UseQueryResult<DefaultGetManyResponse<MyObject>, unknown>>(
         query
@@ -157,10 +157,10 @@ describe("basic usage", () => {
     });
 
     useQueryMock.mockClear();
-    act(() => {
+
+    await waitForHook(() => {
       const query = useAppQuery("fake-object/:id");
       expectType<rq.UseQueryResult<MyObject, unknown>>(query);
     });
   });
 });
-

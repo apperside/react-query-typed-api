@@ -2,29 +2,29 @@
 import { AppQueryOptions } from ".";
 import { AppRoutes } from "..";
 
-export function appQueryKeyBuilder<Scope extends keyof AppRoutes = "main", T extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]>
-	(routeOrRouteObj: T | { scope: Scope, route: T },
-		appQueryOptions: Partial<AppQueryOptions> = {})
-	: any {
+export function appQueryKeyBuilder<
+  Scope extends keyof AppRoutes = "main",
+  T extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]
+>(
+  routeOrRouteObj: T | { scope: Scope; route: T },
+  appQueryOptions: Partial<AppQueryOptions> = {}
+): any {
+  const keyForUseQuery: any[] = [routeOrRouteObj];
 
-	const keyForUseQuery: any[] = [routeOrRouteObj];
-
-	const { extraRoutePath, query, pathParams } = appQueryOptions
-	if (extraRoutePath) {
-		if (typeof extraRoutePath === "object") {
-			keyForUseQuery.push([...extraRoutePath])
-		}
-		else {
-			keyForUseQuery.push(extraRoutePath)
-		}
-	}
-	if (pathParams) {
-		keyForUseQuery.push(pathParams)
-	}
-	if (query) {
-		const itemToPush = typeof query === "string" ? query : { ...query }
-		keyForUseQuery.push(itemToPush)
-	}
-	return keyForUseQuery;
-
+  const { extraRoutePath, query, pathParams } = appQueryOptions;
+  if (extraRoutePath) {
+    if (typeof extraRoutePath === "object") {
+      keyForUseQuery.push([...extraRoutePath]);
+    } else {
+      keyForUseQuery.push(extraRoutePath);
+    }
+  }
+  if (pathParams) {
+    keyForUseQuery.push(pathParams);
+  }
+  if (query) {
+    const itemToPush = typeof query === "string" ? query : { ...query };
+    keyForUseQuery.push(itemToPush);
+  }
+  return keyForUseQuery;
 }

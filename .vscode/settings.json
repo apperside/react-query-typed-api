@@ -20,5 +20,6 @@
         "**/temp": false,
         "**/node_modules": false
     },
-    "workspace.isHidden": false
+    "workspace.isHidden": false,
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

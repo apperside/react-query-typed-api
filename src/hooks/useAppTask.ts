@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { AppTasks } from "..";
+import { useEvent } from "./useEvent";
 
 export type AppTask<Input extends any[], Output = any> = {
   status: "error" | "idle" | "loading" | "success";
@@ -32,13 +33,10 @@ export function useAppTask<
     return taskKey[0];
   }, [taskKey]);
 
-  const performTask = useCallback(
-    async (data: any) => {
-      //@ts-ignore
-      return await fn(...data);
-    },
-    [fn]
-  );
+  const performTask = useEvent(async (data: any) => {
+    //@ts-ignore
+    return await fn(...data);
+  });
 
   const queryKey = useMemo(() => {
     return taskKey;
@@ -67,7 +65,7 @@ export function useAppTask<
     }
   );
 
-  const execute = useCallback(
+  const execute = useEvent(
     async (...params: Parameters<(...args: A) => T>): Promise<T> => {
       try {
         // @ts-ignore
@@ -101,8 +99,7 @@ export function useAppTask<
         );
         throw err;
       }
-    },
-    [operationName, performTask, queryClient, queryKey]
+    }
   );
 
   const status = query.status;

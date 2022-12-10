@@ -16,13 +16,12 @@ export function useAppQuery<
 >(
   routeOrRouteObj: Route | { scope: Scope; route: Route },
   appQueryOptions: Partial<Omit<AppQueryOptions, "payload" | "apiScope">> = {},
-  useQueryOptions: UseQueryOptions = {}
+  { queryKey, ...useQueryOptions }: UseQueryOptions = {}
 ): UseQueryResult<ApiResponseType<Scope, Route>> {
-  const keyForUseQuery = useQueryKeyBuilder(
-    routeOrRouteObj,
-    appQueryOptions,
-    useQueryOptions
-  );
+  const keyForUseQuery = useQueryKeyBuilder(routeOrRouteObj, appQueryOptions, {
+    queryKey,
+    ...useQueryOptions,
+  });
 
   type RES = ApiResponseType<Scope, Route>;
   return useQuery<RES>(

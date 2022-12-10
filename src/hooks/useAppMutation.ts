@@ -40,7 +40,7 @@ export function useAppMutation<
     routeOrRouteObj,
     appQueryOptions,
     mutationOptions
-  );
+  ); // any = [route, typeof queryOptions.query === "string" ? queryOptions.query : { ...queryOptions.query }];
 
   /**
    * _pathParams is used to replace the url path variables.

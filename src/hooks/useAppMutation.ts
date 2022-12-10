@@ -36,7 +36,11 @@ export function useAppMutation<
   any
 > {
   const queryClient = useQueryClient();
-  const keyForUseQuery = useQueryKeyBuilder(routeOrRouteObj, appQueryOptions); // any = [route, typeof queryOptions.query === "string" ? queryOptions.query : { ...queryOptions.query }];
+  const keyForUseQuery = useQueryKeyBuilder(
+    routeOrRouteObj,
+    appQueryOptions,
+    mutationOptions
+  );
 
   /**
    * _pathParams is used to replace the url path variables.

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMemo } from "react";
+import { UseMutationOptions, UseQueryOptions } from "react-query";
 import { AppQueryOptions } from ".";
 import { AppRoutes } from "..";
 import { appQueryKeyBuilder } from "./appQueryKeyBuilder";
@@ -9,11 +10,17 @@ export function useQueryKeyBuilder<
   T extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]
 >(
   routeOrRouteObj: T | { scope: Scope; route: T },
-  appQueryOptions: Partial<AppQueryOptions> = {}
+  appQueryOptions: Partial<AppQueryOptions> = {},
+  useQueryOptions: UseQueryOptions | UseMutationOptions = {}
 ): any {
   const result = useMemo(() => {
+    if ((useQueryOptions as any).queryKey) {
+      return (useQueryOptions as any).queryKey;
+    } else if ((useQueryOptions as any).mutationKey) {
+      return (useQueryOptions as any).mutationKey;
+    }
     return appQueryKeyBuilder(routeOrRouteObj, appQueryOptions);
-  }, [appQueryOptions, routeOrRouteObj]);
+  }, [appQueryOptions, routeOrRouteObj, useQueryOptions]);
 
   return result;
 }

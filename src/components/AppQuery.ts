@@ -1,4 +1,4 @@
-import { UseQueryResult, UseQueryOptions } from "react-query"
+import { UseQueryResult, UseQueryOptions } from '@tanstack/react-query'
 import { AppRoutes, ApiResponseType, AppQueryOptions, useAppQuery } from ".."
 
 type AppQueryProps<Scope extends keyof AppRoutes = "main", T extends keyof AppRoutes[Scope] = keyof AppRoutes[Scope]> = {

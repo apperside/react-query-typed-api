@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AppTasks } from "..";
 import { useEvent } from "./useEvent";
 
@@ -60,7 +60,6 @@ export function useAppTask<
     {
       staleTime: 0,
       enabled: false,
-      notifyOnChangeProps: "tracked",
       retry: false,
     }
   );
@@ -106,7 +105,7 @@ export function useAppTask<
 
   return {
     status: status,
-    isIdle: status === "idle",
+    isIdle: query.fetchStatus === "idle",
     data: query.data as any as T,
     isLoading: status === "loading" || query.isFetching,
     execute,

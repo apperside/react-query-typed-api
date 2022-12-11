@@ -1,8 +1,8 @@
 /* eslint-disable */
 
 import { ValueTypes, GraphQLTypes, InputType, Chain, OperationOptions, chainOptions } from './index';
-import { useMutation, useQuery } from 'react-query';
-import type { UseMutationOptions, UseQueryOptions } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import type { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 
 
 export function useTypedMutation<O extends "mutation_root", TData extends ValueTypes[O], TResult = InputType<GraphQLTypes[O], TData>>(

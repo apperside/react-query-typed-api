@@ -1,5 +1,5 @@
 import { cleanup, render } from "@testing-library/react";
-import * as rq from "react-query";
+import * as rq from '@tanstack/react-query';
 import AppQuery from "./AppQuery";
 
 describe("AppQueryComponent", () => {

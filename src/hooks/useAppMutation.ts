@@ -5,7 +5,7 @@ import {
   UseMutationOptions,
   UseMutationResult,
   useQueryClient,
-} from "react-query";
+} from '@tanstack/react-query';
 import { DeepPartial } from "src/helpers/typeUtils";
 import { AppQueryOptions } from ".";
 import { ApiPayloadType, ApiResponseType, ApiRoute, AppRoutes } from "..";

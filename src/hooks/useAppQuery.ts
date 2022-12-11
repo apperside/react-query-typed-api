@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
+import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 import { AppQueryOptions } from ".";
 import { ApiResponseType, ApiRoute, AppRoutes } from "..";
 import { httpGet } from "../imperative";

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMemo } from "react";
-import { UseMutationOptions, UseQueryOptions } from "react-query";
+import { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { AppQueryOptions } from ".";
 import { AppRoutes } from "..";
 import { appQueryKeyBuilder } from "./appQueryKeyBuilder";

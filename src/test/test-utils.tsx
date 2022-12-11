@@ -1,6 +1,6 @@
 import { waitFor, waitForOptions } from "@testing-library/react";
 import { renderHook } from '@testing-library/react-hooks';
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 /**
  * Withouth this cumbersome setup, the test pass but we get various errors

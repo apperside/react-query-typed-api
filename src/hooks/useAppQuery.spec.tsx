@@ -1,5 +1,5 @@
 import { act, cleanup } from "@testing-library/react";
-import * as rq from "react-query";
+import * as rq from '@tanstack/react-query';
 import { MyObject } from "src/test/types.spec";
 import { expectType } from "tsd";
 import { DefaultGetManyResponse } from "..";

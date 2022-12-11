@@ -1,6 +1,6 @@
 /* eslint-disable testing-library/no-node-access */
 import { act, cleanup } from "@testing-library/react";
-import * as rq from "react-query";
+import * as rq from '@tanstack/react-query';
 import { DeepPartial } from "src/helpers/typeUtils";
 import { MyObject } from "src/test/types.spec";
 import { expectType } from "tsd";

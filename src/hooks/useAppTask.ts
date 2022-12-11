@@ -107,7 +107,7 @@ export function useAppTask<
     status: status,
     isIdle: query.fetchStatus === "idle",
     data: query.data as any as T,
-    isLoading: status === "loading" || query.isFetching,
+    isLoading: query.isFetching,
     execute,
     error: query.error,
   };

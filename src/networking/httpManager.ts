@@ -3,11 +3,11 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
   CancelTokenSource,
-} from "axios";
-import urljoin from "url-join";
-import { ApiScope, AppRoutes } from "..";
-import localStorage from "cross-local-storage";
-declare module "cross-local-storage" {
+} from 'axios';
+import urljoin from 'url-join';
+import { ApiScope, AppRoutes } from '..';
+import localStorage from 'cross-local-storage';
+declare module 'cross-local-storage' {
   /**
   
 	  * Augment this interface to add al custom endpoints
@@ -18,7 +18,7 @@ declare module "cross-local-storage" {
     token,
   }
 }
-export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 /**
  * The options for an HTTP request
@@ -61,9 +61,17 @@ export interface HttpRequestOptions<Payload = any> {
    */
   extraRoutePath?: string | number | string[] | (string | number)[];
   /**
-   * An [Axios's cancel token](https://axios-http.com/docs/cancellation) to cancel pending requests if needed
+   * @deprecated
+   * Use cancelSignal instead.
+   * An [Axios's cancel token](https://axios-http.com/docs/cancellation) to cancel pending requests if needed.
    */
   cancelToken?: CancelTokenSource;
+
+  /**
+   * An [Axios's cancel signal](https://axios-http.com/docs/cancellation) to cancel pending requests if needed.
+   */
+  cancelSignal?: AbortSignal;
+
   /**
    * The payload for the request
    */
@@ -131,7 +139,7 @@ export type NetworkingConfig = ApiConfig;
 const axiosLogginInterceptor = (config?: AxiosRequestConfig) => {
   if (apiConfig.loggingEnabled) {
     console.log(
-      `performing http ${config?.method} to ${config?.url} with options and token ${config?.headers?.["Authorization"]} `,
+      `performing http ${config?.method} to ${config?.url} with options and token ${config?.headers?.['Authorization']} `,
       JSON.stringify(config?.data),
       config
     );
@@ -153,7 +161,7 @@ export function initApi(config: ApiConfig) {
     const serverConfig = config.servers[key] as ApiServerConfig;
     const axiosInstance = axios.create({
       timeout: serverConfig.timeout ?? 30000,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
       ...serverConfig.axiosConfig,
     });
 
@@ -189,14 +197,14 @@ export function initApi(config: ApiConfig) {
 export const initNetworking = initApi;
 
 export async function httpRequest(options: HttpRequestOptions) {
-  const { apiScope = "main", isProtected = true, ...requestOptions } = options;
+  const { apiScope = 'main', isProtected = true, ...requestOptions } = options;
   const { method, url: requestUrl, payload } = requestOptions;
   const { headers = {} } = requestOptions;
 
   // headers = { ...headers, ...apiConfig.servers[apiScope].headers }
   const headersConfig = apiConfig.servers[apiScope].headers ?? {};
   for await (const [key, value] of Object.entries(headersConfig)) {
-    if (typeof value === "function") {
+    if (typeof value === 'function') {
       headers[key] = await value(options);
     } else {
       headers[key] = value;
@@ -205,15 +213,15 @@ export async function httpRequest(options: HttpRequestOptions) {
 
   // whenever the url we are passing is a full url so we can also call arbitrary enpoints if needed
   const isFullUrl =
-    requestUrl.toLowerCase().startsWith("http") ||
-    requestUrl.toLowerCase().startsWith("https");
-  const authHeader = headers["Authorization"];
-  if (typeof window !== "undefined" && isProtected && !authHeader) {
+    requestUrl.toLowerCase().startsWith('http') ||
+    requestUrl.toLowerCase().startsWith('https');
+  const authHeader = headers['Authorization'];
+  if (typeof window !== 'undefined' && isProtected && !authHeader) {
     const token = await localStorage.getItem(
-      (apiConfig.servers[apiScope].tokenLocalStorageKey ?? "token") as any
+      (apiConfig.servers[apiScope].tokenLocalStorageKey ?? 'token') as any
     );
     if (token) {
-      headers["Authorization"] = `Bearer ${token}`;
+      headers['Authorization'] = `Bearer ${token}`;
     }
   }
   const serverInfo = apiConfig.servers[apiScope];
@@ -221,7 +229,7 @@ export async function httpRequest(options: HttpRequestOptions) {
   if (!isFullUrl) {
     finalUrl = serverInfo.apiUrl;
     finalUrl = urljoin(finalUrl, requestUrl);
-    console.log("final url is", finalUrl);
+    console.log('final url is', finalUrl);
   }
 
   try {
@@ -232,6 +240,7 @@ export async function httpRequest(options: HttpRequestOptions) {
       data: payload,
       method,
       cancelToken: requestOptions?.cancelToken?.token,
+      signal: requestOptions.cancelSignal,
     });
 
     /**
@@ -249,7 +258,7 @@ export async function httpRequest(options: HttpRequestOptions) {
         try {
           fn(result);
         } catch (err) {
-          console.warn("error in handler", fn);
+          console.warn('error in handler', fn);
         }
       }
     );
@@ -270,7 +279,7 @@ export async function httpRequest(options: HttpRequestOptions) {
       try {
         fn(error, { ...requestOptions, apiScope });
       } catch (err) {
-        console.warn("error in handler", fn);
+        console.warn('error in handler', fn);
       }
     });
     throw error;

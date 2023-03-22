@@ -202,26 +202,33 @@ export async function httpRequest(options: HttpRequestOptions) {
   const { headers = {} } = requestOptions;
 
   // headers = { ...headers, ...apiConfig.servers[apiScope].headers }
-  const headersConfig = apiConfig.servers[apiScope].headers ?? {};
-  for await (const [key, value] of Object.entries(headersConfig)) {
-    if (typeof value === 'function') {
-      headers[key] = await value(options);
-    } else {
-      headers[key] = value;
+  const headersConfig = apiConfig.servers[apiScope]?.headers ?? {};
+  try {
+    for await (const [key, value] of Object.entries(headersConfig)) {
+      if (typeof value === 'function') {
+        headers[key] = await value(options);
+      } else {
+        headers[key] = value;
+      }
     }
+  } catch (err) {
+    console.error('error in headers config', err);
   }
-
   // whenever the url we are passing is a full url so we can also call arbitrary enpoints if needed
   const isFullUrl =
     requestUrl.toLowerCase().startsWith('http') ||
     requestUrl.toLowerCase().startsWith('https');
   const authHeader = headers['Authorization'];
   if (typeof window !== 'undefined' && isProtected && !authHeader) {
-    const token = await localStorage.getItem(
-      (apiConfig.servers[apiScope].tokenLocalStorageKey ?? 'token') as any
-    );
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
+    try {
+      const token = await localStorage.getItem(
+        (apiConfig.servers[apiScope].tokenLocalStorageKey ?? 'token') as any
+      );
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+    } catch (err) {
+      console.error('error getting token from localstorage', err);
     }
   }
   const serverInfo = apiConfig.servers[apiScope];

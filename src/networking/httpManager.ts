@@ -201,13 +201,15 @@ export async function httpRequest(options: HttpRequestOptions) {
   const { method, url: requestUrl, payload } = requestOptions;
   const { headers = {} } = requestOptions;
 
-  // headers = { ...headers, ...apiConfig.servers[apiScope].headers }
-  const headersConfig = apiConfig.servers[apiScope]?.headers ?? {};
+  console.log('building headers with ', apiConfig.servers?.[apiScope]?.headers);
+  const headersConfig = apiConfig.servers?.[apiScope]?.headers ?? {};
+  console.log('headers config is', headersConfig);
   try {
-    for await (const [key, value] of Object.entries(headersConfig)) {
+    for await (const key of Object.keys(headersConfig)) {
+      const value = headersConfig[key];
       if (typeof value === 'function') {
         headers[key] = await value(options);
-      } else {
+      } else if (value) {
         headers[key] = value;
       }
     }

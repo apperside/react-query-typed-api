@@ -6,11 +6,11 @@ import {
   UseMutationResult,
   useQueryClient,
 } from '@tanstack/react-query';
-import { DeepPartial } from "src/helpers/typeUtils";
-import { AppQueryOptions } from ".";
-import { ApiPayloadType, ApiResponseType, ApiRoute, AppRoutes } from "..";
-import { httpPost } from "../imperative";
-import { useQueryKeyBuilder } from "./useQueryKeyBuilder";
+import { DeepPartial } from 'src/helpers/typeUtils';
+import { AppQueryOptions } from '.';
+import { ApiPayloadType, ApiResponseType, ApiRoute, AppRoutes } from '..';
+import { httpPost } from '../imperative';
+import { useQueryKeyBuilder } from './useQueryKeyBuilder';
 /**
  *
  * @param routeOrRouteObj a route from AppRoutes or an object with a scope and a route
@@ -19,20 +19,18 @@ import { useQueryKeyBuilder } from "./useQueryKeyBuilder";
  * @returns
  */
 export function useAppMutation<
-  Scope extends keyof AppRoutes = "main",
+  Scope extends keyof AppRoutes = 'main',
   Route extends ApiRoute<Scope> = ApiRoute<Scope>
 >(
   routeOrRouteObj: Route | { scope: Scope; route: Route },
   appQueryOptions: Partial<
-    Omit<AppQueryOptions<ApiPayloadType<Scope, Route>>, "apiScope">
+    Omit<AppQueryOptions<ApiPayloadType<Scope, Route>>, 'apiScope'>
   > = {},
   mutationOptions: UseMutationOptions = {}
 ): UseMutationResult<
-  ApiResponseType<Scope, Route, "mutation">,
+  ApiResponseType<Scope, Route, 'mutation'>,
   any,
-  DeepPartial<
-    ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } }
-  >,
+  ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } },
   any
 > {
   const queryClient = useQueryClient();
@@ -52,17 +50,15 @@ export function useAppMutation<
    * If you need to send a post request with a _pathParams property, it will not work
    */
   return useMutation<
-    ApiResponseType<Scope, Route, "mutation">,
+    ApiResponseType<Scope, Route, 'mutation'>,
     any,
-    DeepPartial<
-      ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } }
-    >,
+    ApiPayloadType<Scope, Route> & { _pathParams?: { [key: string]: any } },
     any
   >(
     keyForUseQuery as MutationKey,
     ({ _pathParams, ...params }: any) => {
-      console.log("options", appQueryOptions);
-      console.log("params", params, _pathParams);
+      console.log('options', appQueryOptions);
+      console.log('params', params, _pathParams);
       // const finalRoute = (routeOrRouteObj as string).split("/")
       // 	.map((part) => {
       // 		if (part.startsWith(":")) {
@@ -82,7 +78,7 @@ export function useAppMutation<
         payload: params,
         ...appQueryOptions,
         pathParams: _pathParams ?? appQueryOptions.pathParams,
-      }) as Promise<ApiResponseType<Scope, Route, "mutation">>;
+      }) as Promise<ApiResponseType<Scope, Route, 'mutation'>>;
     },
     {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -92,9 +92,9 @@ export type ApiPayloadType<
   Scope extends keyof AppRoutes,
   Route extends keyof AppRoutes[Scope]
 > = AppRoutes[Scope][Route] extends { payloadType?: infer P }
-  ? P
+  ? Partial<P>
   : AppRoutes[Scope][Route] extends { responseType: infer D }
-  ? D
+  ? Partial<D>
   : never;
 
 export enum AppTasks {}

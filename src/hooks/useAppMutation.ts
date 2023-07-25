@@ -84,10 +84,10 @@ export function useAppMutation<
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       onSuccess: (data: any, variables: any, context: any) => {
-        queryClient.invalidateQueries({
-          queryKey: routeOrRouteObj as any,
-          exact: true,
-        });
+        // queryClient.invalidateQueries({
+        //   queryKey: routeOrRouteObj as any,
+        //   exact: true,
+        // });
         return mutationOptions.onSuccess?.(data, variables, context);
         // return true;
       },

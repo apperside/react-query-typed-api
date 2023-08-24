@@ -194,7 +194,7 @@ describe('basic usage', () => {
     type MutationResulType<Res, Payload> = rq.UseMutationResult<
       Res,
       any,
-      Partial<Payload> & {
+      Payload & {
         _pathParams?:
           | {
               [key: string]: any;

@@ -92,7 +92,9 @@ export type ApiPayloadType<
   Scope extends keyof AppRoutes,
   Route extends keyof AppRoutes[Scope]
 > = AppRoutes[Scope][Route] extends { payloadType?: infer P }
-  ? Partial<P>
+  ? P extends undefined
+    ? Record<string, unknown>
+    : P
   : AppRoutes[Scope][Route] extends { responseType: infer D }
   ? Partial<D>
   : never;

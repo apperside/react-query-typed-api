@@ -1,6 +1,6 @@
 {
   "name": "react-query-typed-api",
-  "version": "0.0.146",
+  "version": "0.0.147",
   "description": "An opinionated wrapper around react-query for strongly typed api requests",
   "main": "lib/index.js",
   "module": "lib/index.mjs",

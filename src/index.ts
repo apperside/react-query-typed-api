@@ -94,7 +94,7 @@ export type ApiPayloadType<
 > = AppRoutes[Scope][Route] extends { payloadType?: infer P }
   ? P extends undefined
     ? Record<string, unknown>
-    : P
+    : Partial<P>
   : AppRoutes[Scope][Route] extends { responseType: infer D }
   ? Partial<D>
   : never;

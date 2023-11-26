@@ -1,7 +1,6 @@
 /* eslint-disable testing-library/no-node-access */
 import { act, cleanup } from '@testing-library/react';
 import * as rq from '@tanstack/react-query';
-import { DeepPartial } from 'src/helpers/typeUtils';
 import { MyObject } from 'src/test/types.spec';
 import { expectType } from 'tsd';
 import { DefaultSaveOnePayload, useAppMutation } from '..';
@@ -39,7 +38,31 @@ describe('basic usage', () => {
     await act(async () => {
       const payload = { item: { myField: 'value' } };
       await hook.mutateAsync(payload);
-      expect(httpPostMock).toHaveBeenCalledWith('fake-object', { payload });
+      expect(httpPostMock).toHaveBeenCalledWith('fake-object', {
+        payload,
+      });
+    });
+    // const query = useAppMutation("fake-object");
+    // expectType<
+    //   rq.UseMutationResult<MyObject, any, DefaultSaveOnePayload<MyObject>>
+    // >(query);
+  });
+
+  test('simple query call, custom timeout', async () => {
+    const {
+      result: { current: hook },
+    } = await waitForHook(() => useAppMutation('fake-object'));
+
+    expect(useMutationMock).toHaveBeenCalled();
+    const queryKeyParameter = useMutationMock.mock.calls[0][0];
+    expect(queryKeyParameter).toEqual(['fake-object']);
+
+    await act(async () => {
+      const payload = { item: { myField: 'value' } };
+      await hook.mutateAsync(payload);
+      expect(httpPostMock).toHaveBeenCalledWith('fake-object', {
+        payload,
+      });
     });
     // const query = useAppMutation("fake-object");
     // expectType<

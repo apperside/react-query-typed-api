@@ -52,6 +52,10 @@ export interface HttpRequestOptions<Payload = any> {
    */
   isProtected?: boolean;
   /**
+   * The timeout for the request in milliseconds
+   */
+  timeout?: number;
+  /**
    * A string that will be added after the base api url
    * (passed in the [initialization options](#initialization) and before the endpoint url.
    * For example if the apiUrl is http://localhost:8080/api and your endpoint is `/my-endpoint`,
@@ -248,6 +252,7 @@ export async function httpRequest(options: HttpRequestOptions) {
       headers: headers,
       data: payload,
       method,
+      timeout: serverInfo.timeout || options.timeout || 30000,
       cancelToken: requestOptions?.cancelToken?.token,
       signal: requestOptions.cancelSignal,
     });

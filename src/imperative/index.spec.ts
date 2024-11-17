@@ -1,9 +1,9 @@
 /* eslint-disable testing-library/no-node-access */
-import { cleanup } from '@testing-library/react';
-import { httpGet, httpPost, initApi } from '..';
-import { httpDelete, httpPatch, httpPut } from './';
+import { cleanup } from "@testing-library/react";
+import { httpGet, httpPost, initApi } from "..";
+import { httpDelete, httpPatch, httpPut } from "./";
 
-const requestMethodMock = jest.fn().mockReturnValue({ result: 'ok' });
+const requestMethodMock = jest.fn().mockReturnValue({ result: "ok" });
 const axiosInstanceMock = {
   request: requestMethodMock,
   interceptors: {
@@ -13,7 +13,7 @@ const axiosInstanceMock = {
   },
 };
 
-jest.mock('axios', () => {
+jest.mock("axios", () => {
   return {
     create: () => {
       return axiosInstanceMock;
@@ -21,9 +21,9 @@ jest.mock('axios', () => {
   };
 });
 
-const BASE_API_URL_1 = 'http://localhost:3000/api1';
-const BASE_API_URL_2 = 'http://localhost:3000/api2';
-describe('imperative usage', () => {
+const BASE_API_URL_1 = "http://localhost:3000/api1";
+const BASE_API_URL_2 = "http://localhost:3000/api2";
+describe("imperative usage", () => {
   beforeAll(() => {
     initApi({
       servers: {
@@ -43,7 +43,7 @@ describe('imperative usage', () => {
           // ],
         },
         anotherApiScope: {
-          apiUrl: BASE_API_URL_2,
+          apiUrl: () => BASE_API_URL_2,
           // requestInterceptor: (config) => {
           //   console.log("openmeteo api request interceptor", config);
           //   return config;
@@ -63,271 +63,271 @@ describe('imperative usage', () => {
 
   afterEach(cleanup);
 
-  test('test GET', async () => {
+  test("test GET", async () => {
     // simple get
-    await httpGet('fake-object');
+    await httpGet("fake-object");
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object`,
       headers: {},
       data: undefined,
       timeout: 30000,
-      method: 'GET',
+      method: "GET",
       cancelToken: undefined,
     });
 
-    await httpGet('fake-object', { timeout: 60000 });
+    await httpGet("fake-object", { timeout: 60000 });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object`,
       headers: {},
       data: undefined,
       timeout: 60000,
-      method: 'GET',
+      method: "GET",
       cancelToken: undefined,
     });
 
     // get with path params
-    await httpGet('fake-object/:id', { pathParams: { id: 1 } });
+    await httpGet("fake-object/:id", { pathParams: { id: 1 } });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object/1`,
       headers: {},
       timeout: 30000,
       data: undefined,
-      method: 'GET',
+      method: "GET",
       cancelToken: undefined,
     });
 
     // get with path params and query params
-    await httpGet('fake-object/:id', {
+    await httpGet("fake-object/:id", {
       pathParams: { id: 1 },
-      query: { queryParam1: 1, queryParam2: 'test' },
+      query: { queryParam1: 1, queryParam2: "test" },
     });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object/1?queryParam1=1&queryParam2=test`,
       headers: {},
       timeout: 30000,
       data: undefined,
-      method: 'GET',
+      method: "GET",
       cancelToken: undefined,
     });
 
     // custom api scope
-    await httpGet({ scope: 'anotherApiScope', route: 'another-api-endpiont' });
+    await httpGet({ scope: "anotherApiScope", route: "another-api-endpiont" });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_2}/another-api-endpiont`,
       headers: {},
       timeout: 30000,
       data: undefined,
-      method: 'GET',
+      method: "GET",
       cancelToken: undefined,
     });
   });
 
-  test('test POST', async () => {
+  test("test POST", async () => {
     // simple get
-    const payload = { item: { myField: 'value' } };
+    const payload = { item: { myField: "value" } };
 
-    await httpPost('fake-object', { payload });
+    await httpPost("fake-object", { payload });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'POST',
+      method: "POST",
       cancelToken: undefined,
     });
     // get with path params
-    await httpPost('fake-object/:id', { pathParams: { id: 1 }, payload });
+    await httpPost("fake-object/:id", { pathParams: { id: 1 }, payload });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object/1`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'POST',
+      method: "POST",
       cancelToken: undefined,
     });
 
     // get with path params and query params
-    await httpPost('fake-object/:id', {
+    await httpPost("fake-object/:id", {
       payload,
       pathParams: { id: 1 },
-      query: { queryParam1: 1, queryParam2: 'test' },
+      query: { queryParam1: 1, queryParam2: "test" },
     });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object/1?queryParam1=1&queryParam2=test`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'POST',
+      method: "POST",
       cancelToken: undefined,
     });
 
     // custom api scope
-    await httpPost({ scope: 'anotherApiScope', route: 'another-api-endpiont' });
+    await httpPost({ scope: "anotherApiScope", route: "another-api-endpiont" });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_2}/another-api-endpiont`,
       headers: {},
       timeout: 30000,
       data: undefined,
-      method: 'POST',
+      method: "POST",
       cancelToken: undefined,
     });
   });
 
-  test('test PUT', async () => {
+  test("test PUT", async () => {
     // simple get
-    const payload = { item: { myField: 'value' } };
+    const payload = { item: { myField: "value" } };
 
-    await httpPut('fake-object', { payload });
+    await httpPut("fake-object", { payload });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'PUT',
+      method: "PUT",
       cancelToken: undefined,
     });
     // get with path params
-    await httpPut('fake-object/:id', { pathParams: { id: 1 }, payload });
+    await httpPut("fake-object/:id", { pathParams: { id: 1 }, payload });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object/1`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'PUT',
+      method: "PUT",
       cancelToken: undefined,
     });
 
     // get with path params and query params
-    await httpPut('fake-object/:id', {
+    await httpPut("fake-object/:id", {
       payload,
       pathParams: { id: 1 },
-      query: { queryParam1: 1, queryParam2: 'test' },
+      query: { queryParam1: 1, queryParam2: "test" },
     });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object/1?queryParam1=1&queryParam2=test`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'PUT',
+      method: "PUT",
       cancelToken: undefined,
     });
 
     // custom api scope
-    await httpPut({ scope: 'anotherApiScope', route: 'another-api-endpiont' });
+    await httpPut({ scope: "anotherApiScope", route: "another-api-endpiont" });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_2}/another-api-endpiont`,
       headers: {},
       timeout: 30000,
       data: undefined,
-      method: 'PUT',
+      method: "PUT",
       cancelToken: undefined,
     });
   });
 
-  test('test PATCH', async () => {
+  test("test PATCH", async () => {
     // simple get
-    const payload = { item: { myField: 'value' } };
+    const payload = { item: { myField: "value" } };
 
-    await httpPatch('fake-object', { payload });
+    await httpPatch("fake-object", { payload });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'PATCH',
+      method: "PATCH",
       cancelToken: undefined,
     });
     // get with path params
-    await httpPatch('fake-object/:id', { pathParams: { id: 1 }, payload });
+    await httpPatch("fake-object/:id", { pathParams: { id: 1 }, payload });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object/1`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'PATCH',
+      method: "PATCH",
       cancelToken: undefined,
     });
 
     // get with path params and query params
-    await httpPatch('fake-object/:id', {
+    await httpPatch("fake-object/:id", {
       payload,
       pathParams: { id: 1 },
-      query: { queryParam1: 1, queryParam2: 'test' },
+      query: { queryParam1: 1, queryParam2: "test" },
     });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object/1?queryParam1=1&queryParam2=test`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'PATCH',
+      method: "PATCH",
       cancelToken: undefined,
     });
 
     // custom api scope
     await httpPatch({
-      scope: 'anotherApiScope',
-      route: 'another-api-endpiont',
+      scope: "anotherApiScope",
+      route: "another-api-endpiont",
     });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_2}/another-api-endpiont`,
       headers: {},
       timeout: 30000,
       data: undefined,
-      method: 'PATCH',
+      method: "PATCH",
       cancelToken: undefined,
     });
   });
 
-  test('test DELETE', async () => {
+  test("test DELETE", async () => {
     // simple get
-    const payload = { item: { myField: 'value' } };
+    const payload = { item: { myField: "value" } };
 
-    await httpDelete('fake-object', { payload });
+    await httpDelete("fake-object", { payload });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'DELETE',
+      method: "DELETE",
       cancelToken: undefined,
     });
     // get with path params
-    await httpDelete('fake-object/:id', { pathParams: { id: 1 }, payload });
+    await httpDelete("fake-object/:id", { pathParams: { id: 1 }, payload });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object/1`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'DELETE',
+      method: "DELETE",
       cancelToken: undefined,
     });
 
     // get with path params and query params
-    await httpDelete('fake-object/:id', {
+    await httpDelete("fake-object/:id", {
       payload,
       pathParams: { id: 1 },
-      query: { queryParam1: 1, queryParam2: 'test' },
+      query: { queryParam1: 1, queryParam2: "test" },
     });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_1}/fake-object/1?queryParam1=1&queryParam2=test`,
       headers: {},
       timeout: 30000,
       data: payload,
-      method: 'DELETE',
+      method: "DELETE",
       cancelToken: undefined,
     });
 
     // custom api scope
     await httpDelete({
-      scope: 'anotherApiScope',
-      route: 'another-api-endpiont',
+      scope: "anotherApiScope",
+      route: "another-api-endpiont",
     });
     expect(axiosInstanceMock.request).toHaveBeenLastCalledWith({
       url: `${BASE_API_URL_2}/another-api-endpiont`,
       headers: {},
       timeout: 30000,
       data: undefined,
-      method: 'DELETE',
+      method: "DELETE",
       cancelToken: undefined,
     });
   });

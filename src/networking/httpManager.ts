@@ -28,7 +28,7 @@ export interface HttpRequestOptions<Payload = any> {
   /**
    * The request url
    */
-  url: string;
+  url: string | ((options: HttpRequestOptions) => string);
   /**
    * The query string.
    * It can be:
@@ -109,7 +109,7 @@ export type ApiServerConfig = {
    * to build custom headers
    */
   tokenLocalStorageKey?: string; // default "token"
-  apiUrl: string;
+  apiUrl: string | ((options?: HttpRequestOptions) => string);
   timeout?: number;
   headers?: {
     [key: string]: string | ((options: HttpRequestOptions) => string);
@@ -152,7 +152,7 @@ const axiosLogginInterceptor = (config?: AxiosRequestConfig) => {
 };
 
 //@ts-ignore
-const axiosInstances: { [key in keyof ApiScope]: AxiosInstance } = {};
+const axiosInstances: { [key in keyof typeof ApiScope]: AxiosInstance } = {};
 
 /**
  * This function must be called as soon as possible in you application lifecycle,
@@ -162,7 +162,9 @@ const axiosInstances: { [key in keyof ApiScope]: AxiosInstance } = {};
 export function initApi(config: ApiConfig) {
   apiConfig = config;
   Object.keys(config.servers).forEach((key) => {
-    const serverConfig = config.servers[key] as ApiServerConfig;
+    const serverConfig = config.servers[
+      key as keyof typeof config.servers
+    ] as ApiServerConfig;
     const axiosInstance = axios.create({
       timeout: serverConfig.timeout ?? 30000,
       headers: { 'Content-Type': 'application/json' },
@@ -190,7 +192,7 @@ export function initApi(config: ApiConfig) {
       }
     );
 
-    axiosInstances[key] = axiosInstance;
+    axiosInstances[key as any] = axiosInstance;
   });
 }
 
@@ -202,9 +204,12 @@ export const initNetworking = initApi;
 
 export async function httpRequest(options: HttpRequestOptions) {
   const { apiScope = 'main', isProtected = true, ...requestOptions } = options;
-  const { method, url: requestUrl, payload } = requestOptions;
+  const { method, url: requestUrlOrFn, payload } = requestOptions;
   const { headers = {} } = requestOptions;
-
+  const requestUrl =
+    typeof requestUrlOrFn === 'function'
+      ? requestUrlOrFn(options)
+      : requestUrlOrFn;
   console.log('building headers with ', apiConfig.servers?.[apiScope]?.headers);
   const headersConfig = apiConfig.servers?.[apiScope]?.headers ?? {};
   console.log('headers config is', headersConfig);
@@ -240,7 +245,10 @@ export async function httpRequest(options: HttpRequestOptions) {
   const serverInfo = apiConfig.servers[apiScope];
   let finalUrl = requestUrl;
   if (!isFullUrl) {
-    finalUrl = serverInfo.apiUrl;
+    finalUrl =
+      typeof serverInfo.apiUrl === 'function'
+        ? serverInfo.apiUrl(options)
+        : serverInfo.apiUrl;
     finalUrl = urljoin(finalUrl, requestUrl);
     console.log('final url is', finalUrl);
   }
